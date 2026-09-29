@@ -1,0 +1,65 @@
+/* Page background */
+body {
+    margin: 0;
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Login Box */
+.login-box {
+    width: 420px;
+    padding: 35px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #dcdfe3;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Heading */
+.login-box h2 {
+    color: #1f3c5b;
+    font-weight: 700;
+}
+
+
+/* Labels */
+.login-box .form-label {
+    font-weight: 600;
+    color: #333333;
+}
+
+
+/* Input fields */
+.login-box .form-control,
+.login-box .form-select {
+    height: 45px;
+    border: 1px solid #cfd4da;
+    border-radius: 6px;
+}
+
+
+/* Input focus */
+.login-box .form-control:focus,
+.login-box .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+
+/* Login button */
+.login-box .btn-primary {
+    height: 45px;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+
+/* Button hover */
+.login-box .btn-primary:hover {
+    background-color: #0b5ed7;
+}

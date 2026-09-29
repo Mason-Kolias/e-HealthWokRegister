@@ -1,0 +1,372 @@
+
+<!-- =================================================
+     PROFILE PAGE WRAPPER
+================================================== -->
+
+<div class="profile-page">
+
+
+    <!-- =================================================
+         ORANGE PROFILE HEADER
+    ================================================== -->
+
+    <header class="portal-page-header">
+
+        <div class="portal-page-header-content">
+
+            <span class="portal-page-header-label">
+                ACCOUNT
+            </span>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                {% if request.user.role == "registrar" %}
+
+                    View and manage your e-HealthWorkRegister
+                    registrar account information.
+
+                {% else %}
+
+                    View and manage your e-HealthWorkRegister
+                    health worker account information.
+
+                {% endif %}
+            </p>
+
+        </div>
+
+
+        <div class="portal-page-header-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PROFILE ACTION
+    ================================================== -->
+
+    <div class="profile-header-actions">
+
+        <a
+            href="{% url 'edit_profile' %}"
+            class="profile-edit-button"
+        >
+            <i class="fa-solid fa-pen-to-square"></i>
+            Edit Profile
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         MESSAGES
+    ================================================== -->
+
+    {% if messages %}
+
+        <div class="messages-container">
+
+            {% for message in messages %}
+
+                <div class="message message-{{ message.tags }}">
+
+                    {% if message.tags == "success" %}
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    {% endif %}
+
+                    <span>
+                        {{ message }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         PROFILE MAIN LAYOUT
+    ================================================== -->
+
+    <div class="profile-layout">
+
+
+        <!-- PROFILE OVERVIEW -->
+
+        <section class="profile-card profile-overview">
+
+            {% if request.user.profile_photo %}
+
+                <img
+                    src="{{ request.user.profile_photo.url }}"
+                    alt="Profile photo"
+                    class="profile-photo"
+                >
+
+            {% else %}
+
+                <div class="profile-avatar">
+
+                    {% if request.user.first_name or request.user.last_name %}
+
+                        {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+
+                    {% else %}
+
+                        {{ request.user.email|first|upper }}
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
+
+            <h2>
+                {% if request.user.get_full_name %}
+
+                    {{ request.user.get_full_name }}
+
+                {% else %}
+
+                    {{ request.user.username }}
+
+                {% endif %}
+            </h2>
+
+
+            <p class="profile-email">
+                {{ request.user.email }}
+            </p>
+
+
+            <span class="role-badge">
+
+                {% if request.user.role == "registrar" %}
+
+                    <i class="fa-solid fa-user-shield"></i>
+                    Registrar
+
+                {% else %}
+
+                    <i class="fa-solid fa-user-doctor"></i>
+                    Health Worker
+
+                {% endif %}
+
+            </span>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACCOUNT INFORMATION
+        ================================================== -->
+
+        <section class="profile-card profile-details">
+
+            <div class="section-heading">
+
+                <div class="section-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Account Information
+                    </h2>
+
+                    <p>
+                        Your registered account details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-grid">
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        First Name
+                    </span>
+
+                    <span class="field-value">
+                        {% if request.user.first_name %}
+                            {{ request.user.first_name }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        Last Name
+                    </span>
+
+                    <span class="field-value">
+                        {% if request.user.last_name %}
+                            {{ request.user.last_name }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        Username
+                    </span>
+
+                    <span class="field-value">
+                        {{ request.user.username }}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        Email Address
+                    </span>
+
+                    <span class="field-value">
+                        {{ request.user.email }}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        Account Type
+                    </span>
+
+                    <span class="field-value">
+
+                        {% if request.user.role == "registrar" %}
+                            Registrar
+                        {% else %}
+                            Health Worker
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span class="field-label">
+                        Member Since
+                    </span>
+
+                    <span class="field-value">
+                        {{ request.user.date_joined|date:"d F Y" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ACCOUNT SECURITY
+    ================================================== -->
+
+    <section class="profile-card security-card">
+
+        <div class="section-heading">
+
+            <div class="section-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Account Security
+                </h2>
+
+                <p>
+                    Manage your account password.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="security-row">
+
+            <div class="security-info">
+
+                <div class="security-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Password
+                    </strong>
+
+                    <p>
+                        Keep your account secure by using a strong password.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{% url 'change_password' %}"
+                class="secondary-button"
+            >
+                <i class="fa-solid fa-key"></i>
+                Change Password
+            </a>
+
+        </div>
+
+    </section>
+
+
+</div>

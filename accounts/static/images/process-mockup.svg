@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520">
+<defs>
+  <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7ec"/><stop offset="1" stop-color="#f1f5f8"/></linearGradient>
+  <filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".12"/></filter>
+</defs>
+<rect width="700" height="520" rx="28" fill="url(#a)"/>
+<circle cx="590" cy="95" r="85" fill="#c46703" opacity=".08"/>
+<g filter="url(#s)">
+ <rect x="72" y="70" width="556" height="375" rx="20" fill="#fff"/>
+ <rect x="72" y="70" width="556" height="58" rx="20" fill="#0b1f33"/>
+ <circle cx="105" cy="99" r="6" fill="#fff" opacity=".7"/><circle cx="125" cy="99" r="6" fill="#fff" opacity=".45"/>
+ <text x="155" y="105" font-family="Arial" font-size="16" fill="#fff" font-weight="700">Medical Licence Application</text>
+ <g font-family="Arial">
+  <circle cx="125" cy="180" r="25" fill="#c46703"/><text x="118" y="186" font-size="15" fill="#fff" font-weight="700">1</text>
+  <text x="165" y="177" font-size="15" fill="#17212b" font-weight="700">Personal Information</text>
+  <text x="165" y="198" font-size="12" fill="#7a838c">Applicant details completed</text>
+  <line x1="125" y1="208" x2="125" y2="252" stroke="#d8dee4" stroke-width="2"/>
+  <circle cx="125" cy="278" r="25" fill="#c46703"/><text x="118" y="284" font-size="15" fill="#fff" font-weight="700">2</text>
+  <text x="165" y="275" font-size="15" fill="#17212b" font-weight="700">Documents</text>
+  <text x="165" y="296" font-size="12" fill="#7a838c">Supporting documents uploaded</text>
+  <line x1="125" y1="306" x2="125" y2="350" stroke="#d8dee4" stroke-width="2"/>
+  <circle cx="125" cy="376" r="25" fill="#35a853"/><text x="118" y="382" font-size="15" fill="#fff" font-weight="700">3</text>
+  <text x="165" y="373" font-size="15" fill="#17212b" font-weight="700">Review &amp; Submit</text>
+  <text x="165" y="394" font-size="12" fill="#7a838c">Ready for registrar review</text>
+ </g>
+</g>
+</svg>

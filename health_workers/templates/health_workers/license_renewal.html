@@ -1,0 +1,1138 @@
+{% extends "health_workers/health_worker_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Annual Renewal | e-HealthWorkRegister
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'health_workers/css/renewal.css' %}"
+>
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="renewal-page">
+
+            <header class="health-worker-page-header">
+
+
+
+    <div class="health-worker-page-header-content">
+
+
+
+        <span class="health-worker-page-header-label">
+
+            LICENSE MANAGEMENT
+
+        </span>
+
+
+
+        <h1>
+
+            Annual Renewal of License to Practice
+
+        </h1>
+
+
+
+        <p>
+
+            Renew your existing medical registration using
+
+            your assigned registration number.
+
+        </p>
+
+
+
+    </div>
+
+
+
+    <div class="health-worker-page-header-icon">
+
+        <i class="fa-solid fa-arrows-rotate"></i>
+
+    </div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+            {% if messages %}
+
+
+
+                <div class="renewal-messages">
+
+
+
+                    {% for message in messages %}
+
+
+
+                        <div class="renewal-message {{ message.tags }}">
+
+
+
+                            {% if message.tags == "success" %}
+
+
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+
+
+                            {% elif message.tags == "error" %}
+
+
+
+                                <i class="fa-solid fa-circle-exclamation"></i>
+
+
+
+                            {% else %}
+
+
+
+                                <i class="fa-solid fa-circle-info"></i>
+
+
+
+                            {% endif %}
+
+
+
+                            <span>
+
+                                {{ message }}
+
+                            </span>
+
+
+
+                        </div>
+
+
+
+                    {% endfor %}
+
+
+
+                </div>
+
+
+
+            {% endif %}
+
+
+
+
+
+{% if renewal and renewal.status == "submitted" %}
+
+
+
+    <div class="renewal-locked-notice">
+
+
+
+        <div class="renewal-locked-icon">
+
+            <i class="fa-solid fa-lock"></i>
+
+        </div>
+
+
+
+        <div class="renewal-locked-content">
+
+
+
+            <span class="renewal-locked-label">
+
+                APPLICATION LOCKED
+
+            </span>
+
+
+
+            <strong>
+
+                Renewal Application Already Submitted
+
+            </strong>
+
+
+
+            <p>
+
+                You have already submitted a license renewal application.
+
+                You cannot submit another renewal application while your
+
+                current application is being processed.
+
+            </p>
+
+
+
+            <p>
+
+                You will only be able to edit and resubmit your renewal
+
+                application if it is rejected by the registrar.
+
+            </p>
+
+
+
+            <div class="renewal-status-row">
+
+                <span>Current Status</span>
+
+
+
+                <span class="renewal-status-badge">
+
+                    Submitted
+
+                </span>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+{% elif renewal and renewal.status == "under_review" %}
+
+
+
+    <div class="renewal-locked-notice">
+
+
+
+        <div class="renewal-locked-icon">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </div>
+
+
+
+        <div class="renewal-locked-content">
+
+
+
+            <span class="renewal-locked-label">
+
+                APPLICATION LOCKED
+
+            </span>
+
+
+
+            <strong>
+
+                Renewal Application Under Review
+
+            </strong>
+
+
+
+            <p>
+
+                Your license renewal application is currently being
+
+                reviewed by the registrar. You cannot submit another
+
+                renewal application while the review is in progress.
+
+            </p>
+
+
+
+            <p>
+
+                You will only be able to edit and resubmit the application
+
+                if it is rejected.
+
+            </p>
+
+
+
+            <div class="renewal-status-row">
+
+                <span>Current Status</span>
+
+
+
+                <span class="renewal-status-badge">
+
+                    Under Review
+
+                </span>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+{% elif renewal and renewal.status == "approved" %}
+
+
+
+    <div class="renewal-locked-notice">
+
+
+
+        <div class="renewal-locked-icon success">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+
+
+        <div class="renewal-locked-content">
+
+
+
+            <span class="renewal-locked-label success-text">
+
+                APPLICATION APPROVED
+
+            </span>
+
+
+
+            <strong>
+
+                Renewal Application Approved
+
+            </strong>
+
+
+
+            <p>
+
+                Your renewal application has been approved by the
+
+                registrar. Your renewed medical license is now waiting
+
+                to be generated.
+
+            </p>
+
+
+
+            <p>
+
+                You cannot submit another renewal application at this time.
+
+            </p>
+
+
+
+            <div class="renewal-status-row">
+
+                <span>Current Status</span>
+
+
+
+                <span class="renewal-status-badge approved">
+
+                    Approved
+
+                </span>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+{% elif renewal and renewal.status == "renewed" %}
+
+
+
+    <div class="renewal-locked-notice renewed">
+
+
+
+        <div class="renewal-locked-icon success">
+
+            <i class="fa-solid fa-certificate"></i>
+
+        </div>
+
+
+
+        <div class="renewal-locked-content">
+
+
+
+            <span class="renewal-locked-label success-text">
+
+                LICENSE RENEWED
+
+            </span>
+
+
+
+            <strong>
+
+                Your Medical License Has Been Renewed
+
+            </strong>
+
+
+
+            <p>
+
+                Your renewal application has been completed successfully.
+
+                Your renewed medical license is now available.
+
+            </p>
+
+
+
+            {% if medical_license %}
+
+
+
+                <div class="renewal-status-row">
+
+
+
+                    <span>
+
+                        {{ medical_license.license_number }}
+
+                    </span>
+
+
+
+                    <span class="renewal-status-badge approved">
+
+                        Active
+
+                    </span>
+
+
+
+                </div>
+
+
+
+            {% endif %}
+
+
+
+            <a
+
+                href="{% url 'download_renewed_license' renewal.id %}"
+
+                class="renewal-download-button"
+
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Download Renewed License
+
+            </a>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% if form %}
+
+            <div class="renewal-notice">
+
+
+
+                <div class="renewal-notice-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
+
+
+
+                <div>
+
+
+
+                    <strong>
+
+                        Registration number required
+
+                    </strong>
+
+
+
+                    <p>
+
+                        Enter the registration number assigned to you
+
+                        when your medical license was generated.
+
+                        The number must belong to your account before
+
+                        the renewal can be submitted.
+
+                    </p>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <form
+
+                method="post"
+
+                enctype="multipart/form-data"
+
+                class="renewal-form"
+
+            >
+
+
+
+                {% csrf_token %}
+
+
+
+
+
+                <section class="renewal-card">
+
+
+
+                    <div class="renewal-card-heading">
+
+
+
+                        <div class="renewal-card-icon">
+
+                            <i class="fa-solid fa-id-card"></i>
+
+                        </div>
+
+
+
+                        <div>
+
+
+
+                            <h2>
+
+                                Registration Details
+
+                            </h2>
+
+
+
+                            <p>
+
+                                Verify your existing registration.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+
+                        <label for="{{ form.registration_number.id_for_label }}">
+
+                            Registration Number
+
+                            <span>*</span>
+
+                        </label>
+
+
+
+                        {{ form.registration_number }}
+
+
+
+                        {% if form.registration_number.errors %}
+
+
+
+                            <div class="field-error">
+
+                                {{ form.registration_number.errors }}
+
+                            </div>
+
+
+
+                        {% endif %}
+
+
+
+                        <small>
+
+                            Use the Registration Number shown on your
+
+                            generated medical license.
+
+                        </small>
+
+
+
+                    </div>
+
+
+
+
+
+                    {% if medical_license %}
+
+
+
+                        <div class="license-preview">
+
+
+
+                            <div>
+
+                                <span>
+
+                                    Registered Name
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    {{ medical_license.application.full_name }}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <div>
+
+                                <span>
+
+                                    Registration Number
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    {{ medical_license.license_number }}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <div>
+
+                                <span>
+
+                                    License Expiry
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    {{ medical_license.expiry_date|date:"d M Y" }}
+
+                                </strong>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    {% endif %}
+
+
+
+                </section>
+
+
+
+
+
+                <section class="renewal-card">
+
+
+
+                    <div class="renewal-card-heading">
+
+
+
+                        <div class="renewal-card-icon">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+
+                        <div>
+
+
+
+                            <h2>
+
+                                Current Information
+
+                            </h2>
+
+
+
+                            <p>
+
+                                Confirm your current employment and contact details.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="form-grid">
+
+
+
+                        <div class="form-group">
+
+
+
+                            <label>
+
+                                Current Employer
+
+                            </label>
+
+
+
+                            {{ form.current_employer }}
+
+
+
+                            {% if form.current_employer.errors %}
+
+                                <div class="field-error">
+
+                                    {{ form.current_employer.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+
+
+
+                            <label>
+
+                                Current Work Location
+
+                            </label>
+
+
+
+                            {{ form.current_work_location }}
+
+
+
+                            {% if form.current_work_location.errors %}
+
+                                <div class="field-error">
+
+                                    {{ form.current_work_location.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+
+
+
+                            <label>
+
+                                Contact Phone
+
+                            </label>
+
+
+
+                            {{ form.contact_phone }}
+
+
+
+                            {% if form.contact_phone.errors %}
+
+                                <div class="field-error">
+
+                                    {{ form.contact_phone.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+
+
+
+                            <label>
+
+                                Email Address
+
+                            </label>
+
+
+
+                            {{ form.email }}
+
+
+
+                            {% if form.email.errors %}
+
+                                <div class="field-error">
+
+                                    {{ form.email.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+
+
+                <section class="renewal-card">
+
+
+
+                    <div class="renewal-card-heading">
+
+
+
+                        <div class="renewal-card-icon">
+
+                            <i class="fa-solid fa-receipt"></i>
+
+                        </div>
+
+
+
+                        <div>
+
+
+
+                            <h2>
+
+                                Renewal Fee Receipt
+
+                            </h2>
+
+
+
+                            <p>
+
+                                Upload the renewal fee payment receipt.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="receipt-upload">
+
+
+
+                        <div class="receipt-icon">
+
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                        </div>
+
+
+
+                        <div class="receipt-content">
+
+
+
+                            <strong>
+
+                                Renewal Fee Receipt
+
+                            </strong>
+
+
+
+                            <p>
+
+                                This is the only document required
+
+                                for your renewal application.
+
+                            </p>
+
+
+
+                            {{ form.payment_receipt }}
+
+
+
+                            <small>
+
+                                Accepted formats: PDF, JPG, JPEG or PNG.
+
+                                Maximum size: 5 MB.
+
+                            </small>
+
+
+
+                            {% if form.payment_receipt.errors %}
+
+
+
+                                <div class="field-error">
+
+                                    {{ form.payment_receipt.errors }}
+
+                                </div>
+
+
+
+                            {% endif %}
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+
+
+                {% if form.non_field_errors %}
+
+
+
+                    <div class="field-error form-wide-error">
+
+                        {{ form.non_field_errors }}
+
+                    </div>
+
+
+
+                {% endif %}
+
+
+
+
+
+                <div class="renewal-actions">
+
+
+
+                    <a
+
+                        href="{% url 'health_worker_dashboard' %}"
+
+                        class="secondary-button"
+
+                    >
+
+                        Cancel
+
+                    </a>
+
+
+
+
+
+                    <button
+
+                        type="submit"
+
+                        class="primary-button"
+
+                    >
+
+                        Continue to Review
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </form>
+
+            {% endif %}
+
+
+
+        </div>
+
+{% endblock %}

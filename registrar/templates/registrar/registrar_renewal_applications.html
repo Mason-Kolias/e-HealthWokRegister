@@ -1,0 +1,342 @@
+{% extends "registrar/registrar_base.html" %}
+
+
+{% block title %}
+    License Renewals
+{% endblock %}
+
+
+{% block registrar_content %}
+
+<section class="dashboard-content">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="welcome-section three-d-card">
+
+        <div class="welcome-content">
+
+            <span class="welcome-label">
+                LICENSE MANAGEMENT
+            </span>
+
+            <h2>
+                Annual License Renewals
+            </h2>
+
+            <p>
+                Review and manage annual medical practice license renewal
+                applications submitted by existing health workers.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-file-signature"></i>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RENEWAL APPLICATION MANAGEMENT
+    ====================================================== -->
+
+    <div class="dashboard-grid">
+
+
+        <div class="dashboard-card applications-card three-d-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="card-header">
+
+                <div>
+
+                    <span class="card-eyebrow">
+                        RENEWAL APPLICATION MANAGEMENT
+                    </span>
+
+                    <h3>
+                        Submitted Renewals
+                    </h3>
+
+                    <p>
+                        Review existing license details, renewal information
+                        and supporting payment documentation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Renewal No.
+                            </th>
+
+                            <th>
+                                Applicant
+                            </th>
+
+                            <th>
+                                License No.
+                            </th>
+
+                            <th>
+                                Submitted
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                    {% for renewal in renewals %}
+
+
+                        <tr>
+
+
+                            <!-- RENEWAL NUMBER -->
+
+                            <td>
+
+                                <strong>
+                                    {{ renewal.renewal_application_number }}
+                                </strong>
+
+                            </td>
+
+
+
+                            <!-- APPLICANT -->
+
+                            <td>
+
+                                {{ renewal.applicant.get_full_name|default:renewal.applicant.username }}
+
+                            </td>
+
+
+
+                            <!-- LICENSE -->
+
+                            <td>
+
+                                <strong>
+                                    {{ renewal.medical_license.license_number }}
+                                </strong>
+
+                                {% if renewal.medical_license.expiry_date %}
+
+                                    <br>
+
+                                    <small>
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                        Expires
+                                        {{ renewal.medical_license.expiry_date|date:"d M Y" }}
+
+                                    </small>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- SUBMITTED -->
+
+                            <td>
+
+                                {% if renewal.submitted_at %}
+
+                                    {{ renewal.submitted_at|date:"d M Y" }}
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+
+                                {% if renewal.status == "submitted" %}
+
+                                    <span class="status pending">
+
+                                        <i class="fa-solid fa-clock"></i>
+
+                                        Submitted
+
+                                    </span>
+
+
+                                {% elif renewal.status == "under_review" %}
+
+                                    <span class="status review">
+
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                                        Under Review
+
+                                    </span>
+
+
+                                {% elif renewal.status == "renewed" %}
+
+                                    <span class="status approved">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        Renewed
+
+                                    </span>
+
+
+                                {% elif renewal.status == "rejected" %}
+
+                                    <span class="status rejected">
+
+                                        <i class="fa-solid fa-circle-xmark"></i>
+
+                                        Rejected
+
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="status">
+
+                                        {{ renewal.status|title }}
+
+                                    </span>
+
+                                {% endif %}
+
+
+                            </td>
+
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <a
+                                    href="{% url 'registrar_review_renewal' renewal.id %}"
+                                    class="view-btn"
+                                >
+
+                                    Review
+
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+
+
+                    {% empty %}
+
+
+                        <!-- EMPTY STATE -->
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty-table"
+                            >
+
+                                <div class="empty-icon">
+
+                                    <i class="fa-solid fa-folder-open"></i>
+
+                                </div>
+
+
+                                <strong>
+
+                                    No renewal applications have been submitted.
+
+                                </strong>
+
+
+                                <span>
+
+                                    License renewal applications submitted by
+                                    health workers will appear here.
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}

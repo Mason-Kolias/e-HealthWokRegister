@@ -1,0 +1,359 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | e-HealthWorkRegister</title>
+
+    {% if request.user.role == "registrar" %}
+        <link rel="stylesheet" href="{% static 'registrar/css/registrar_dashboard.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'health_workers/css/dashboard.css' %}">
+    {% endif %}
+
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+
+                {% if request.user.role == "registrar" %}
+                    <h2>REGISTRAR PORTAL</h2>
+                    <span>Health Worker Registration</span>
+                {% else %}
+                    <h2>e-HealthWorkRegister</h2>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+            {% if request.user.role == "registrar" %}
+
+                <a href="{% url 'registrar_dashboard' %}" class="nav-link">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'registrar_review_applications' %}" class="nav-link">
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    <span>Review Applications</span>
+                </a>
+
+                <a href="{% url 'generate_license_page' %}" class="nav-link">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>Generate New Medical License</span>
+                </a>
+
+                <a href="{% url 'registrar_reports' %}" class="nav-link">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Reports</span>
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'health_worker_dashboard' %}" class="nav-link">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'medical_license_application' %}" class="nav-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>New Registration for License to Practice</span>
+                </a>
+
+                <a href="{% url 'license_renewal_application' %}" class="nav-link">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Annual Renewal of License to Practice</span>
+                </a>
+
+            {% endif %}
+
+            <a
+                href="{% url 'profile' %}"
+                class="nav-link active"
+            >
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="{% url 'logout' %}" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="profile-page">
+
+            <div class="profile-header">
+
+                <div>
+
+                    <span class="page-label">
+                        ACCOUNT
+                    </span>
+
+                    <h1>
+                        Edit Profile
+                    </h1>
+
+                    <p>
+                        Update your account information and profile photo.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <section class="profile-card edit-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Update the information associated with your account.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-error">
+                        {{ form.non_field_errors }}
+                    </div>
+
+                {% endif %}
+
+
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+
+                    <div class="photo-upload-section">
+
+                        <div class="current-photo">
+
+                            {% if request.user.profile_photo %}
+
+                                <img
+                                    src="{{ request.user.profile_photo.url }}"
+                                    alt="Current profile photo"
+                                    class="edit-profile-photo"
+                                >
+
+                            {% else %}
+
+                                <div class="profile-avatar edit-avatar">
+
+                                    {% if request.user.first_name or request.user.last_name %}
+
+                                        {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+
+                                    {% else %}
+
+                                        {{ request.user.email|first|upper }}
+
+                                    {% endif %}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="photo-upload-content">
+
+                            <h3>
+                                Profile Photo
+                            </h3>
+
+                            <p>
+                                Upload a clear profile photo. JPG or PNG, maximum 5 MB.
+                            </p>
+
+                            <div class="photo-input">
+
+                                {{ form.profile_photo }}
+
+                            </div>
+
+                            {% if form.profile_photo.errors %}
+
+                                <div class="field-error">
+                                    {{ form.profile_photo.errors }}
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if request.user.profile_photo %}
+
+                                <label class="remove-photo-option">
+
+                                    {{ form.remove_profile_photo }}
+
+                                    <span>
+                                        Remove current profile photo
+                                    </span>
+
+                                </label>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="{{ form.first_name.id_for_label }}">
+                                First Name
+                            </label>
+
+                            {{ form.first_name }}
+
+                            {% if form.first_name.errors %}
+                                <div class="field-error">
+                                    {{ form.first_name.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="{{ form.last_name.id_for_label }}">
+                                Last Name
+                            </label>
+
+                            {{ form.last_name }}
+
+                            {% if form.last_name.errors %}
+                                <div class="field-error">
+                                    {{ form.last_name.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="{{ form.username.id_for_label }}">
+                                Username
+                            </label>
+
+                            {{ form.username }}
+
+                            {% if form.username.errors %}
+                                <div class="field-error">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="{{ form.email.id_for_label }}">
+                                Email Address
+                            </label>
+
+                            {{ form.email }}
+
+                            {% if form.email.errors %}
+                                <div class="field-error">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'profile' %}"
+                            class="cancel-button"
+                        >
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="save-button"
+                        >
+                            <i class="fa-solid fa-check"></i>
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

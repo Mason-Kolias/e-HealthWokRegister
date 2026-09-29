@@ -1,0 +1,296 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Generate New Medical License
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrar/css/generate_license.css' %}"
+>
+
+{% endblock %}
+
+
+{% block registrar_content %}
+
+
+<section class="dashboard-content">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+<header class="registrar-page-header">
+        <!--
+        <div>
+
+            <span>
+                REGISTRAR PORTAL
+            </span>
+
+            <h1>
+                Generate New Medical License
+            </h1>
+
+            <p>
+                Generate professional medical licenses for approved
+                New Health Worker Applications.
+            </p>
+
+        </div>
+        -->
+        
+         <div class="registrar-page-header-content">
+
+        <span class="registrar-page-header-label">
+            LICENSE MANAGEMENT
+        </span>
+
+        <h2>
+            Generate New Medical License
+        </h2>
+
+        <p>
+            Generate professional medical licenses for approved
+            new health worker applications.
+        </p>
+
+    </div>
+
+    <div class="registrar-page-header-icon">
+        <i class="fa-solid fa-id-card"></i>
+    </div>
+
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MESSAGES
+    ====================================================== -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message {{ message.tags }}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         APPROVED APPLICATIONS
+    ====================================================== -->
+
+    <section class="license-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Approved Applications
+                </h2>
+
+                <p>
+                    The following applications have been approved
+                    and are ready for license generation.
+                </p>
+
+            </div>
+
+
+            <div class="approved-count">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                {{ approved_applications|length }} Approved
+
+            </div>
+
+        </div>
+
+
+
+        <div class="table-container">
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Application No.
+                        </th>
+
+                        <th>
+                            Applicant
+                        </th>
+
+                        <th>
+                            Profession
+                        </th>
+
+                        <th>
+                            Approved Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                {% for application in approved_applications %}
+
+                    <tr>
+
+
+                        <td>
+
+                            <strong>
+                                {{ application.application_number }}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            {{ application.full_name }}
+                        </td>
+
+
+                        <td>
+                            {{ application.profession }}
+                        </td>
+
+
+                        <td>
+
+                            {% if application.reviewed_at %}
+
+                                {{ application.reviewed_at|date:"d M Y" }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <form
+                                method="POST"
+                                action="{% url 'generate_medical_license' application.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="generate-btn"
+                                    onclick="return confirm('Generate the medical license for {{ application.full_name }}?');"
+                                >
+
+                                    <i class="fa-solid fa-id-card"></i>
+
+                                    Generate License
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+
+
+                {% empty %}
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty-state"
+                        >
+
+                            <i class="fa-solid fa-folder-open"></i>
+
+                            <h3>
+                                No Approved Applications
+                            </h3>
+
+                            <p>
+                                There are currently no approved applications
+                                waiting for license generation.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</section>
+
+
+{% endblock %}

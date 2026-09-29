@@ -1,0 +1,299 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="PNG Health Workers Online Registration System">
+
+    <title>Sign In | PNG Health Workers Registration</title>
+
+
+
+    <!-- Login-specific CSS -->
+    <link rel="stylesheet"
+          href="{% static 'accounts/style.css' %}">
+
+</head>
+
+<body class="login-screen">
+
+<!-- ==================================================
+     HEADER
+     ================================================== -->
+
+<header class="site-header">
+
+    <div class="top-strip">
+
+        <div class="container top-strip-inner">
+
+            <span>🇵🇬 Papua New Guinea</span>
+
+            <span>
+                Digital Health Registration Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navbar container">
+
+        <!-- BRAND -->
+
+        <a class="brand"
+           href="{% url 'home' %}"
+           aria-label="PNG Health Workers Registration System">
+
+            <div class="brand-mark">
+                +
+            </div>
+
+            <div>
+
+                <strong>
+                    PNG HEALTH
+                </strong>
+
+                <span>
+                    Health Workers Registration
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#faq">
+                FAQ
+            </a>
+
+            <a href="{% url 'login' %}"
+               class="nav-signin active">
+
+                Sign In <span>→</span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- ==================================================
+     LOGIN CONTENT
+     ================================================== -->
+
+<main class="login-main">
+
+    <div class="login-background-pattern"></div>
+
+
+    <div class="login-container">
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <div class="logo-container">
+
+                    <img
+                        src="{% static 'accounts/images/png-crest.png' %}"
+                        alt="Papua New Guinea Crest"
+                        class="logo"
+                    >
+
+                </div>
+
+
+                <h1>
+                    e-HealthWorkRegister
+                </h1>
+
+
+                <p>
+                    PNG Online Health Workers Registration System
+                </p>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <div class="login-form-container">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p class="login-subtitle">
+                    Sign in to access your account
+                </p>
+
+
+                <form method="POST"
+                      action="{% url 'login' %}">
+
+                    {% csrf_token %}
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="username"
+                            id="username"
+                            class="form-control"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ROLE -->
+
+                    <div class="form-group">
+
+                        <label for="role">
+                            Login As
+                        </label>
+
+                        <select
+                            name="role"
+                            id="role"
+                            class="form-control"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                selected
+                                disabled
+                            >
+                                Select your role
+                            </option>
+
+                            <option value="health_worker">
+                                Health Worker
+                            </option>
+
+                            <option value="registrar">
+                                Registrar
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ERROR -->
+
+                    {% if error %}
+
+                    <div class="error-message">
+
+                        {{ error }}
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Sign In
+                        <span>→</span>
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="login-footer">
+
+                <p>
+                    PNG Health Workers Online Registration System
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

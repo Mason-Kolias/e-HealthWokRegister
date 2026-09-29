@@ -1,0 +1,320 @@
+{% extends "registrar/registrar_base.html" %}
+
+
+{% block title %}
+    Registrar Dashboard
+{% endblock %}
+
+
+{% block registrar_content %}
+
+<section class="dashboard-content">
+
+
+    <!-- =================================================
+         WELCOME
+    ================================================== -->
+
+    <div class="welcome-section three-d-card">
+
+        <div class="welcome-content">
+
+ <span class="welcome-label">
+                REGISTRAR PORTAL
+            </span>
+       
+
+            <h2>
+                Welcome back,
+                {{ request.user.first_name|default:"Registrar" }}!
+            </h2>
+
+            <p>
+                Review applications, verify documents and manage
+                health worker professional licenses from one central
+                registration portal.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-user-tie"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SUMMARY CARDS
+    ================================================== -->
+
+    <div class="summary-grid">
+
+
+        <!-- TOTAL APPLICATIONS -->
+
+        <div class="summary-card three-d-card">
+
+            <div class="summary-icon blue">
+
+                <i class="fa-solid fa-file-lines"></i>
+
+            </div>
+
+            <div class="summary-info">
+
+                <span>
+                    Total Applications
+                </span>
+
+                <h3>
+                    {{ total_applications }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- PENDING REVIEW -->
+
+        <div class="summary-card three-d-card">
+
+            <div class="summary-icon orange">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <div class="summary-info">
+
+                <span>
+                    Pending Review
+                </span>
+
+                <h3>
+                    {{ pending_review }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPROVED -->
+
+        <div class="summary-card three-d-card">
+
+            <div class="summary-icon green">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="summary-info">
+
+                <span>
+                    Approved
+                </span>
+
+                <h3>
+                    {{ approved_applications }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- REJECTED -->
+
+        <div class="summary-card three-d-card">
+
+            <div class="summary-icon red">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+            </div>
+
+            <div class="summary-info">
+
+                <span>
+                    Rejected
+                </span>
+
+                <h3>
+                    {{ rejected_applications }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- LICENSES ISSUED -->
+
+        <div class="summary-card three-d-card">
+
+            <div class="summary-icon purple">
+
+                <i class="fa-solid fa-id-card"></i>
+
+            </div>
+
+            <div class="summary-info">
+
+                <span>
+                    Licenses Issued
+                </span>
+
+                <h3>
+                    {{ licenses_issued }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         APPLICATION STATISTICS
+    ================================================== -->
+
+    <div class="lower-grid">
+
+        <div class="dashboard-card three-d-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="card-header">
+
+                <div>
+
+                    <span class="card-eyebrow">
+                        PERFORMANCE OVERVIEW
+                    </span>
+
+                    <h3>
+                        Application Statistics
+                    </h3>
+
+                    <p>
+                        Current registration overview
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div class="statistics">
+
+
+                <!-- NEW APPLICATIONS -->
+
+                <div class="stat-item">
+
+                    <div class="stat-label">
+
+                        <span>
+                            New Applications
+                        </span>
+
+                        <strong>
+                            {{ new_applications_percentage }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-bar">
+
+                        <div
+                            class="stat-fill blue-fill"
+                            style="width: {{ new_applications_percentage }}%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- UNDER REVIEW -->
+
+                <div class="stat-item">
+
+                    <div class="stat-label">
+
+                        <span>
+                            Under Review
+                        </span>
+
+                        <strong>
+                            {{ under_review_percentage }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-bar">
+
+                        <div
+                            class="stat-fill orange-fill"
+                            style="width: {{ under_review_percentage }}%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- APPROVED -->
+
+                <div class="stat-item">
+
+                    <div class="stat-label">
+
+                        <span>
+                            Approved
+                        </span>
+
+                        <strong>
+                            {{ approved_percentage }}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-bar">
+
+                        <div
+                            class="stat-fill green-fill"
+                            style="width: {{ approved_percentage }}%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+{% endblock %}

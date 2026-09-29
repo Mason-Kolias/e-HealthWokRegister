@@ -1,0 +1,431 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Notifications | e-HealthWorkRegister
+    </title>
+
+    {% if request.user.role == "registrar" %}
+
+        <link
+            rel="stylesheet"
+            href="{% static 'registrar/css/registrar_dashboard.css' %}"
+        >
+
+    {% else %}
+
+        <link
+            rel="stylesheet"
+            href="{% static 'health_workers/css/dashboard.css' %}"
+        >
+
+    {% endif %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/profile.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/notifications.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+
+                {% if request.user.role == "registrar" %}
+
+                    <h2>
+                        REGISTRAR PORTAL
+                    </h2>
+
+                    <span>
+                        Health Worker Registration
+                    </span>
+
+                {% else %}
+
+                    <h2>
+                        e-HealthWorkRegister
+                    </h2>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+
+            {% if request.user.role == "registrar" %}
+
+                <a
+                    href="{% url 'registrar_dashboard' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                    href="{% url 'registrar_review_applications' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    <span>Review Applications</span>
+                </a>
+
+
+                <a
+                    href="{% url 'generate_license_page' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>Generate New Medical License</span>
+                </a>
+
+
+                <a
+                    href="{% url 'registrar_reports' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Reports</span>
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'health_worker_dashboard' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                    href="{% url 'medical_license_application' %}"
+                    class="nav-link"
+                >
+                    <i class="fas fa-file-medical"></i>
+                    <span>
+                        New Registration for License to Practice
+                    </span>
+                </a>
+
+
+                <a
+                    href="{% url 'license_renewal_application' %}"
+                    class="nav-link"
+                >
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>
+                        Annual Renewal of License to Practice
+                    </span>
+                </a>
+
+            {% endif %}
+
+
+            <a
+                href="{% url 'notifications' %}"
+                class="nav-link active"
+            >
+                <i class="fa-solid fa-bell"></i>
+
+                <span>
+                    Notifications
+                </span>
+
+                {% if unread_count > 0 %}
+
+                    <span class="sidebar-notification-badge">
+                        {{ unread_count }}
+                    </span>
+
+                {% endif %}
+
+            </a>
+
+
+            <a
+                href="{% url 'profile' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-user"></i>
+                <span>
+                    My Profile
+                </span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-link"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>
+                    Logout
+                </span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="notifications-page">
+
+
+            <div class="notifications-header">
+
+                <div>
+
+                    <span class="page-label">
+                        ACCOUNT
+                    </span>
+
+                    <h1>
+                        Notifications
+                    </h1>
+
+                    <p>
+                        Stay updated about your applications, licenses and account activity.
+                    </p>
+
+                </div>
+
+
+                {% if unread_count > 0 %}
+
+                    <form
+                        method="post"
+                        action="{% url 'mark_all_notifications_read' %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="mark-all-button"
+                        >
+                            <i class="fa-solid fa-check-double"></i>
+                            Mark All as Read
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="notification-summary">
+
+                <div class="notification-summary-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        {{ unread_count }}
+                    </strong>
+
+                    <span>
+                        unread notification{{ unread_count|pluralize }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="notification-list">
+
+                {% if notifications %}
+
+                    {% for notification in notifications %}
+
+                        <div
+                            class="notification-card {% if not notification.is_read %}notification-unread{% endif %}"
+                        >
+
+                            <div class="notification-icon
+                                {% if notification.notification_type == 'application_submitted' %}
+                                    notification-blue
+                                {% elif notification.notification_type == 'application_under_review' %}
+                                    notification-purple
+                                {% elif notification.notification_type == 'application_approved' %}
+                                    notification-green
+                                {% elif notification.notification_type == 'application_rejected' %}
+                                    notification-red
+                                {% elif notification.notification_type == 'application_resubmitted' %}
+                                    notification-orange
+                                {% elif notification.notification_type == 'license_generated' %}
+                                    notification-gold
+                                {% else %}
+                                    notification-gray
+                                {% endif %}
+                            ">
+
+                                {% if notification.notification_type == "application_submitted" %}
+
+                                    <i class="fa-solid fa-file-circle-plus"></i>
+
+                                {% elif notification.notification_type == "application_under_review" %}
+
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                                {% elif notification.notification_type == "application_approved" %}
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                {% elif notification.notification_type == "application_rejected" %}
+
+                                    <i class="fa-solid fa-circle-xmark"></i>
+
+                                {% elif notification.notification_type == "application_resubmitted" %}
+
+                                    <i class="fa-solid fa-rotate"></i>
+
+                                {% elif notification.notification_type == "license_generated" %}
+
+                                    <i class="fa-solid fa-id-card"></i>
+
+                                {% else %}
+
+                                    <i class="fa-solid fa-bell"></i>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="notification-content">
+
+                                <div class="notification-top">
+
+                                    <h3>
+                                        {{ notification.title }}
+                                    </h3>
+
+                                    {% if not notification.is_read %}
+
+                                        <span class="unread-dot"></span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <p>
+                                    {{ notification.message }}
+                                </p>
+
+
+                                <div class="notification-bottom">
+
+                                    <span class="notification-date">
+                                        <i class="fa-regular fa-clock"></i>
+                                        {{ notification.created_at|date:"d M Y, H:i" }}
+                                    </span>
+
+
+                                    {% if notification.is_read %}
+
+                                        <span class="read-label">
+                                            <i class="fa-solid fa-check"></i>
+                                            Read
+                                        </span>
+
+                                    {% else %}
+
+                                        <a
+                                            href="{% url 'mark_notification_read' notification.id %}"
+                                            class="notification-action"
+                                        >
+                                            View
+                                        </a>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty-notifications">
+
+                        <div class="empty-notification-icon">
+                            <i class="fa-regular fa-bell-slash"></i>
+                        </div>
+
+                        <h2>
+                            No Notifications
+                        </h2>
+
+                        <p>
+                            You don't have any notifications at the moment.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

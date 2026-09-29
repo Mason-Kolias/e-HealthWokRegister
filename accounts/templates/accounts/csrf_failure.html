@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Security Error | e-HealthWorkRegister</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #f6f8fb;
+        color: #182b3d;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .error-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 40px;
+        background: #ffffff;
+        border: 1px solid #e5eaf0;
+        border-radius: 14px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(11, 31, 51, 0.08);
+    }
+
+    .error-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #fff2e2;
+        color: #c46703;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .brand {
+        margin-bottom: 8px;
+        color: #0b1f33;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    h1 {
+        margin: 0 0 12px;
+        color: #0b1f33;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    p {
+        margin: 0 auto 26px;
+        max-width: 420px;
+        color: #62748a;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 24px;
+        border-radius: 9px;
+        background: #c46703;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s ease;
+    }
+
+    .button:hover {
+        background: #a65300;
+    }
+
+    .footer {
+        margin-top: 22px;
+        color: #8a9aab;
+        font-size: 12px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<main class="error-container">
+
+    <div class="error-icon">
+        !
+    </div>
+
+    <div class="brand">
+        e-HealthWorkRegister
+    </div>
+
+    <h1>
+        Security Check Failed
+    </h1>
+
+    <p>
+        Your request could not be completed because the security
+        verification token was missing or expired. Please return to
+        the sign-in page and try again.
+    </p>
+
+    <a href="{% url 'home' %}" class="button">
+        Return to Sign In
+    </a>
+
+    <div class="footer">
+        PNG Health Workers Online Registration System
+    </div>
+
+</main>
+```
+
+</body>
+
+</html>

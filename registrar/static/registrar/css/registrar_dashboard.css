@@ -1,0 +1,2748 @@
+/* =========================================================
+   PNG HEALTH WORKERS ONLINE REGISTRATION SYSTEM
+   REGISTRAR DASHBOARD
+   LARGE PROFESSIONAL TYPOGRAPHY
+   ========================================================= */
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+    --orange: #c46703;
+    --orange-dark: #a65300;
+    --orange-light: #e98a18;
+    --orange-soft: #fff2e2;
+
+    --navy: #0b1f33;
+    --navy-light: #163653;
+    --navy-soft: #eaf1f7;
+
+    --background: #f6f8fb;
+    --white: #ffffff;
+
+    --text: #182b3d;
+    --text-soft: #62748a;
+    --text-muted: #8a9aab;
+
+    --border: #e5eaf0;
+
+    --green: #198754;
+    --green-soft: #e8f6ef;
+
+    --red: #c0392b;
+    --red-soft: #fdeceb;
+
+    --blue: #2e6f95;
+    --blue-soft: #eaf3f8;
+
+    --purple: #6f5aa8;
+    --purple-soft: #f0edfa;
+
+    --shadow-sm: 0 2px 8px rgba(11,31,51,0.05);
+    --shadow-md: 0 8px 24px rgba(11,31,51,0.08);
+
+    --radius: 14px;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+
+    /* Increased base size */
+    font-size: 15px;
+
+    line-height: 1.55;
+    min-height: 100vh;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 260px;
+
+    background: var(--navy);
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    box-shadow:
+        4px 0 18px rgba(11,31,51,0.08);
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+   ========================================================= */
+
+.sidebar-header {
+    min-height: 94px;
+
+    padding: 20px 22px;
+
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.brand {
+    position: relative;
+}
+
+
+
+.brand h2 {
+    display: inline;
+
+    color: #ffffff;
+
+    /* Increased brand size */
+    font-size: 17px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+}
+
+.brand span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #aebdcc;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.sidebar-nav {
+    flex: 1;
+
+    padding: 24px 14px;
+
+    overflow-y: auto;
+}
+
+.nav-title {
+    margin: 7px 10px 11px;
+
+    color: #8297aa;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 48px;
+
+    padding: 12px 13px;
+
+    margin-bottom: 5px;
+
+    border-radius: 9px;
+
+    color: #dbe5ee;
+
+    /* Increased navigation font */
+    font-size: 15px;
+
+    font-weight: 500;
+
+    line-height: 1.35;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-link i {
+    width: 20px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    /* Increased navigation icons */
+    font-size: 18px;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.08);
+
+    color: #ffffff;
+
+    transform: translateX(2px);
+}
+
+.nav-link.active {
+    background: var(--orange);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(196,103,3,0.24);
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    padding: 14px;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 48px;
+
+    padding: 12px 13px;
+
+    border-radius: 9px;
+
+    color: #dbe5ee;
+
+    font-size: 15px;
+
+    transition: 0.2s ease;
+}
+
+.logout-link i {
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+.logout-link:hover {
+    background: rgba(192,57,43,0.18);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - 260px);
+
+    margin-left: 260px;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+    min-height: 86px;
+
+    padding: 15px 32px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+}
+
+.page-title {
+    margin-left: 13px;
+}
+
+.page-title h1 {
+    color: var(--navy);
+
+    /* Increased page title */
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+}
+
+.page-title::before {
+    content: "DIGITAL HEALTH REGISTRATION PORTAL";
+
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--orange);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.profile-avatar {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    /* Increased profile icon */
+    font-size: 17px;
+}
+
+.profile-info strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 14px;
+}
+
+.profile-info span {
+    display: block;
+
+    margin-top: 1px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+    flex: 1;
+
+    padding: 30px 32px 36px;
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.welcome-section {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 31px 32px;
+
+    margin-bottom: 22px;
+
+    border-radius: var(--radius);
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--orange-light)
+        );
+
+    box-shadow:
+        0 9px 24px rgba(196,103,3,0.18);
+}
+
+.welcome-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -55px;
+    bottom: -95px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+}
+
+.welcome-content {
+    position: relative;
+
+    z-index: 1;
+}
+
+.welcome-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #ffe9d0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.welcome-section h2 {
+    color: #ffffff;
+
+    /* Increased main heading */
+    font-size: 25px;
+
+    font-weight: 650;
+
+    line-height: 1.3;
+}
+
+.welcome-section p {
+    max-width: 700px;
+
+    margin-top: 8px;
+
+    color: #fff5ea;
+
+    /* Increased supporting text */
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+.welcome-icon {
+    position: relative;
+
+    z-index: 1;
+
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.14);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    /* Increased icon */
+    font-size: 31px;
+}
+
+
+/* =========================================================
+   SUMMARY GRID
+   ========================================================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.summary-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 116px;
+
+    padding: 19px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: var(--orange);
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+
+    border-color: #d8e0e8;
+}
+
+.summary-icon {
+    width: 51px;
+    height: 51px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    /* Increased summary icons */
+    font-size: 21px;
+}
+
+.summary-icon.blue {
+    background: var(--blue-soft);
+    color: var(--blue);
+}
+
+.summary-icon.orange {
+    background: var(--orange-soft);
+    color: var(--orange);
+}
+
+.summary-icon.green {
+    background: var(--green-soft);
+    color: var(--green);
+}
+
+.summary-icon.red {
+    background: var(--red-soft);
+    color: var(--red);
+}
+
+.summary-icon.purple {
+    background: var(--purple-soft);
+    color: var(--purple);
+}
+
+.summary-info {
+    min-width: 0;
+}
+
+.summary-info span {
+    display: block;
+
+    color: var(--text-muted);
+
+    /* Increased card labels */
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin-bottom: 3px;
+}
+
+.summary-info h3 {
+    color: var(--navy);
+
+    /* Increased summary numbers */
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+   ========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 21px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   LOWER GRID
+   ========================================================= */
+
+.lower-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 21px;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.dashboard-card {
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 23px 24px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.card-eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--orange);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.card-header h3 {
+    color: var(--navy);
+
+    /* Increased card headings */
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+.card-header p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th {
+    padding: 14px 18px;
+
+    text-align: left;
+
+    color: #63768a;
+
+    /* Increased table headings */
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.55px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 16px 18px;
+
+    color: #53687c;
+
+    /* Increased table body text */
+    font-size: 14px;
+
+    line-height: 1.45;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #fbfcfd;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td strong {
+    color: var(--navy);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 13px;
+
+    border-radius: 30px;
+
+    /* Increased badge size */
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status.pending {
+    background: var(--orange-soft);
+
+    color: #a85d00;
+}
+
+.status.review {
+    background: var(--blue-soft);
+
+    color: var(--blue);
+}
+
+.status.approved {
+    background: var(--green-soft);
+
+    color: var(--green);
+}
+
+.status.rejected {
+    background: var(--red-soft);
+
+    color: var(--red);
+}
+
+
+/* =========================================================
+   REVIEW BUTTON
+   ========================================================= */
+
+.view-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 39px;
+
+    padding: 8px 13px;
+
+    border: 1px solid #d6dfe7;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: var(--navy);
+
+    /* Increased button text */
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.view-btn i {
+    font-size: 14px;
+}
+
+.view-btn:hover {
+    background: var(--orange);
+
+    border-color: var(--orange);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY TABLE
+   ========================================================= */
+
+.empty-table {
+    padding: 50px 20px !important;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+}
+
+.empty-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 11px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    /* Increased empty-state icon */
+    font-size: 20px;
+}
+
+.empty-table strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 14px;
+}
+
+.empty-table span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.statistics {
+    padding: 24px;
+}
+
+.stat-item {
+    margin-bottom: 21px;
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-label {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.stat-label span {
+    color: var(--text-soft);
+
+    /* Increased statistic labels */
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.stat-label strong {
+    color: var(--navy);
+
+    font-size: 14px;
+}
+
+.stat-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #edf1f5;
+}
+
+.stat-fill {
+    height: 100%;
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+.blue-fill {
+    background:
+        linear-gradient(
+            90deg,
+            #2e6f95,
+            #4e8fb3
+        );
+}
+
+.orange-fill {
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange),
+            var(--orange-light)
+        );
+}
+
+.green-fill {
+    background:
+        linear-gradient(
+            90deg,
+            #198754,
+            #35a96e
+        );
+}
+
+
+/* =========================================================
+   RENEWAL REVIEW
+   ========================================================= */
+
+.renewal-review-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    padding: 21px;
+}
+
+.renewal-review-grid > div {
+    padding: 16px;
+
+    border: 1px solid #eaecf0;
+
+    border-radius: 9px;
+
+    background: #fafbfc;
+}
+
+.renewal-review-grid span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #667085;
+
+    /* Increased labels */
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.renewal-review-grid strong {
+    display: block;
+
+    color: #102a43;
+
+    /* Increased values */
+    font-size: 14px;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   RENEWAL DECISION FORM
+   ========================================================= */
+
+.renewal-decision-form {
+    padding: 21px;
+}
+
+.rejection-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #344054;
+
+    /* Increased label */
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.rejection-group label span {
+    margin-left: 6px;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+
+    font-weight: 400;
+}
+
+.rejection-group textarea {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    resize: vertical;
+
+    font-family: inherit;
+
+    /* Increased textarea text */
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.rejection-group textarea:focus {
+    border-color: #c46703;
+
+    box-shadow:
+        0 0 0 3px rgba(196, 103, 3, 0.10);
+}
+
+
+/* =========================================================
+   DECISION BUTTONS
+   ========================================================= */
+
+.decision-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 19px;
+}
+
+.decision-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 10px 16px;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    /* Increased decision button text */
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.decision-button i {
+    font-size: 15px;
+}
+
+.decision-button.approve {
+    background: #168447;
+
+    border-color: #168447;
+
+    color: #ffffff;
+}
+
+.decision-button.reject {
+    background: #ffffff;
+
+    border-color: #d92d20;
+
+    color: #d92d20;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 78px;
+    }
+
+    .brand,
+    .nav-title,
+    .nav-link span,
+    .logout-link span {
+        display: none;
+    }
+
+    .sidebar-header {
+        justify-content: center;
+
+        padding: 18px 10px;
+    }
+
+    .nav-link,
+    .logout-link {
+        justify-content: center;
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-link i,
+    .logout-link i {
+        font-size: 19px;
+    }
+
+    .main-content {
+        width: calc(100% - 78px);
+
+        margin-left: 78px;
+    }
+
+    .topbar {
+        padding: 14px 20px;
+    }
+
+    .topbar-right {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 23px 20px;
+    }
+
+    .welcome-section {
+        padding: 28px;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .renewal-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .decision-actions {
+        flex-direction: column;
+    }
+
+    .decision-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title h1 {
+        font-size: 16px;
+    }
+
+    .page-title::before {
+        font-size: 9px;
+    }
+
+    .logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .welcome-section {
+        padding: 23px;
+
+        align-items: flex-start;
+
+        min-height: 175px;
+    }
+
+    .welcome-section h2 {
+        font-size: 21px;
+    }
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+    .welcome-icon {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 17px 12px;
+    }
+
+    .card-header {
+        padding: 20px;
+    }
+
+    .card-header h3 {
+        font-size: 18px;
+    }
+
+    .statistics {
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .sidebar {
+        width: 64px;
+    }
+
+    .main-content {
+        width: calc(100% - 64px);
+
+        margin-left: 64px;
+    }
+
+    .topbar {
+        padding: 11px 12px;
+    }
+
+    .page-title h1 {
+        font-size: 13px;
+    }
+
+    .page-title::before {
+        display: none;
+    }
+
+    .logo {
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+
+/* ============================================================
+   SHARED REGISTRAR ORANGE HEADER
+   SAME TYPOGRAPHY ON EVERY PAGE
+============================================================ */
+
+.registrar-page-header {
+    position: relative;
+    overflow: hidden;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    gap: 25px;
+
+    width: 100%;
+
+    padding: 31px 32px !important;
+    margin-bottom: 22px !important;
+
+    border: none !important;
+    border-radius: var(--radius) !important;
+
+    color: #ffffff !important;
+
+    background: linear-gradient(
+        135deg,
+        var(--orange),
+        var(--orange-light)
+    ) !important;
+
+    box-shadow:
+        0 9px 24px rgba(196, 103, 3, 0.18) !important;
+}
+
+
+/* Decorative circle */
+
+.registrar-page-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -55px;
+    bottom: -95px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ============================================================
+   CONTENT
+============================================================ */
+
+.registrar-page-header-content {
+    position: relative;
+    z-index: 1;
+
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ============================================================
+   SMALL LABEL
+============================================================ */
+
+.registrar-page-header-label {
+    display: block !important;
+
+    margin-bottom: 6px !important;
+
+    color: #ffe9d0 !important;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+
+    font-size: 11px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: 1px !important;
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   MAIN TITLE
+============================================================ */
+
+.registrar-page-header h1,
+.registrar-page-header h2 {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #ffffff !important;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+
+    font-size: 25px !important;
+    font-weight: 650 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: 0 !important;
+}
+
+
+/* ============================================================
+   DESCRIPTION
+============================================================ */
+
+.registrar-page-header p {
+    max-width: 700px;
+
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+
+    color: #fff5ea !important;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+
+    font-size: 15px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.6 !important;
+
+    letter-spacing: 0 !important;
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+.registrar-page-header-icon {
+    position: relative;
+    z-index: 1;
+
+    width: 70px !important;
+    height: 70px !important;
+
+    flex: 0 0 70px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 18px !important;
+
+    background: rgba(255, 255, 255, 0.14) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+
+    color: #ffffff !important;
+}
+
+
+.registrar-page-header-icon i {
+    color: #ffffff !important;
+
+    font-size: 31px !important;
+
+    line-height: 1 !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .registrar-page-header {
+        padding: 28px !important;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .registrar-page-header {
+        min-height: 175px;
+
+        padding: 23px !important;
+
+        align-items: flex-start !important;
+    }
+
+
+    .registrar-page-header h1,
+    .registrar-page-header h2 {
+        font-size: 21px !important;
+    }
+
+
+    .registrar-page-header p {
+        font-size: 14px !important;
+    }
+
+
+    .registrar-page-header-icon {
+        display: none !important;
+    }
+}
+
+/* =========================================================
+   REGISTRAR TOP ACCOUNT BAR
+========================================================= */
+
+.portal-topbar {
+    min-height: 74px;
+    padding: 12px 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5eaf0;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.portal-topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+
+.portal-topbar-label {
+    color: #0b1f33;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.portal-topbar-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   SHORTCUT BUTTONS
+========================================================= */
+
+.topbar-shortcut {
+    min-height: 46px;
+
+    padding: 10px 15px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border: 1px solid #e5eaf0;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #34495e;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.topbar-shortcut i {
+    color: #c46703;
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.topbar-shortcut:hover {
+    background: #fff5e9;
+
+    border-color: #e6b47e;
+
+    color: #c46703;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVE PAGE
+========================================================= */
+
+.topbar-shortcut.active {
+    background: #fff2e2;
+
+    border-color: #c46703;
+
+    color: #c46703;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-shortcut:hover {
+    background: #fdeceb;
+
+    border-color: #e5aaa4;
+
+    color: #c0392b;
+}
+
+
+.logout-shortcut:hover i {
+    color: #c0392b;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .portal-topbar {
+        padding: 12px 20px;
+    }
+
+    .portal-topbar-left {
+        display: none;
+    }
+
+    .portal-topbar-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portal-topbar {
+        padding: 10px 12px;
+    }
+
+    .topbar-shortcut {
+        width: 46px;
+        height: 46px;
+
+        padding: 0;
+    }
+
+    .topbar-shortcut span {
+        display: none;
+    }
+
+    .topbar-shortcut i {
+        font-size: 19px;
+    }
+
+}
+
+
+/* ============================================================
+   SIDEBAR USER PROFILE
+============================================================ */
+
+.sidebar-user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 20px;
+    padding: 18px 12px 16px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+    text-decoration: none;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.sidebar-user-profile:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+/* ============================================================
+   PROFILE PHOTO
+============================================================ */
+
+.sidebar-profile-photo,
+.sidebar-profile-avatar {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    margin-bottom: 11px;
+
+    box-sizing: border-box;
+}
+
+
+.sidebar-profile-photo {
+    display: block;
+
+    object-fit: cover;
+
+    border: 3px solid #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(196, 103, 3, 0.85),
+        0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   FALLBACK INITIALS
+============================================================ */
+
+.sidebar-profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #c46703;
+
+    border: 3px solid #ffffff;
+
+    color: #ffffff;
+
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 0 3px rgba(196, 103, 3, 0.85),
+        0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   USER DETAILS
+============================================================ */
+
+.sidebar-user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+}
+
+
+.sidebar-user-details strong {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 4px;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.sidebar-user-details span {
+    display: block;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* ============================================================
+   SMALLER SCREENS
+============================================================ */
+
+@media (max-height: 750px) {
+
+    .sidebar-user-profile {
+        margin-top: 12px;
+        padding-top: 13px;
+        padding-bottom: 12px;
+    }
+
+    .sidebar-profile-photo,
+    .sidebar-profile-avatar {
+        width: 62px;
+        height: 62px;
+        margin-bottom: 8px;
+    }
+
+    .sidebar-profile-avatar {
+        font-size: 19px;
+    }
+
+    .sidebar-user-details strong {
+        font-size: 14px;
+    }
+}
+
+
+
+/* ============================================================
+   SIDEBAR HEADER - PORTAL TITLE ABOVE PROFILE
+============================================================ */
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Portal title */
+
+.sidebar-header .brand {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.sidebar-header .brand h2 {
+    margin: 0;
+    text-align: center;
+}
+
+
+/* User profile underneath portal title */
+
+.sidebar-user-profile {
+    width: 100%;
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+
+
+/* ============================================================
+   RENEWAL REVIEW PAGE
+============================================================ */
+
+.dashboard-content {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 32px 45px;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   ORANGE REVIEW HEADER
+============================================================ */
+
+.registrar-review-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    padding: 25px 28px;
+    margin-bottom: 24px;
+
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        135deg,
+        #c46703 0%,
+        #d9780a 100%
+    );
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(196, 103, 3, 0.16),
+        0 2px 5px rgba(16, 42, 67, 0.08);
+}
+
+
+.registrar-review-header-content {
+    min-width: 0;
+}
+
+
+.registrar-review-header-label {
+    display: block;
+    margin-bottom: 6px;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+
+.registrar-review-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 29px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+
+.registrar-review-header p {
+    max-width: 760px;
+
+    margin: 8px 0 0;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+.registrar-review-header-icon {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    color: #ffffff;
+
+    font-size: 23px;
+}
+
+
+/* ============================================================
+   REVIEW CARDS
+============================================================ */
+
+.dashboard-content .dashboard-card {
+    margin-bottom: 22px;
+}
+
+
+.dashboard-content .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid #e4e7ec;
+}
+
+
+.dashboard-content .card-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #c46703;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.dashboard-content .card-header h3 {
+    margin: 0;
+
+    color: #102a43;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+
+.dashboard-content .card-header p {
+    max-width: 750px;
+
+    margin: 7px 0 0;
+
+    color: #667085;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   RENEWAL APPLICATION DETAILS
+============================================================ */
+
+.renewal-review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+.review-field {
+    min-width: 0;
+
+    padding: 16px 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+
+    box-sizing: border-box;
+}
+
+
+.review-field span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #667085;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.review-field strong {
+    display: block;
+
+    color: #1d2939;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+
+/* ============================================================
+   PAYMENT VERIFICATION
+============================================================ */
+
+.document-review-row {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 18px 20px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+.document-review-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff4e8;
+
+    border: 1px solid #f6d7b3;
+    border-radius: 9px;
+
+    color: #c46703;
+
+    font-size: 21px;
+}
+
+
+.document-review-info {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.document-review-info strong {
+    color: #1d2939;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.document-review-info span {
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+.renewal-review-button {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border: 1px solid #c46703;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #c46703;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.renewal-review-button:hover {
+    background: #c46703;
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   MISSING RECEIPT
+============================================================ */
+
+.renewal-empty-state {
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background: #fffafa;
+
+    border: 1px dashed #f0b4ae;
+    border-radius: 10px;
+}
+
+
+.renewal-empty-state i {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #b42318;
+
+    font-size: 32px;
+}
+
+
+.renewal-empty-state h4 {
+    margin: 0 0 6px;
+
+    color: #b42318;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.renewal-empty-state p {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   REGISTRAR DECISION
+============================================================ */
+
+.renewal-decision-actions {
+    display: grid;
+
+    grid-template-columns:
+        minmax(230px, 0.75fr)
+        minmax(0, 1.5fr);
+
+    gap: 20px;
+
+    align-items: stretch;
+}
+
+
+/* APPROVAL SIDE */
+
+.renewal-decision-actions > form:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 190px;
+
+    padding: 24px;
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+.renewal-decision-actions .primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 44px;
+
+    padding: 11px 19px;
+
+    border: 1px solid #15803d;
+    border-radius: 7px;
+
+    background: #15803d;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.renewal-decision-actions .primary-button:hover {
+    background: #166534;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   REJECTION SIDE
+============================================================ */
+
+.rejection-form {
+    padding: 22px;
+
+    background: #fffafa;
+
+    border: 1px solid #fecdca;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+.rejection-form label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.rejection-form textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 105px;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    outline: none;
+
+    background: #ffffff;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+
+    color: #344054;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.rejection-form textarea:focus {
+    border-color: #b42318;
+
+    box-shadow:
+        0 0 0 3px rgba(180, 35, 24, 0.08);
+}
+
+
+.danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    margin-top: 14px;
+
+    padding: 10px 17px;
+
+    border: 1px solid #b42318;
+    border-radius: 7px;
+
+    background: #b42318;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.danger-button:hover {
+    background: #912018;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .renewal-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .renewal-decision-actions {
+        grid-template-columns: 1fr;
+    }
+
+
+    .renewal-decision-actions > form:first-child {
+        min-height: auto;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-content {
+        padding: 20px;
+    }
+
+
+    .registrar-review-header {
+        padding: 21px;
+
+        gap: 15px;
+    }
+
+
+    .registrar-review-header h1 {
+        font-size: 24px;
+    }
+
+
+    .registrar-review-header-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 19px;
+    }
+
+
+    .document-review-row {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+
+    .renewal-review-button {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .registrar-review-header-icon {
+        display: none;
+    }
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   DECISION CONTENT
+============================================================ */
+
+.decision-option-content {
+    width: 100%;
+    text-align: center;
+}
+
+
+.decision-option-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 19px;
+}
+
+
+.approve-icon {
+    margin: 0 auto 11px;
+
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+.reject-icon {
+    flex-shrink: 0;
+
+    background: #fee4e2;
+    color: #b42318;
+}
+
+
+.decision-option-content h4,
+.decision-option-heading h4 {
+    margin: 0 0 6px;
+
+    color: #1d2939;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.decision-option-content p,
+.decision-option-heading p {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+.decision-option-content .primary-button {
+    margin-top: 17px;
+}
+
+
+.decision-option-heading {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}

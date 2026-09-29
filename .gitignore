@@ -1,0 +1,28 @@
+# Database - DO NOT upload
+db.sqlite3
+db.sqlite3-journal
+
+# Uploaded/private files
+media/
+
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables / secrets
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Windows
+Thumbs.db
+Desktop.ini

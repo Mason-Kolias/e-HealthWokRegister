@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7eb"/><stop offset="1" stop-color="#edf3f7"/></linearGradient>
+</defs>
+<rect width="900" height="620" rx="34" fill="url(#bg)"/>
+<circle cx="720" cy="150" r="130" fill="#c46703" opacity=".09"/>
+<circle cx="160" cy="500" r="160" fill="#0b1f33" opacity=".06"/>
+<rect x="210" y="100" width="480" height="350" rx="24" fill="#fff" stroke="#e7eaed" stroke-width="3"/>
+<rect x="245" y="140" width="410" height="190" rx="15" fill="#f6f8fa"/>
+<rect x="290" y="350" width="320" height="13" rx="6" fill="#dfe4e8"/>
+<rect x="340" y="380" width="220" height="13" rx="6" fill="#dfe4e8"/>
+<rect x="390" y="415" width="120" height="22" rx="11" fill="#c46703"/>
+<text x="450" y="235" text-anchor="middle" font-family="Arial" font-size="24" fill="#c46703" font-weight="700">PROJECT IMAGE SPACE</text>
+<text x="450" y="268" text-anchor="middle" font-family="Arial" font-size="14" fill="#6d7882">Replace with your health worker / portal image</text>
+<circle cx="680" cy="430" r="62" fill="#c46703"/>
+<path d="M680 390v80M640 430h80" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+</svg>

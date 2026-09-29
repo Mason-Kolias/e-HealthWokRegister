@@ -1,0 +1,285 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            PNG Health Workers Online Registration System
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'health_workers/css/dashboard.css' %}"
+    >
+   
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <link
+    rel="stylesheet"
+    href="{% static 'health_workers/css/presentation-typography.css' %}"
+>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+
+                <h2>
+                 Health Workers Portal
+                </h2>
+
+            </div>
+              <!-- LOGGED-IN USER -->
+    <a href="{% url 'profile' %}" class="sidebar-user-profile">
+
+        {% if request.user.profile_photo %}
+
+            <img
+                src="{{ request.user.profile_photo.url }}"
+                alt="Profile photo"
+                class="sidebar-profile-photo"
+            >
+
+        {% else %}
+
+            <div class="sidebar-profile-avatar">
+
+                {% if request.user.first_name or request.user.last_name %}
+                    {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+                {% else %}
+                    {{ request.user.email|first|upper }}
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+        <div class="sidebar-user-details">
+
+            <strong>
+                {% if request.user.get_full_name %}
+                    {{ request.user.get_full_name }}
+                {% else %}
+                    {{ request.user.username }}
+                {% endif %}
+            </strong>
+
+            <span>
+                Health Worker
+            </span>
+
+        </div>
+
+    </a>
+
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+            <a
+                href="{% url 'health_worker_dashboard' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'health_worker_dashboard' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="{% url 'medical_license_application' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'medical_license_application' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fas fa-file-medical"></i>
+
+                <span>
+                    New Registration for License to Practice
+                </span>
+
+            </a>
+
+            <a
+                href="{% url 'license_renewal_application' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'license_renewal_application' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fa-solid fa-arrows-rotate"></i>
+
+                <span>
+                    Annual Renewal of License to Practice
+                </span>
+
+            </a>
+
+            <a
+    href="{% url 'notifications' %}"
+    class="nav-link {% if request.resolver_match.url_name == 'notifications' %}active{% endif %}"
+>
+    <i class="fa-solid fa-bell"></i>
+    <span>Notifications</span>
+</a>
+
+
+
+            <a href="{% url 'profile' %}" class="nav-link {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' or request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+    <i class="fa-solid fa-user"></i>
+    <span>My Profile</span>
+</a>
+
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-link"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+        <!-- =====================================================
+     TOP ACCOUNT SHORTCUTS
+====================================================== -->
+
+<header class="portal-topbar">
+
+    <div class="portal-topbar-left">
+
+        <span class="portal-topbar-label">
+          <!--  HEALTH WORKER PORTAL-->
+        </span>
+
+    </div>
+
+
+    <div class="portal-topbar-actions">
+
+        <!-- NOTIFICATIONS -->
+
+        <a
+            href="{% url 'notifications' %}"
+            class="topbar-shortcut
+            {% if request.resolver_match.url_name == 'notifications' %}
+                active
+            {% endif %}"
+            title="Notifications"
+        >
+            <i class="fa-solid fa-bell"></i>
+
+            <span>
+                Notifications
+            </span>
+        </a>
+
+
+        <!-- PROFILE -->
+
+        <a
+            href="{% url 'profile' %}"
+            class="topbar-shortcut
+            {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' or request.resolver_match.url_name == 'change_password' %}
+                active
+            {% endif %}"
+            title="My Profile"
+        >
+            <i class="fa-solid fa-user"></i>
+
+            <span>
+                My Profile
+            </span>
+        </a>
+
+
+        <!-- LOGOUT -->
+
+        <a
+            href="{% url 'logout' %}"
+            class="topbar-shortcut logout-shortcut"
+            title="Logout"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+        </a>
+
+    </div>
+
+</header>
+ 
+        {% block dashboard_content %}
+        {% endblock %}
+      
+
+
+    </main> 
+
+</div>
+</div>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+
+</html>

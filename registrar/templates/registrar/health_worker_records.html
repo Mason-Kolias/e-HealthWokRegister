@@ -1,0 +1,581 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Health Worker Records | Registrar Portal
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrar/css/health_worker_records.css' %}"
+>
+
+{% endblock %}
+
+
+{% block registrar_content %}
+
+<div class="records-page">
+
+    <!--
+
+    <div class="records-header">
+
+        <div>
+
+            <span class="records-eyebrow">
+                REGISTRY
+            </span>
+
+            <h1>
+                Health Worker Records
+            </h1>
+
+            <p>
+                View registered health workers, professional information,
+                licenses and renewal history.
+            </p>
+
+        </div>
+
+    </div>
+    -->
+
+    <div class="registrar-page-header">
+
+    <div class="registrar-page-header-content">
+
+        <span class="registrar-page-header-label">
+            HEALTH WORKER MANAGEMENT
+        </span>
+
+        <h2>
+            Health Worker Records
+        </h2>
+
+        <p>
+            View registered health workers, professional information,
+            licenses and renewal history.
+        </p>
+
+    </div>
+
+    <div class="registrar-page-header-icon">
+        <i class="fa-solid fa-user-doctor"></i>
+    </div>
+
+</div>
+
+
+    <div class="records-summary">
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-blue">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+
+                <span>
+                    Total Records
+                </span>
+
+                <strong>
+                    {{ total_records }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-green">
+                <i class="fa-solid fa-id-card"></i>
+            </div>
+
+            <div>
+
+                <span>
+                    Active Licenses
+                </span>
+
+                <strong>
+                    {{ active_licenses }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-orange">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+
+                <span>
+                    Expired Licenses
+                </span>
+
+                <strong>
+                    {{ expired_licenses }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon summary-red">
+                <i class="fa-solid fa-ban"></i>
+            </div>
+
+            <div>
+
+                <span>
+                    Revoked Licenses
+                </span>
+
+                <strong>
+                    {{ revoked_licenses }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="records-card">
+
+
+        <div class="records-card-header">
+
+            <div>
+
+                <h2>
+                    Registered Health Workers
+                </h2>
+
+                <p>
+                    Search and filter the health worker registry.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            method="get"
+            class="records-filters"
+        >
+
+            <div class="filter-group search-group">
+
+                <label for="search">
+                    Search
+                </label>
+
+                <div class="search-input">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="search"
+                        name="search"
+                        value="{{ search_query }}"
+                        placeholder="Name, license number, application number..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="profession">
+                    Profession
+                </label>
+
+                <select
+                    id="profession"
+                    name="profession"
+                >
+
+                    <option value="">
+                        All Professions
+                    </option>
+
+                    {% for value, label in profession_choices %}
+
+                        <option
+                            value="{{ value }}"
+                            {% if selected_profession == value %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ label }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="province">
+                    Province
+                </label>
+
+                <select
+                    id="province"
+                    name="province"
+                >
+
+                    <option value="">
+                        All Provinces
+                    </option>
+
+                    {% for value, label in province_choices %}
+
+                        <option
+                            value="{{ value }}"
+                            {% if selected_province == value %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ label }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="license_status">
+                    License Status
+                </label>
+
+                <select
+                    id="license_status"
+                    name="license_status"
+                >
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option
+                        value="active"
+                        {% if selected_license_status == "active" %}
+                            selected
+                        {% endif %}
+                    >
+                        Active
+                    </option>
+
+                    <option
+                        value="expired"
+                        {% if selected_license_status == "expired" %}
+                            selected
+                        {% endif %}
+                    >
+                        Expired
+                    </option>
+
+                    <option
+                        value="revoked"
+                        {% if selected_license_status == "revoked" %}
+                            selected
+                        {% endif %}
+                    >
+                        Revoked
+                    </option>
+
+                    <option
+                        value="no_license"
+                        {% if selected_license_status == "no_license" %}
+                            selected
+                        {% endif %}
+                    >
+                        No License
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-actions">
+
+                <button
+                    type="submit"
+                    class="filter-button"
+                >
+
+                    <i class="fa-solid fa-filter"></i>
+
+                    Apply Filters
+
+                </button>
+
+
+                <a
+                    href="{% url 'registrar_health_worker_records' %}"
+                    class="clear-button"
+                >
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Clear
+
+                </a>
+
+            </div>
+
+        </form>
+
+
+        <div class="records-table-wrapper">
+
+            {% if records %}
+
+                <table class="records-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                HEALTH WORKER
+                            </th>
+
+                            <th>
+                                PROFESSION
+                            </th>
+
+                            <th>
+                                LICENSE NUMBER
+                            </th>
+
+                            <th>
+                                EXPIRY
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                            <th>
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for record in records %}
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="worker-cell">
+
+                                        <div class="worker-avatar">
+
+                                            {% if record.full_name %}
+
+                                                {{ record.full_name|first|upper }}
+
+                                            {% elif record.applicant.first_name %}
+
+                                                {{ record.applicant.first_name|first|upper }}
+
+                                            {% else %}
+
+                                                {{ record.applicant.username|first|upper }}
+
+                                            {% endif %}
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <strong>
+
+                                                {% if record.full_name %}
+
+                                                    {{ record.full_name }}
+
+                                                {% elif record.applicant.get_full_name %}
+
+                                                    {{ record.applicant.get_full_name }}
+
+                                                {% else %}
+
+                                                    {{ record.applicant.username }}
+
+                                                {% endif %}
+
+                                            </strong>
+
+                                            <span>
+                                                {{ record.application_number }}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if record.get_profession_display %}
+
+                                        {{ record.get_profession_display }}
+
+                                    {% else %}
+
+                                        Not specified
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if record.license %}
+
+                                        <span class="license-number">
+                                            {{ record.license.license_number }}
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="not-available">
+                                            Not generated
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if record.license %}
+
+                                        {{ record.license.expiry_date|date:"d M Y" }}
+
+                                    {% else %}
+
+                                        —
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if record.license %}
+
+                                        <span
+                                            class="status-badge status-{{ record.license.status }}"
+                                        >
+                                            {{ record.license.get_status_display }}
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status-badge status-pending">
+                                            Pending License
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    <a
+                                        href="{% url 'registrar_health_worker_record_detail' record.id %}"
+                                        class="view-button"
+                                    >
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                        View Record
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <div class="empty-records">
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-users-slash"></i>
+
+                    </div>
+
+                    <h2>
+                        No Health Worker Records Found
+                    </h2>
+
+                    <p>
+                        No registered health workers match the selected filters.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

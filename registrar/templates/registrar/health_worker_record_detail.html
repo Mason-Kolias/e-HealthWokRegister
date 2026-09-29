@@ -1,0 +1,701 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Health Worker Record | Registrar Portal
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrar/css/health_worker_records.css' %}"
+>
+
+{% endblock %}
+
+
+{% block registrar_content %}
+
+<div class="record-detail-page">
+
+
+    <div class="detail-header">
+
+        <div>
+
+            <a
+                href="{% url 'registrar_health_worker_records' %}"
+                class="back-link"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Health Worker Records
+            </a>
+
+            <span class="records-eyebrow">
+                HEALTH WORKER RECORD
+            </span>
+
+            <h1>
+
+                {% if application.full_name %}
+
+                    {{ application.full_name }}
+
+                {% elif application.applicant.get_full_name %}
+
+                    {{ application.applicant.get_full_name }}
+
+                {% else %}
+
+                    {{ application.applicant.username }}
+
+                {% endif %}
+
+            </h1>
+
+            <p>
+                Application {{ application.application_number }}
+            </p>
+
+        </div>
+
+
+        {% if license_record %}
+
+            <span
+                class="large-status-badge status-{{ license_record.status }}"
+            >
+                {{ license_record.get_status_display }}
+            </span>
+
+        {% else %}
+
+            <span class="large-status-badge status-pending">
+                License Pending
+            </span>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="detail-grid">
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Personal Information
+                    </h2>
+
+                    <p>
+                        Registered personal details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-fields">
+
+                <div>
+                    <span>Full Name</span>
+                    <strong>
+                        {{ application.full_name|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Date of Birth</span>
+                    <strong>
+                        {{ application.date_of_birth|date:"d F Y"|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Gender</span>
+                    <strong>
+                        {{ application.get_gender_display|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Nationality</span>
+                    <strong>
+                        {{ application.nationality|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Phone</span>
+                    <strong>
+                        {{ application.phone_number|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Email</span>
+                    <strong>
+                        {{ application.email|default:application.applicant.email }}
+                    </strong>
+                </div>
+
+                <div class="detail-field-wide">
+                    <span>Residential Address</span>
+                    <strong>
+                        {{ application.residential_address|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Province</span>
+                    <strong>
+                        {{ application.province|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>District</span>
+                    <strong>
+                        {{ application.district|default:"Not provided" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Professional Information
+                    </h2>
+
+                    <p>
+                        Professional registration details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-fields">
+
+                <div>
+                    <span>Profession</span>
+                    <strong>
+                        {{ application.get_profession_display|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Registration Number</span>
+                    <strong>
+                        {{ application.professional_registration_number|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Specialization</span>
+                    <strong>
+                        {{ application.specialization|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Years of Experience</span>
+                    <strong>
+                        {{ application.years_of_experience|default:"Not provided" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Education
+                    </h2>
+
+                    <p>
+                        Academic and qualification information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-fields">
+
+                <div>
+                    <span>Qualification</span>
+                    <strong>
+                        {{ application.qualification|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Institution</span>
+                    <strong>
+                        {{ application.get_institution_display|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Campus</span>
+                    <strong>
+                        {{ application.campus|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Institution Province</span>
+                    <strong>
+                        {{ application.institution_province|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Country</span>
+                    <strong>
+                        {{ application.country_of_qualification|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Year Started</span>
+                    <strong>
+                        {{ application.year_started|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Year Completed</span>
+                    <strong>
+                        {{ application.year_completed|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Graduation Status</span>
+                    <strong>
+                        {{ application.get_graduation_status_display|default:"Not provided" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Employment
+                    </h2>
+
+                    <p>
+                        Current employment information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-fields">
+
+                <div>
+                    <span>Current Employer</span>
+                    <strong>
+                        {{ application.current_employer|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Position</span>
+                    <strong>
+                        {{ application.position|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Workplace Province</span>
+                    <strong>
+                        {{ application.workplace_province|default:"Not provided" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Employment Start Date</span>
+                    <strong>
+                        {{ application.employment_start_date|date:"d F Y"|default:"Not provided" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="detail-card license-detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Current Medical License
+                    </h2>
+
+                    <p>
+                        Current professional license information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if license_record %}
+
+                <div class="license-detail-grid">
+
+                    <div>
+                        <span>License Number</span>
+                        <strong>
+                            {{ license_record.license_number }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+                        <strong>
+                            {{ license_record.get_status_display }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Issue Date</span>
+                        <strong>
+                            {{ license_record.issue_date|date:"d F Y" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Expiry Date</span>
+                        <strong>
+                            {{ license_record.expiry_date|date:"d F Y" }}
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                {% if license_record.license_document %}
+
+                    <div class="license-action">
+
+                        <a
+                            href="{{ license_record.license_document.url }}"
+                            target="_blank"
+                            class="primary-action"
+                        >
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                            View Medical License
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            {% else %}
+
+                <div class="no-license-message">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <p>
+                        A medical license has not yet been generated
+                        for this health worker.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        License Renewal History
+                    </h2>
+
+                    <p>
+                        Previous annual renewal applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if renewal_history %}
+
+                <div class="history-table-wrapper">
+
+                    <table class="history-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Renewal Number
+                                </th>
+
+                                <th>
+                                    Submitted
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Reviewed
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for renewal in renewal_history %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ renewal.renewal_application_number }}
+                                    </td>
+
+                                    <td>
+
+                                        {% if renewal.submitted_at %}
+
+                                            {{ renewal.submitted_at|date:"d M Y" }}
+
+                                        {% else %}
+
+                                            —
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="status-badge status-{{ renewal.status }}"
+                                        >
+                                            {{ renewal.get_status_display }}
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        {% if renewal.reviewed_at %}
+
+                                            {{ renewal.reviewed_at|date:"d M Y" }}
+
+                                        {% else %}
+
+                                            —
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="no-history">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    <p>
+                        No license renewal applications have been recorded.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div class="detail-icon">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Supporting Documents
+                    </h2>
+
+                    <p>
+                        Documents submitted with the original registration.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if documents %}
+
+                <div class="document-list">
+
+                    {% for document in documents %}
+
+                        <div class="document-row">
+
+                            <div class="document-info">
+
+                                <div class="document-icon">
+                                    <i class="fa-solid fa-file"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        {{ document.get_document_type_display }}
+                                    </strong>
+
+                                    <span>
+                                        Uploaded {{ document.uploaded_at|date:"d M Y" }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            {% if document.document_file %}
+
+                                <a
+                                    href="{{ document.document_file.url }}"
+                                    target="_blank"
+                                    class="document-button"
+                                >
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                    View
+
+                                </a>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="no-history">
+
+                    <i class="fa-solid fa-file-circle-exclamation"></i>
+
+                    <p>
+                        No supporting documents are available.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

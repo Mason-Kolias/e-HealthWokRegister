@@ -1,0 +1,730 @@
+{% extends "registrar/registrar_base.html" %}
+{% load static %}
+
+{% block title %}
+    Review Application
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'registrar/css/review_application.css' %}">
+{% endblock %}
+
+{% block registrar_content %}
+
+<section class="review-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="review-header">
+
+        <div class="review-header-content">
+
+            <div class="breadcrumb">
+                <a href="{% url 'registrar_review_applications' %}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Review Applications
+                </a>
+
+                <span>/</span>
+
+                <span>
+                    Application Review
+                </span>
+            </div>
+
+            <div class="header-main">
+
+                <div>
+
+                    <span class="section-label">
+                        APPLICATION REVIEW
+                    </span>
+
+                    <h2>
+                        {{ application.full_name|default:"Health Worker Application" }}
+                    </h2>
+
+                    <p>
+                        Application No.
+                        <strong>{{ application.application_number }}</strong>
+                    </p>
+
+                </div>
+
+                <div class="application-status">
+
+                    {% if application.status == "submitted" %}
+
+                        <span class="status-badge pending">
+                            <i class="fa-solid fa-clock"></i>
+                            Pending Review
+                        </span>
+
+                    {% elif application.status == "under_review" %}
+
+                        <span class="status-badge review">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Under Review
+                        </span>
+
+                    {% elif application.status == "approved" %}
+
+                        <span class="status-badge approved">
+                            <i class="fa-solid fa-check"></i>
+                            Approved
+                        </span>
+
+                    {% elif application.status == "rejected" %}
+
+                        <span class="status-badge rejected">
+                            <i class="fa-solid fa-xmark"></i>
+                            Rejected
+                        </span>
+
+                    {% elif application.status == "license_generated" %}
+
+                        <span class="status-badge approved">
+                            <i class="fa-solid fa-certificate"></i>
+                            License Generated
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         APPLICATION OVERVIEW
+    ====================================================== -->
+
+    <div class="overview-grid">
+
+        <div class="overview-item">
+
+            <div class="overview-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <div>
+                <span>Profession</span>
+
+                <strong>
+                    {% if application.get_profession_display %}
+                        {{ application.get_profession_display }}
+                    {% else %}
+                        {{ application.profession|default:"—" }}
+                    {% endif %}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+            <div class="overview-icon">
+                <i class="fa-solid fa-id-card"></i>
+            </div>
+
+            <div>
+                <span>Registration Number</span>
+
+                <strong>
+                    {{ application.professional_registration_number|default:"—" }}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+            <div class="overview-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <div>
+                <span>Submitted</span>
+
+                <strong>
+                    {% if application.submitted_at %}
+                        {{ application.submitted_at|date:"d M Y" }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="overview-item">
+
+            <div class="overview-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <div>
+                <span>Application Type</span>
+
+                <strong>
+                    {{ application.get_application_type_display }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PERSONAL INFORMATION
+    ====================================================== -->
+
+    <div class="review-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+                <span>SECTION 01</span>
+                <h3>Personal Information</h3>
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+            <div class="information-item">
+                <span>Full Name</span>
+                <strong>
+                    {{ application.full_name|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Date of Birth</span>
+                <strong>
+                    {% if application.date_of_birth %}
+                        {{ application.date_of_birth|date:"d M Y" }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Gender</span>
+                <strong>
+                    {{ application.get_gender_display|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Nationality</span>
+                <strong>
+                    {{ application.nationality|default:"—" }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONTACT INFORMATION
+    ====================================================== -->
+
+    <div class="review-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                <i class="fa-solid fa-address-book"></i>
+            </div>
+
+            <div>
+                <span>SECTION 02</span>
+                <h3>Contact Information</h3>
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+            <div class="information-item">
+                <span>Phone Number</span>
+                <strong>
+                    {{ application.phone_number|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Email Address</span>
+                <strong>
+                    {{ application.email|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Province</span>
+                <strong>
+                    {{ application.province|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>District</span>
+                <strong>
+                    {{ application.district|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item full-width">
+                <span>Residential Address</span>
+                <strong>
+                    {{ application.residential_address|default:"—" }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROFESSIONAL INFORMATION
+    ====================================================== -->
+
+    <div class="review-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <div>
+                <span>SECTION 03</span>
+                <h3>Professional Information</h3>
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+            <div class="information-item">
+                <span>Profession</span>
+                <strong>
+                    {% if application.get_profession_display %}
+                        {{ application.get_profession_display }}
+                    {% else %}
+                        {{ application.profession|default:"—" }}
+                    {% endif %}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Professional Registration Number</span>
+                <strong>
+                    {{ application.professional_registration_number|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Specialization</span>
+                <strong>
+                    {{ application.specialization|default:"Not Specified" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Years of Experience</span>
+                <strong>
+                    {% if application.years_of_experience != None %}
+                        {{ application.years_of_experience }} years
+                    {% else %}
+                        —
+                    {% endif %}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         EDUCATION
+    ====================================================== -->
+
+    <div class="review-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <span>SECTION 04</span>
+                <h3>Education & Qualification</h3>
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+            <div class="information-item">
+                <span>Qualification</span>
+                <strong>
+                    {{ application.qualification|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Institution</span>
+                <strong>
+                    {{ application.institution|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Country of Qualification</span>
+                <strong>
+                    {{ application.country_of_qualification|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Year Completed</span>
+                <strong>
+                    {{ application.year_completed|default:"—" }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         EMPLOYMENT
+    ====================================================== -->
+
+    <div class="review-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                <i class="fa-solid fa-briefcase"></i>
+            </div>
+
+            <div>
+                <span>SECTION 05</span>
+                <h3>Employment Information</h3>
+            </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+            <div class="information-item">
+                <span>Current Employer</span>
+                <strong>
+                    {{ application.current_employer|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Position</span>
+                <strong>
+                    {{ application.position|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Workplace Province</span>
+                <strong>
+                    {{ application.workplace_province|default:"—" }}
+                </strong>
+            </div>
+
+            <div class="information-item">
+                <span>Employment Start Date</span>
+                <strong>
+                    {% if application.employment_start_date %}
+                        {{ application.employment_start_date|date:"d M Y" }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DOCUMENT VERIFICATION
+    ====================================================== -->
+
+    <div class="review-card documents-card">
+
+        <div class="documents-header">
+
+            <div class="card-title">
+
+                <div class="title-icon">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <div>
+                    <span>SECTION 06</span>
+                    <h3>Supporting Documents</h3>
+                </div>
+
+            </div>
+
+            <span class="document-count">
+                {{ documents|length }} Document{{ documents|length|pluralize }}
+            </span>
+
+        </div>
+
+
+        <p class="section-description">
+            Review and verify each supporting document before
+            approving or rejecting this application.
+        </p>
+
+
+        <div class="documents-list">
+
+            {% for document in documents %}
+
+                <div class="document-item">
+
+                    <div class="document-left">
+
+                        <div class="document-icon">
+
+                            {% if ".pdf" in document.document_file.name|lower %}
+
+                                <i class="fa-solid fa-file-pdf"></i>
+
+                            {% elif ".jpg" in document.document_file.name|lower or ".jpeg" in document.document_file.name|lower or ".png" in document.document_file.name|lower %}
+
+                                <i class="fa-solid fa-file-image"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-file"></i>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="document-details">
+
+                            <strong>
+                                {{ document.get_document_type_display }}
+                            </strong>
+
+                            <span>
+                                {{ document.document_file.name|cut:"health_worker_documents/" }}
+                            </span>
+
+                            <small>
+                                Uploaded
+                                {{ document.uploaded_at|date:"d M Y, H:i" }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="{{ document.document_file.url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="document-view-btn"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                        View Document
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="documents-empty">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    <strong>
+                        No supporting documents uploaded
+                    </strong>
+
+                    <span>
+                        This application does not contain any uploaded documents.
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REGISTRAR DECISION
+    ====================================================== -->
+
+    {% if application.status == "under_review" or application.status == "submitted" %}
+
+        <div class="decision-card">
+
+            <div class="decision-header">
+
+                <div>
+
+                    <span class="section-label">
+                        FINAL REVIEW
+                    </span>
+
+                    <h3>
+                        Registrar Decision
+                    </h3>
+
+                    <p>
+                        Confirm that all applicant information and supporting
+                        documents have been verified before making a decision.
+                    </p>
+
+                </div>
+
+                <div class="decision-icon">
+                    <i class="fa-solid fa-gavel"></i>
+                </div>
+
+            </div>
+
+
+            <div class="decision-actions">
+
+                <!-- APPROVE -->
+
+                <form method="post" class="approve-form">
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="approve"
+                    >
+
+                    <button
+                        type="submit"
+                        class="approve-button"
+                        onclick="return confirm('Are you sure you want to approve this application?');"
+                    >
+                        <i class="fa-solid fa-check"></i>
+
+                        <span>
+                            Approve Application
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </form>
+
+
+                <!-- REJECT -->
+
+                <div class="reject-area">
+
+                    <form method="post">
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="action"
+                            value="reject"
+                        >
+
+                        <label for="rejection_reason">
+                            Rejection Reason
+                        </label>
+
+                        <textarea
+                            id="rejection_reason"
+                            name="rejection_reason"
+                            rows="4"
+                            placeholder="Enter the reason for rejecting this application..."
+                        ></textarea>
+
+                        <button
+                            type="submit"
+                            class="reject-button"
+                            onclick="return confirm('Are you sure you want to reject this application?');"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                            Reject Application
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         FOOTER ACTION
+    ====================================================== -->
+
+    <div class="review-footer">
+
+        <a
+            href="{% url 'registrar_review_applications' %}"
+            class="back-button"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Applications
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

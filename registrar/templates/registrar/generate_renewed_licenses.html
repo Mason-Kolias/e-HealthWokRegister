@@ -1,0 +1,335 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Generate Renewed Medical License
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrar/css/generate_renewed_license.css' %}"
+>
+
+{% endblock %}
+
+
+{% block registrar_content %}
+
+
+<section class="dashboard-content">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    
+<header class="registrar-page-header">
+
+    <div class="registrar-page-header-content">
+
+        <span class="registrar-page-header-label">
+            LICENSE RENEWAL
+        </span>
+
+        <h2>
+            Generate Renewed Medical License
+        </h2>
+
+        <p>
+            Generate renewed medical licenses for approved
+            License Renewal Applications.
+        </p>
+
+    </div>
+
+    <div class="registrar-page-header-icon">
+        <i class="fa-solid fa-arrows-rotate"></i>
+    </div>
+
+</header>
+
+
+
+    <!-- =====================================================
+         MESSAGES
+    ====================================================== -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message {{ message.tags }}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         APPROVED RENEWAL APPLICATIONS
+    ====================================================== -->
+
+    <section class="license-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Approved Renewal Applications
+                </h2>
+
+                <p>
+                    The following renewal applications have been
+                    approved and are ready for renewed license generation.
+                </p>
+
+            </div>
+
+
+            <div class="approved-count">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                {{ approved_renewals|length }} Approved
+
+            </div>
+
+        </div>
+
+
+
+        <div class="table-container">
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Renewal No.
+                        </th>
+
+                        <th>
+                            Applicant
+                        </th>
+
+                        <th>
+                            License No.
+                        </th>
+
+                        <th>
+                            Profession
+                        </th>
+
+                        <th>
+                            Current Expiry
+                        </th>
+
+                        <th>
+                            Approved Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                {% for renewal in approved_renewals %}
+
+                    <tr>
+
+
+                        <td>
+
+                            <strong>
+                                {{ renewal.renewal_application_number }}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            {% if renewal.applicant.get_full_name %}
+
+                                {{ renewal.applicant.get_full_name }}
+
+                            {% else %}
+
+                                {{ renewal.applicant.username }}
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if renewal.medical_license %}
+
+                                {{ renewal.medical_license.license_number }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if renewal.medical_license.application %}
+
+                                {{ renewal.medical_license.application.profession }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if renewal.medical_license.expiry_date %}
+
+                                {{ renewal.medical_license.expiry_date|date:"d M Y" }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if renewal.reviewed_at %}
+
+                                {{ renewal.reviewed_at|date:"d M Y" }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <form
+                                method="POST"
+                                action="{% url 'generate_renewed_license' renewal.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="generate-btn"
+                                    onclick="return confirm('Generate the renewed medical license for {% if renewal.applicant.get_full_name %}{{ renewal.applicant.get_full_name }}{% else %}{{ renewal.applicant.username }}{% endif %}?');"
+                                >
+
+                                    <i class="fa-solid fa-id-card"></i>
+
+                                    Generate License
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+
+
+                {% empty %}
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty-state"
+                        >
+
+                            <i class="fa-solid fa-folder-open"></i>
+
+                            <h3>
+                                No Approved Renewal Applications
+                            </h3>
+
+                            <p>
+                                There are currently no approved renewal
+                                applications waiting for license generation.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</section>
+
+
+{% endblock %}

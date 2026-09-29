@@ -1,0 +1,24 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    My Profile | e-HealthWorkRegister
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/profile.css' %}"
+    >
+    <link
+    rel="stylesheet"
+    href="{% static 'css/portal_header.css' %}"
+>
+{% endblock %}
+
+{% block registrar_content %}
+
+    {% include "accounts/profile_content.html" %}
+
+{% endblock %}

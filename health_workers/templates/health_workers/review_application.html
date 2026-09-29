@@ -1,0 +1,87 @@
+{% extends "health_workers/health_worker_base.html" %}
+
+{% block title %}
+Review Medical License Application | e-HealthWorkRegister
+{% endblock %}
+
+{% block dashboard_content %}
+
+<section class="application-page">
+
+    <div class="application-page-header">
+
+        <div class="header-content">
+
+            <div class="header-eyebrow">
+                <i class="fa-solid fa-clipboard-check"></i>
+                PNG HEALTH WORKERS REGISTRATION
+            </div>
+
+            <h1>
+                Review Your Application
+            </h1>
+
+            <p>
+                Review your application using the final review section
+                before submitting it to the Registrar.
+            </p>
+
+        </div>
+
+        <div class="application-number">
+
+            <span>
+                Application Number
+            </span>
+
+            <strong>
+                {{ application.application_number }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="application-card">
+
+        <div class="submission-notice">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <div>
+
+                <strong>
+                    Final Review
+                </strong>
+
+                <p>
+                    The application review process is now part of the
+                    seven-step application form. Use the button below
+                    to return to Step 7, where you can review your
+                    information, confirm the declaration, provide your
+                    signature and submit the application.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a
+                href="{% url 'medical_license_application' %}?step=7"
+                class="btn primary"
+            >
+                <i class="fa-solid fa-clipboard-check"></i>
+                Continue to Final Review
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

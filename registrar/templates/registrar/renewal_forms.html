@@ -1,0 +1,353 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Renewal Applications | Registrar Portal
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'registrar/css/registrar_dashboard.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+
+                <h2>
+                    REGISTRAR PORTAL
+                </h2>
+
+                <span>
+                    Health Worker Registration
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+
+            <a
+                href="{% url 'registrar_dashboard' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>
+                    Dashboard
+                </span>
+            </a>
+
+
+            <a
+                href="{% url 'registrar_review_applications' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-file-circle-check"></i>
+                <span>
+                    Review Applications
+                </span>
+            </a>
+
+
+            <a
+                href="{% url 'registrar_renewal_applications' %}"
+                class="nav-link active"
+            >
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>
+                    Renewal Applications
+                </span>
+            </a>
+
+
+            <a
+                href="{% url 'generate_license_page' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-id-card"></i>
+                <span>
+                    Generate New Medical License
+                </span>
+            </a>
+
+
+            <a
+                href="{% url 'registrar_reports' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-chart-column"></i>
+                <span>
+                    Reports
+                </span>
+            </a>
+
+
+            <a
+                href="{% url 'profile' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-user"></i>
+                <span>
+                    My Profile
+                </span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-link"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>
+                    Logout
+                </span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <section class="dashboard-content">
+
+            <div class="welcome-section">
+
+                <div>
+
+                    <h2>
+                        Renewal Applications
+                    </h2>
+
+                    <p>
+                        Review and process annual medical license renewals.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+
+                    <i class="fa-solid fa-arrows-rotate"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card applications-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Submitted Renewal Applications
+                        </h3>
+
+                        <p>
+                            Applications requiring Registrar review
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Renewal No.
+                                </th>
+
+                                <th>
+                                    Applicant
+                                </th>
+
+                                <th>
+                                    Registration No.
+                                </th>
+
+                                <th>
+                                    Expiry Date
+                                </th>
+
+                                <th>
+                                    Submitted
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for renewal in renewals %}
+
+                                <tr>
+
+                                    <td>
+                                        <strong>
+                                            {{ renewal.renewal_application_number }}
+                                        </strong>
+                                    </td>
+
+
+                                    <td>
+                                        {{ renewal.medical_license.application.full_name }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ renewal.medical_license.license_number }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ renewal.medical_license.expiry_date|date:"d M Y" }}
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if renewal.submitted_at %}
+
+                                            {{ renewal.submitted_at|date:"d M Y" }}
+
+                                        {% else %}
+
+                                            —
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if renewal.status == "submitted" %}
+
+                                            <span class="status pending">
+                                                Pending
+                                            </span>
+
+                                        {% elif renewal.status == "under_review" %}
+
+                                            <span class="status review">
+                                                Under Review
+                                            </span>
+
+                                        {% elif renewal.status == "renewed" %}
+
+                                            <span class="status approved">
+                                                Renewed
+                                            </span>
+
+                                        {% elif renewal.status == "rejected" %}
+
+                                            <span class="status rejected">
+                                                Rejected
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a
+                                            href="{% url 'registrar_review_renewal' renewal.id %}"
+                                            class="view-btn"
+                                        >
+                                            Review
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            {% empty %}
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        style="text-align: center;"
+                                    >
+                                        No renewal applications have been submitted.
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
+

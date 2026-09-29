@@ -1,0 +1,460 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Review Renewal | e-HealthWorkRegister
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'health_workers/css/dashboard.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'health_workers/css/renewal.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+                <h2>e-HealthWorkRegister</h2>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+            <a
+                href="{% url 'health_worker_dashboard' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a
+                href="{% url 'medical_license_application' %}"
+                class="nav-link"
+            >
+                <i class="fas fa-file-medical"></i>
+                <span>New Registration for License to Practice</span>
+            </a>
+
+            <a
+                href="{% url 'license_renewal_application' %}"
+                class="nav-link active"
+            >
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Annual Renewal of License to Practice</span>
+            </a>
+
+            <a
+                href="{% url 'notifications' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a
+                href="{% url 'profile' %}"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-link"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="renewal-page">
+
+            <div class="renewal-header">
+
+                <span class="renewal-label">
+                    FINAL REVIEW
+                </span>
+
+                <h1>
+                    Review Renewal Application
+                </h1>
+
+                <p>
+                    Confirm your renewal information before sending
+                    it to the Registrar.
+                </p>
+
+            </div>
+
+
+            <section class="renewal-card">
+
+                <div class="renewal-card-heading">
+
+                    <div class="renewal-card-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Registration Information
+                        </h2>
+
+                        <p>
+                            Existing medical registration details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="license-preview">
+
+                    <div>
+                        <span>
+                            Renewal Application No.
+                        </span>
+
+                        <strong>
+                            {{ renewal.renewal_application_number }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Registration Number
+                        </span>
+
+                        <strong>
+                            {{ medical_license.license_number }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Applicant
+                        </span>
+
+                        <strong>
+                            {{ medical_license.application.full_name }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Issue Date
+                        </span>
+
+                        <strong>
+                            {{ medical_license.issue_date|date:"d M Y" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Current Expiry Date
+                        </span>
+
+                        <strong>
+                            {{ medical_license.expiry_date|date:"d M Y" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Status
+                        </span>
+
+                        <strong>
+                            {{ medical_license.get_status_display }}
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="renewal-card">
+
+                <div class="renewal-card-heading">
+
+                    <div class="renewal-card-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Current Information
+                        </h2>
+
+                        <p>
+                            Information supplied for this renewal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="license-preview">
+
+                    <div>
+                        <span>
+                            Current Employer
+                        </span>
+
+                        <strong>
+                            {{ renewal.current_employer|default:"Not provided" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Work Location
+                        </span>
+
+                        <strong>
+                            {{ renewal.current_work_location|default:"Not provided" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Contact Phone
+                        </span>
+
+                        <strong>
+                            {{ renewal.contact_phone|default:"Not provided" }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Email
+                        </span>
+
+                        <strong>
+                            {{ renewal.email|default:"Not provided" }}
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="renewal-card">
+
+                <div class="renewal-card-heading">
+
+                    <div class="renewal-card-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Renewal Fee Receipt
+                        </h2>
+
+                        <p>
+                            The single required supporting document.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if renewal.payment_receipt %}
+
+                    <div class="receipt-upload">
+
+                        <div class="receipt-icon">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+
+                        <div class="receipt-content">
+
+                            <strong>
+                                Receipt uploaded
+                            </strong>
+
+                            <p>
+                                {{ renewal.payment_receipt.name }}
+                            </p>
+
+                            <a
+                                href="{{ renewal.payment_receipt.url }}"
+                                target="_blank"
+                                class="primary-button"
+                            >
+                                <i class="fa-solid fa-eye"></i>
+                                View Receipt
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="renewal-notice">
+
+                        <div class="renewal-notice-icon">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Receipt required
+                            </strong>
+
+                            <p>
+                                A renewal fee receipt must be uploaded
+                                before the application can be submitted.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <section class="renewal-card">
+
+                <div class="renewal-notice">
+
+                    <div class="renewal-notice-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Declaration
+                        </strong>
+
+                        <p>
+                            I confirm that the information supplied in this
+                            renewal application is accurate and that the
+                            attached document is the renewal fee payment receipt.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    method="post"
+                    action="{% url 'submit_renewal_application' renewal.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <label class="declaration-option">
+
+                        <input
+                            type="checkbox"
+                            name="declaration"
+                            value="1"
+                            required
+                        >
+
+                        <span>
+                            I confirm the declaration above.
+                        </span>
+
+                    </label>
+
+
+                    <div class="renewal-actions">
+
+                        <a
+                            href="{% url 'license_renewal_application' %}"
+                            class="secondary-button"
+                        >
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Edit Renewal
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            Submit Renewal Application
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
+

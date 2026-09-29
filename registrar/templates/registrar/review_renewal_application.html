@@ -1,0 +1,429 @@
+{% extends "registrar/registrar_base.html" %}
+
+{% block title %}
+    Review License Renewal
+{% endblock %}
+
+{% block registrar_content %}
+
+<section class="dashboard-content">
+<!--
+    <div class="page-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                LICENSE RENEWAL REVIEW
+            </span>
+
+            <h2>
+                Review Renewal Application
+            </h2>
+
+            <p>
+                Verify the health worker's renewal information before approving or rejecting the application.
+            </p>
+
+        </div>
+
+    </div>
+
+-->
+<div class="registrar-review-header">
+
+    <div class="registrar-review-header-content">
+
+        <span class="registrar-review-header-label">
+            LICENSE RENEWAL REVIEW
+        </span>
+
+        <h1>
+            Review Renewal Application
+        </h1>
+
+        <p>
+            Verify the health worker's renewal information,
+            payment receipt and registration details before
+            making a decision.
+        </p>
+
+    </div>
+
+    <div class="registrar-review-header-icon">
+        <i class="fa-solid fa-arrows-rotate"></i>
+    </div>
+
+</div>
+
+
+
+
+    <div class="dashboard-card three-d-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <span class="card-eyebrow">
+                    APPLICATION DETAILS
+                </span>
+
+                <h3>
+                    {{ renewal.renewal_application_number }}
+                </h3>
+
+            </div>
+
+            <div>
+
+                {% if renewal.status == "submitted" %}
+
+                    <span class="status-badge status-pending">
+                        Submitted
+                    </span>
+
+                {% elif renewal.status == "under_review" %}
+
+                    <span class="status-badge status-review">
+                        Under Review
+                    </span>
+
+                {% elif renewal.status == "renewed" %}
+
+                    <span class="status-badge status-approved">
+                        Renewed
+                    </span>
+
+                {% elif renewal.status == "rejected" %}
+
+                    <span class="status-badge status-rejected">
+                        Rejected
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="renewal-review-grid">
+
+            <div class="review-field">
+                <span>Health Worker</span>
+                <strong>
+                    {{ renewal.applicant.get_full_name|default:renewal.applicant.username }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Registration Number</span>
+                <strong>
+                    {{ medical_license.license_number }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Current License Expiry</span>
+                <strong>
+                    {{ medical_license.expiry_date|date:"d F Y" }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Profession</span>
+                <strong>
+                    {{ application.get_profession_display }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Current Employer</span>
+                <strong>
+                    {{ renewal.current_employer|default:"Not provided" }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Work Location</span>
+                <strong>
+                    {{ renewal.current_work_location|default:"Not provided" }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Contact Phone</span>
+                <strong>
+                    {{ renewal.contact_phone|default:"Not provided" }}
+                </strong>
+            </div>
+
+            <div class="review-field">
+                <span>Email</span>
+                <strong>
+                    {{ renewal.email|default:"Not provided" }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card three-d-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <span class="card-eyebrow">
+                    PAYMENT VERIFICATION
+                </span>
+
+                <h3>
+                    Renewal Fee Receipt
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        {% if renewal.payment_receipt %}
+
+            <div class="document-review-row">
+
+                <div class="document-review-icon">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                </div>
+
+                <div class="document-review-info">
+
+                    <strong>
+                        Renewal Fee Payment Receipt
+                    </strong>
+
+                    <span>
+                        Submitted by applicant
+                    </span>
+
+                </div>
+
+                <a
+                    href="{{ renewal.payment_receipt.url }}"
+                    target="_blank"
+                    class="renewal-review-button"
+                >
+                    <i class="fa-solid fa-eye"></i>
+                    View Receipt
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <div class="renewal-empty-state">
+
+                <i class="fa-solid fa-file-circle-xmark"></i>
+
+                <h4>
+                    Receipt unavailable
+                </h4>
+
+                <p>
+                    No payment receipt is attached to this renewal.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if renewal.status == "submitted" or renewal.status == "under_review" %}
+<!--
+    <div class="dashboard-card three-d-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <span class="card-eyebrow">
+                    REGISTRAR DECISION
+                </span>
+
+                <h3>
+                    Process Renewal
+                </h3>
+
+                <p>
+                    Approving the renewal will extend the existing license for another year and generate a new license PDF.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="renewal-decision-actions">
+
+            <form
+                method="post"
+                action="{% url 'approve_renewal' renewal.id %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    onclick="return confirm('Approve this renewal and generate the renewed license?');"
+                >
+                    <i class="fa-solid fa-circle-check"></i>
+                    Approve Renewal
+                </button>
+
+            </form>
+
+
+            <form
+                method="post"
+                action="{% url 'reject_renewal' renewal.id %}"
+                class="rejection-form"
+            >
+
+                {% csrf_token %}
+
+                <label for="rejection_reason">
+                    Rejection Reason
+                </label>
+
+                <textarea
+                    id="rejection_reason"
+                    name="rejection_reason"
+                    rows="4"
+                    placeholder="Enter the reason for rejecting this renewal..."
+                    required
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="danger-button"
+                    onclick="return confirm('Reject this renewal application?');"
+                >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    Reject Renewal
+                </button>
+
+            </form>
+
+        </div>
+        -->
+
+
+        <div class="renewal-decision-actions">
+
+    <!-- APPROVE -->
+
+    <form
+        method="post"
+        action="{% url 'approve_renewal' renewal.id %}"
+        class="approval-form"
+    >
+
+        {% csrf_token %}
+
+        <div class="decision-option-content">
+
+            <div class="decision-option-icon approve-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <h4>
+                Approve Renewal
+            </h4>
+
+            <p>
+                Confirm that the renewal information and payment
+                receipt have been verified.
+            </p>
+
+            <button
+                type="submit"
+                class="primary-button"
+                onclick="return confirm('Approve this renewal and generate the renewed license?');"
+            >
+                <i class="fa-solid fa-circle-check"></i>
+                Approve Renewal
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- REJECT -->
+
+    <form
+        method="post"
+        action="{% url 'reject_renewal' renewal.id %}"
+        class="rejection-form"
+    >
+
+        {% csrf_token %}
+
+        <div class="decision-option-heading">
+
+            <div class="decision-option-icon reject-icon">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+
+            <div>
+                <h4>
+                    Reject Renewal
+                </h4>
+
+                <p>
+                    Provide a clear reason so the health worker
+                    knows what needs to be corrected.
+                </p>
+            </div>
+
+        </div>
+
+
+        <label for="rejection_reason">
+            Rejection Reason
+        </label>
+
+        <textarea
+            id="rejection_reason"
+            name="rejection_reason"
+            rows="4"
+            placeholder="Enter the reason for rejecting this renewal..."
+            required
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="danger-button"
+            onclick="return confirm('Reject this renewal application?');"
+        >
+            <i class="fa-solid fa-circle-xmark"></i>
+            Reject Renewal
+        </button>
+
+    </form>
+
+</div>
+
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

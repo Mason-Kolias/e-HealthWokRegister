@@ -1,0 +1,2607 @@
+{% extends "health_workers/health_worker_base.html" %}
+
+{% load static %}
+
+{% block title %}
+Medical License Application | e-HealthWorkRegister
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'health_workers/css/application.css' %}"
+>
+
+{% endblock %}
+
+{% block dashboard_content %}
+
+<section class="application-page">
+    <header class="health-worker-page-header">
+
+    <div class="health-worker-page-header-content">
+
+        <span class="health-worker-page-header-label">
+            LICENSE MANAGEMENT
+        </span>
+
+        <h1>
+            New Registration for License to Practice
+        </h1>
+
+        <p>
+            Complete this application if you have completed or are
+            completing an approved health profession programme and
+            are applying for your first license to practice in Papua
+            New Guinea.
+        </p>
+
+    </div>
+
+
+    <div class="health-worker-page-header-side">
+
+        <div class="health-worker-application-number">
+
+            <span>
+                Application Number
+            </span>
+
+            <strong>
+                {% if application %}
+                    {{ application.application_number }}
+                {% else %}
+                    Assigned when saved
+                {% endif %}
+            </strong>
+
+        </div>
+
+
+        <div class="health-worker-page-header-icon">
+            <i class="fa-solid fa-file-medical"></i>
+        </div>
+
+    </div>
+
+</header>
+
+
+    {% if is_locked %}
+
+        <div class="status-banner application-locked">
+
+            <div class="status-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Application Already Submitted
+                </strong>
+
+                <p>
+                    You have already submitted a new registration
+                    application for a License to Practice.
+                    You cannot submit another new registration application
+                    while your current application is being processed or
+                    has already been approved.
+                </p>
+
+                <p>
+                    This application is temporarily unavailable for editing.
+                    You may submit a corrected application only if the
+                    Registrar rejects this application and requests changes.
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+    {% if messages %}
+
+        <div class="messages-container">
+
+            {% for message in messages %}
+
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+
+                    {% if message.tags == "success" %}
+                        <i class="fa-solid fa-circle-check"></i>
+                    {% elif message.tags == "error" %}
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    {% else %}
+                        <i class="fa-solid fa-circle-info"></i>
+                    {% endif %}
+
+                    <span>
+                        {{ message }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    {% if is_rejected %}
+
+        <div class="status-banner rejected">
+
+            <div class="status-icon">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Application Requires Correction
+                </strong>
+
+                <p>
+                    Your previous application was not approved.
+                    Please correct the information identified by
+                    the Registrar and resubmit this application.
+                </p>
+
+                {% if application.rejection_reason %}
+
+                    <div class="rejection-reason">
+
+                        <span>
+                            Registrar's Reason
+                        </span>
+
+                        <p>
+                            {{ application.rejection_reason }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+    {% if form.errors and not is_locked %}
+
+        <div class="form-error-summary">
+
+            <strong>
+                Please review the information entered.
+            </strong>
+
+            {% for field in form %}
+
+                {% for error in field.errors %}
+
+                    <p>
+                        {{ field.label }}: {{ error }}
+                    </p>
+
+                {% endfor %}
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    {% if document_formset.non_form_errors and not is_locked %}
+
+        <div class="form-error-summary">
+
+            <strong>
+                Please review the supporting documents.
+            </strong>
+
+            {% for error in document_formset.non_form_errors %}
+
+                <p>
+                    {{ error }}
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="wizard-progress">
+
+        <div class="progress-line">
+
+            <div
+                class="progress-line-fill"
+                id="progressLineFill"
+            ></div>
+
+        </div>
+
+        <button type="button" class="wizard-progress-step" data-step="1">
+            <span class="step-number">1</span>
+            <span class="step-label">Personal Information</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="2">
+            <span class="step-number">2</span>
+            <span class="step-label">Contact & Location</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="3">
+            <span class="step-number">3</span>
+            <span class="step-label">Profession</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="4">
+            <span class="step-number">4</span>
+            <span class="step-label">Education & Graduation</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="5">
+            <span class="step-number">5</span>
+            <span class="step-label">Employment</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="6">
+            <span class="step-number">6</span>
+            <span class="step-label">Supporting Documents</span>
+        </button>
+
+        <button type="button" class="wizard-progress-step" data-step="7">
+            <span class="step-number">7</span>
+            <span class="step-label">Review & Submit</span>
+        </button>
+
+    </div>
+
+
+    <form
+        method="post"
+        enctype="multipart/form-data"
+        id="applicationForm"
+        novalidate
+    >
+
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            name="current_step"
+            id="currentStep"
+            value="{{ initial_step|default:1 }}"
+        >
+
+
+        <!-- STEP 1 -->
+
+        <div class="wizard-step" data-step="1">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <h2>Personal Information</h2>
+
+                        <p>
+                            Enter your personal identification details
+                            exactly as they appear on your official records.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="information-notice">
+
+                    <i class="fa-solid fa-circle-info notice-icon"></i>
+
+                    <div>
+
+                        <strong>
+                            Use your official information
+                        </strong>
+
+                        <p>
+                            Your name and date of birth should match your
+                            National ID, Grade 12 certificate and other
+                            supporting documents.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        {% if field.name == "full_name" or field.name == "date_of_birth" or field.name == "gender" or field.name == "nationality" %}
+
+                            <div class="form-group">
+
+                                <label for="{{ field.id_for_label }}">
+
+                                    {{ field.label }}
+
+                                    {% if field.field.required and not is_locked %}
+                                        <span class="required">*</span>
+                                    {% endif %}
+
+                                </label>
+
+                                {{ field }}
+
+                                {% for error in field.errors %}
+                                    <span class="field-error">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <span></span>
+
+                    <button
+                        type="submit"
+                        class="btn primary next-step"
+                        data-submit-step="1"
+                        {% if is_locked %}disabled{% endif %}
+                    >
+                        Continue
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div class="wizard-step" data-step="2">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div>
+                        <h2>Contact & Location</h2>
+
+                        <p>
+                            Provide your current contact details and
+                            residential location.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        {% if field.name == "phone_number" or field.name == "email" or field.name == "residential_address" or field.name == "province" or field.name == "district" %}
+
+                            <div class="form-group {% if field.name == 'residential_address' %}full-width{% endif %}">
+
+                                <label for="{{ field.id_for_label }}">
+
+                                    {{ field.label }}
+
+                                    {% if field.field.required and not is_locked %}
+                                        <span class="required">*</span>
+                                    {% endif %}
+
+                                </label>
+
+                                {{ field }}
+
+                                {% for error in field.errors %}
+                                    <span class="field-error">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn primary next-step"
+                        data-submit-step="2"
+                        {% if is_locked %}disabled{% endif %}
+                    >
+                        Continue
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 3 -->
+
+        <div class="wizard-step" data-step="3">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+
+                    <div>
+                        <h2>Profession</h2>
+
+                        <p>
+                            Tell us about the health profession for which
+                            you are applying to practice.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="information-notice">
+
+                    <i class="fa-solid fa-graduation-cap notice-icon"></i>
+
+                    <div>
+
+                        <strong>
+                            New registration
+                        </strong>
+
+                        <p>
+                            This application is intended for graduates,
+                            course-completed applicants and eligible
+                            final-year students entering professional practice.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        {% if field.name == "profession" or field.name == "professional_registration_number" or field.name == "specialization" or field.name == "years_of_experience" %}
+
+                            <div class="form-group">
+
+                                <label for="{{ field.id_for_label }}">
+
+                                    {{ field.label }}
+
+                                    {% if field.field.required and not is_locked %}
+                                        <span class="required">*</span>
+                                    {% endif %}
+
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.name == "professional_registration_number" %}
+                                    <small>
+                                        Leave blank if you have not previously
+                                        been issued a professional registration number.
+                                    </small>
+                                {% endif %}
+
+                                {% if field.name == "years_of_experience" %}
+                                    <small>
+                                        Enter 0 if you have no previous professional experience.
+                                    </small>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <span class="field-error">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn primary next-step"
+                        data-submit-step="3"
+                        {% if is_locked %}disabled{% endif %}
+                    >
+                        Continue
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 4 -->
+
+        <div class="wizard-step" data-step="4">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <h2>Education & Graduation</h2>
+
+                        <p>
+                            Provide details of the health profession
+                            programme you completed or are completing.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        {% if field.name == "qualification" or field.name == "institution" or field.name == "campus" or field.name == "institution_province" or field.name == "country_of_qualification" or field.name == "year_started" or field.name == "year_completed" or field.name == "graduation_status" %}
+
+                            <div class="form-group">
+
+                                <label for="{{ field.id_for_label }}">
+
+                                    {{ field.label }}
+
+                                    {% if field.field.required and not is_locked %}
+                                        <span class="required">*</span>
+                                    {% endif %}
+
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.name == "graduation_status" %}
+                                    <small>
+                                        Select Graduated if you have formally
+                                        graduated, Course Completed if your
+                                        programme is completed but graduation
+                                        is pending, or Final Year Student if
+                                        you are completing your final year.
+                                    </small>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <span class="field-error">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn primary next-step"
+                        data-submit-step="4"
+                        {% if is_locked %}disabled{% endif %}
+                    >
+                        Continue
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 5 -->
+
+        <div class="wizard-step" data-step="5">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                    <div>
+                        <h2>Employment</h2>
+
+                        <p>
+                            Provide your current employment information,
+                            if applicable.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="information-notice">
+
+                    <i class="fa-solid fa-circle-info notice-icon"></i>
+
+                    <div>
+
+                        <strong>
+                            Employment information
+                        </strong>
+
+                        <p>
+                            If you have not yet commenced employment,
+                            leave the employment fields blank.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    {% for field in form %}
+
+                        {% if field.name == "current_employer" or field.name == "position" or field.name == "workplace_province" or field.name == "employment_start_date" %}
+
+                            <div class="form-group">
+
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+                                {% for error in field.errors %}
+                                    <span class="field-error">
+                                        {{ error }}
+                                    </span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn primary next-step"
+                        data-submit-step="5"
+                        {% if is_locked %}disabled{% endif %}
+                    >
+                        Continue
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 6 -->
+
+        <div class="wizard-step" data-step="6">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+
+                    <div>
+                        <h2>Supporting Documents</h2>
+
+                        <p>
+                            Upload each required supporting document before
+                            proceeding to the final review.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="upload-notice">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <div>
+
+                        {% if is_locked %}
+
+                            <strong>
+                                Documents submitted
+                            </strong>
+
+                            <p>
+                                Your supporting documents have already been
+                                submitted. They cannot be replaced while the
+                                application is locked.
+                            </p>
+
+                        {% else %}
+
+                            <strong>
+                                Upload requirements
+                            </strong>
+
+                            <p>
+                                Accepted formats: PDF, JPG, JPEG and PNG.
+                                Maximum file size: 5 MB per document.
+                                All six documents are required before submission.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                {{ document_formset.management_form }}
+
+
+                <div class="document-list">
+
+                    {% for document_form in document_formset %}
+
+                        <div class="document-card">
+
+                            <div class="document-number">
+                                {{ forloop.counter }}
+                            </div>
+
+                            <div class="document-information">
+
+                                <h3>
+                                    {{ document_form.fixed_document_label }}
+                                </h3>
+
+                                <p>
+                                    {% if is_locked %}
+                                        Submitted supporting document
+                                    {% else %}
+                                        Upload the required supporting document.
+                                    {% endif %}
+                                </p>
+
+
+                                {{ document_form.document_type }}
+
+
+                                {% if document_form.non_field_errors %}
+
+                                    {% for error in document_form.non_field_errors %}
+
+                                        <div class="field-error">
+                                            {{ error }}
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% endif %}
+
+
+                                {% if document_form.document_file.errors %}
+
+                                    {% for error in document_form.document_file.errors %}
+
+                                        <div class="field-error">
+                                            {{ error }}
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% endif %}
+
+
+                                <label class="file-upload-box {% if is_locked %}disabled-upload{% endif %}">
+
+                                    <i class="fa-solid fa-file-arrow-up"></i>
+
+                                    <span>
+
+                                        <span class="upload-main-text">
+
+                                            {% if is_locked %}
+                                                Document locked
+                                            {% else %}
+                                                Choose file
+                                            {% endif %}
+
+                                        </span>
+
+                                        <span
+                                            class="upload-file-name"
+                                            data-default="No file selected"
+                                        >
+
+                                            {% if document_form.instance.pk and document_form.instance.document_file %}
+
+                                                {{ document_form.instance.document_file.name|cut:"health_worker_documents/" }}
+
+                                            {% else %}
+
+                                                No file selected
+
+                                            {% endif %}
+
+                                        </span>
+
+                                    </span>
+
+                                    {{ document_form.document_file }}
+
+                                </label>
+
+
+                                {% if document_form.instance.pk and document_form.instance.document_file %}
+
+                                    <div class="existing-document">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        <span>
+
+                                            Document uploaded:
+
+                                            <strong>
+                                                {{ document_form.instance.document_file.name|cut:"health_worker_documents/" }}
+                                            </strong>
+
+                                        </span>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+
+                    {% if is_locked %}
+
+                        <button
+                            type="button"
+                            class="btn primary"
+                            disabled
+                        >
+                            <i class="fa-solid fa-lock"></i>
+                            Documents Submitted
+                        </button>
+
+                    {% else %}
+
+                        <button
+                            type="submit"
+                            class="btn primary next-step"
+                            id="saveDocuments"
+                            data-submit-step="6"
+                        >
+                            Review Application
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 7 -->
+
+        <div class="wizard-step" data-step="7">
+
+            <div class="application-card">
+
+                <div class="card-heading">
+
+                    <div class="card-icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Review & Submit
+                        </h2>
+
+                        <p>
+                            Review the information and supporting documents
+                            associated with this application.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if is_locked %}
+
+                    <div class="submission-notice application-readonly-notice">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <div>
+
+                            <strong>
+                                Application is read-only
+                            </strong>
+
+                            <p>
+                                This application has already been submitted.
+                                You can review all information below, but
+                                no changes or new submission can be made.
+                                If the Registrar rejects the application,
+                                you will be able to correct and resubmit it.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="submission-notice">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <div>
+
+                            <strong>
+                                Final review
+                            </strong>
+
+                            <p>
+                                Make sure the information below is accurate
+                                and matches your supporting documents.
+                                Once submitted, the application will be
+                                sent to the Registrar for review.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="review-grid">
+
+                    <div class="review-section">
+
+                        <div class="review-section-header">
+
+                            <div>
+                                <span class="review-eyebrow">STEP 01</span>
+                                <h3>Personal Information</h3>
+                            </div>
+
+                            {% if not is_locked %}
+
+                                <button
+                                    type="button"
+                                    class="edit-step"
+                                    data-edit-step="1"
+                                >
+                                    Edit
+                                </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="review-items">
+
+                            <div>
+                                <span>Full Name</span>
+                                <strong>{{ form.full_name.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Date of Birth</span>
+                                <strong>{{ form.date_of_birth.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Gender</span>
+                                <strong>{{ form.gender.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Nationality</span>
+                                <strong>{{ form.nationality.value|default:"Not provided" }}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-section">
+
+                        <div class="review-section-header">
+
+                            <div>
+                                <span class="review-eyebrow">STEP 02</span>
+                                <h3>Contact & Location</h3>
+                            </div>
+
+                            {% if not is_locked %}
+
+                                <button
+                                    type="button"
+                                    class="edit-step"
+                                    data-edit-step="2"
+                                >
+                                    Edit
+                                </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="review-items">
+
+                            <div>
+                                <span>Phone</span>
+                                <strong>{{ form.phone_number.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Email</span>
+                                <strong>{{ form.email.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div class="full-review">
+                                <span>Residential Address</span>
+                                <strong>{{ form.residential_address.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Province</span>
+                                <strong>{{ form.province.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>District</span>
+                                <strong>{{ form.district.value|default:"Not provided" }}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-section">
+
+                        <div class="review-section-header">
+
+                            <div>
+                                <span class="review-eyebrow">STEP 03</span>
+                                <h3>Profession</h3>
+                            </div>
+
+                            {% if not is_locked %}
+
+                                <button
+                                    type="button"
+                                    class="edit-step"
+                                    data-edit-step="3"
+                                >
+                                    Edit
+                                </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="review-items">
+
+                            <div>
+                                <span>Profession</span>
+                                <strong>{{ form.profession.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Specialization</span>
+                                <strong>{{ form.specialization.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Registration Number</span>
+                                <strong>{{ form.professional_registration_number.value|default:"Not applicable" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Experience</span>
+                                <strong>{{ form.years_of_experience.value|default:"0" }} year(s)</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-section">
+
+                        <div class="review-section-header">
+
+                            <div>
+                                <span class="review-eyebrow">STEP 04</span>
+                                <h3>Education & Graduation</h3>
+                            </div>
+
+                            {% if not is_locked %}
+
+                                <button
+                                    type="button"
+                                    class="edit-step"
+                                    data-edit-step="4"
+                                >
+                                    Edit
+                                </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="review-items">
+
+                            <div>
+                                <span>Qualification</span>
+                                <strong>{{ form.qualification.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Institution</span>
+                                <strong>{{ form.institution.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Campus</span>
+                                <strong>{{ form.campus.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Institution Province</span>
+                                <strong>{{ form.institution_province.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Country</span>
+                                <strong>{{ form.country_of_qualification.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Year Started</span>
+                                <strong>{{ form.year_started.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Year Completed</span>
+                                <strong>{{ form.year_completed.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Graduation Status</span>
+                                <strong>{{ form.graduation_status.value|default:"Not provided" }}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-section">
+
+                        <div class="review-section-header">
+
+                            <div>
+                                <span class="review-eyebrow">STEP 05</span>
+                                <h3>Employment</h3>
+                            </div>
+
+                            {% if not is_locked %}
+
+                                <button
+                                    type="button"
+                                    class="edit-step"
+                                    data-edit-step="5"
+                                >
+                                    Edit
+                                </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="review-items">
+
+                            <div>
+                                <span>Employer</span>
+                                <strong>{{ form.current_employer.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Position</span>
+                                <strong>{{ form.position.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Workplace Province</span>
+                                <strong>{{ form.workplace_province.value|default:"Not provided" }}</strong>
+                            </div>
+
+                            <div>
+                                <span>Employment Start Date</span>
+                                <strong>{{ form.employment_start_date.value|default:"Not provided" }}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-review">
+
+                    <div class="review-section-header">
+
+                        <div>
+                            <span class="review-eyebrow">STEP 06</span>
+                            <h3>Supporting Documents</h3>
+                        </div>
+
+                        {% if not is_locked %}
+
+                            <button
+                                type="button"
+                                class="edit-step"
+                                data-edit-step="6"
+                            >
+                                Edit
+                            </button>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="document-review-list">
+
+                        {% for document_form in document_formset %}
+
+                            <div class="document-review-item">
+
+                                <i class="fa-solid fa-file-lines"></i>
+
+                                <span>
+                                    {{ document_form.fixed_document_label }}
+                                </span>
+
+                                {% if document_form.instance.pk and document_form.instance.document_file %}
+
+                                    <strong class="uploaded">
+                                        Uploaded
+                                    </strong>
+
+                                {% else %}
+
+                                    <strong class="not-uploaded">
+                                        Required
+                                    </strong>
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                {% if not is_locked %}
+
+                    <div class="declaration-box">
+
+                        <div class="declaration-icon">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+
+                        <div class="declaration-content">
+
+                            <h3>
+                                Applicant Declaration
+                            </h3>
+
+                            <p>
+                                I declare that the information provided in this
+                                application is true, complete and accurate to the
+                                best of my knowledge. I understand that providing
+                                false or misleading information may affect the
+                                processing of my application and may be subject
+                                to applicable professional or legal requirements.
+                            </p>
+
+                            <label class="checkbox-label">
+
+                                <input
+                                    type="checkbox"
+                                    name="declaration"
+                                    id="declaration"
+                                    value="1"
+                                >
+
+                                <span>
+                                    I confirm that I have reviewed this application
+                                    and that the information provided is true,
+                                    complete and accurate.
+                                </span>
+
+                            </label>
+
+                            <div
+                                class="declaration-error"
+                                id="declarationError"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="signature-section"
+                        id="signatureSection"
+                    >
+
+                        <div class="signature-heading">
+
+                            <div class="signature-icon">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Applicant Signature
+                                </h3>
+
+                                <p>
+                                    Sign inside the box below using your mouse,
+                                    trackpad or touchscreen.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="signature-box">
+
+                            <canvas id="signatureCanvas"></canvas>
+
+                            <div
+                                class="signature-placeholder"
+                                id="signaturePlaceholder"
+                            >
+                                Sign here after confirming the declaration
+                            </div>
+
+                        </div>
+
+
+                        <div class="signature-footer">
+
+                            <span id="signatureStatus">
+                                Signature required
+                            </span>
+
+                            <button
+                                type="button"
+                                class="clear-signature"
+                                id="clearSignature"
+                            >
+                                <i class="fa-solid fa-eraser"></i>
+                                Clear Signature
+                            </button>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="signature_data"
+                            id="signatureData"
+                        >
+
+                        <div
+                            class="signature-error"
+                            id="signatureError"
+                        ></div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="declaration-box application-locked-declaration">
+
+                        <div class="declaration-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div class="declaration-content">
+
+                            <h3>
+                                Submission Completed
+                            </h3>
+
+                            <p>
+                                The applicant declaration and signature were
+                                completed when this application was submitted.
+                                This section is now locked.
+                            </p>
+
+                            {% if application.signature %}
+
+                                <div class="signature-submitted">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Applicant signature submitted
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="btn secondary previous-step"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Previous
+                    </button>
+
+
+                    {% if is_locked %}
+
+                        <button
+                            type="button"
+                            class="btn primary"
+                            disabled
+                        >
+                            <i class="fa-solid fa-lock"></i>
+                            Application Submitted
+                        </button>
+
+                    {% else %}
+
+                        <button
+                            type="submit"
+                            class="btn primary submit-application"
+                            id="submitApplication"
+                            data-final-submit="true"
+                        >
+
+                            <i class="fa-solid fa-paper-plane"></i>
+
+                            {% if is_rejected %}
+                                Resubmit Application
+                            {% else %}
+                                Submit Application
+                            {% endif %}
+
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form =
+        document.getElementById("applicationForm");
+
+    const steps =
+        Array.from(
+            document.querySelectorAll(".wizard-step")
+        );
+
+    const progressSteps =
+        Array.from(
+            document.querySelectorAll(
+                ".wizard-progress-step"
+            )
+        );
+
+    const progressLineFill =
+        document.getElementById(
+            "progressLineFill"
+        );
+
+    const currentStepInput =
+        document.getElementById(
+            "currentStep"
+        );
+
+    let currentStep = parseInt(
+        currentStepInput?.value || "1",
+        10
+    );
+
+    if (
+        Number.isNaN(currentStep) ||
+        currentStep < 1 ||
+        currentStep > steps.length
+    ) {
+        currentStep = 1;
+    }
+
+
+    const isLocked =
+        {% if is_locked %}
+            true
+        {% else %}
+            false
+        {% endif %};
+
+
+    function showStep(stepNumber) {
+
+        stepNumber = Math.max(
+            1,
+            Math.min(
+                stepNumber,
+                steps.length
+            )
+        );
+
+        currentStep = stepNumber;
+
+        if (currentStepInput) {
+            currentStepInput.value =
+                currentStep;
+        }
+
+
+        steps.forEach(function (step) {
+
+            const number =
+                parseInt(
+                    step.dataset.step,
+                    10
+                );
+
+            if (number === currentStep) {
+
+                step.classList.add("active");
+                step.style.display = "block";
+
+            } else {
+
+                step.classList.remove("active");
+                step.style.display = "none";
+
+            }
+
+        });
+
+
+        progressSteps.forEach(function (progressStep) {
+
+            const number =
+                parseInt(
+                    progressStep.dataset.step,
+                    10
+                );
+
+            progressStep.classList.remove(
+                "active",
+                "completed"
+            );
+
+            if (number === currentStep) {
+
+                progressStep.classList.add(
+                    "active"
+                );
+
+            } else if (number < currentStep) {
+
+                progressStep.classList.add(
+                    "completed"
+                );
+
+            }
+
+        });
+
+
+        if (
+            progressLineFill &&
+            progressSteps.length > 1
+        ) {
+
+            const percentage =
+                (
+                    (currentStep - 1) /
+                    (progressSteps.length - 1)
+                ) * 100;
+
+            progressLineFill.style.width =
+                percentage + "%";
+        }
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    function validateVisibleStep() {
+
+        const currentWizardStep =
+            document.querySelector(
+                '.wizard-step[data-step="' +
+                currentStep +
+                '"]'
+            );
+
+        if (!currentWizardStep) {
+            return true;
+        }
+
+
+        const requiredFields =
+            currentWizardStep.querySelectorAll(
+                "input[required], select[required], textarea[required]"
+            );
+
+        let valid = true;
+
+
+        requiredFields.forEach(function (field) {
+
+            if (
+                field.disabled ||
+                field.type === "hidden"
+            ) {
+                return;
+            }
+
+
+            if (!field.checkValidity()) {
+
+                valid = false;
+
+                field.classList.add(
+                    "input-error"
+                );
+
+                field.reportValidity();
+
+                setTimeout(function () {
+
+                    field.classList.remove(
+                        "input-error"
+                    );
+
+                }, 2000);
+
+            }
+
+        });
+
+        return valid;
+    }
+
+
+    document
+        .querySelectorAll(
+            "[data-submit-step]"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    if (isLocked) {
+
+                        event.preventDefault();
+                        return;
+
+                    }
+
+                    const targetStep =
+                        parseInt(
+                            button.dataset.submitStep,
+                            10
+                        );
+
+                    currentStep =
+                        targetStep;
+
+                    if (currentStepInput) {
+
+                        currentStepInput.value =
+                            targetStep;
+
+                    }
+
+
+                    if (
+                        !validateVisibleStep()
+                    ) {
+
+                        event.preventDefault();
+                        return;
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            ".previous-step"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    if (currentStep > 1) {
+
+                        showStep(
+                            currentStep - 1
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    progressSteps.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const target =
+                    parseInt(
+                        button.dataset.step,
+                        10
+                    );
+
+                if (isLocked) {
+
+                    showStep(target);
+                    return;
+
+                }
+
+                if (
+                    target <= currentStep
+                ) {
+
+                    showStep(target);
+
+                }
+
+            }
+        );
+
+    });
+
+
+    document
+        .querySelectorAll(
+            ".edit-step"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const target =
+                        parseInt(
+                            button.dataset.editStep,
+                            10
+                        );
+
+                    if (
+                        target >= 1 &&
+                        target <= steps.length
+                    ) {
+
+                        showStep(target);
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            'input[type="file"]'
+        )
+        .forEach(function (input) {
+
+            input.addEventListener(
+                "change",
+                function () {
+
+                    const uploadBox =
+                        input.closest(
+                            ".file-upload-box"
+                        );
+
+                    if (!uploadBox) {
+                        return;
+                    }
+
+                    const fileNameElement =
+                        uploadBox.querySelector(
+                            ".upload-file-name"
+                        );
+
+                    if (!fileNameElement) {
+                        return;
+                    }
+
+                    if (
+                        input.files &&
+                        input.files.length > 0
+                    ) {
+
+                        fileNameElement.textContent =
+                            input.files[0].name;
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    const canvas =
+        document.getElementById(
+            "signatureCanvas"
+        );
+
+    const signatureData =
+        document.getElementById(
+            "signatureData"
+        );
+
+    const signaturePlaceholder =
+        document.getElementById(
+            "signaturePlaceholder"
+        );
+
+    const signatureStatus =
+        document.getElementById(
+            "signatureStatus"
+        );
+
+    const signatureError =
+        document.getElementById(
+            "signatureError"
+        );
+
+    const clearSignature =
+        document.getElementById(
+            "clearSignature"
+        );
+
+    const signatureSection =
+        document.getElementById(
+            "signatureSection"
+        );
+
+    const declaration =
+        document.getElementById(
+            "declaration"
+        );
+
+
+    let hasSignature = false;
+
+
+    if (canvas) {
+
+        const context =
+            canvas.getContext("2d");
+
+        let drawing = false;
+
+
+        function setupCanvas() {
+
+            const rect =
+                canvas.getBoundingClientRect();
+
+            if (
+                !rect.width ||
+                !rect.height
+            ) {
+                return;
+            }
+
+            const ratio =
+                Math.max(
+                    window.devicePixelRatio || 1,
+                    1
+                );
+
+            canvas.width =
+                Math.round(
+                    rect.width * ratio
+                );
+
+            canvas.height =
+                Math.round(
+                    rect.height * ratio
+                );
+
+            canvas.style.width =
+                rect.width + "px";
+
+            canvas.style.height =
+                rect.height + "px";
+
+            context.setTransform(
+                ratio,
+                0,
+                0,
+                ratio,
+                0,
+                0
+            );
+
+            context.lineWidth = 2.2;
+            context.lineCap = "round";
+            context.lineJoin = "round";
+            context.strokeStyle = "#182b3d";
+            context.fillStyle = "#182b3d";
+        }
+
+
+        function getPosition(event) {
+
+            const rect =
+                canvas.getBoundingClientRect();
+
+            return {
+                x:
+                    event.clientX -
+                    rect.left,
+
+                y:
+                    event.clientY -
+                    rect.top
+            };
+        }
+
+
+        function updateSignature() {
+
+            if (!signatureData) {
+                return;
+            }
+
+            if (hasSignature) {
+
+                signatureData.value =
+                    canvas.toDataURL(
+                        "image/png"
+                    );
+
+                if (signaturePlaceholder) {
+
+                    signaturePlaceholder.style.display =
+                        "none";
+
+                }
+
+                if (signatureStatus) {
+
+                    signatureStatus.textContent =
+                        "Signature captured";
+
+                    signatureStatus.classList.add(
+                        "signed"
+                    );
+
+                }
+
+                if (signatureSection) {
+
+                    signatureSection.classList.add(
+                        "signature-enabled"
+                    );
+
+                }
+
+            } else {
+
+                signatureData.value = "";
+
+                if (signaturePlaceholder) {
+
+                    signaturePlaceholder.style.display =
+                        "flex";
+
+                }
+
+                if (signatureStatus) {
+
+                    signatureStatus.textContent =
+                        "Signature required";
+
+                    signatureStatus.classList.remove(
+                        "signed"
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        function startDrawing(event) {
+
+            if (isLocked) {
+                return;
+            }
+
+            if (
+                declaration &&
+                !declaration.checked
+            ) {
+
+                if (signatureError) {
+
+                    signatureError.textContent =
+                        "Please confirm the declaration before signing.";
+
+                }
+
+                return;
+            }
+
+            event.preventDefault();
+
+            drawing = true;
+
+            if (
+                canvas.setPointerCapture
+            ) {
+
+                try {
+
+                    canvas.setPointerCapture(
+                        event.pointerId
+                    );
+
+                } catch (error) {
+                }
+
+            }
+
+            const position =
+                getPosition(event);
+
+            context.beginPath();
+
+            context.moveTo(
+                position.x,
+                position.y
+            );
+
+            context.arc(
+                position.x,
+                position.y,
+                1.1,
+                0,
+                Math.PI * 2
+            );
+
+            context.fill();
+
+            hasSignature = true;
+
+            updateSignature();
+        }
+
+
+        function draw(event) {
+
+            if (
+                !drawing ||
+                isLocked
+            ) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const position =
+                getPosition(event);
+
+            context.lineTo(
+                position.x,
+                position.y
+            );
+
+            context.stroke();
+
+            context.beginPath();
+
+            context.moveTo(
+                position.x,
+                position.y
+            );
+
+            hasSignature = true;
+
+            updateSignature();
+        }
+
+
+        function stopDrawing(event) {
+
+            if (!drawing) {
+                return;
+            }
+
+            event.preventDefault();
+
+            drawing = false;
+
+            if (
+                canvas.releasePointerCapture
+            ) {
+
+                try {
+
+                    if (
+                        canvas.hasPointerCapture &&
+                        canvas.hasPointerCapture(
+                            event.pointerId
+                        )
+                    ) {
+
+                        canvas.releasePointerCapture(
+                            event.pointerId
+                        );
+
+                    }
+
+                } catch (error) {
+                }
+
+            }
+
+            if (hasSignature) {
+                updateSignature();
+            }
+        }
+
+
+        function clearCanvas() {
+
+            if (isLocked) {
+                return;
+            }
+
+            const rect =
+                canvas.getBoundingClientRect();
+
+            context.clearRect(
+                0,
+                0,
+                rect.width,
+                rect.height
+            );
+
+            drawing = false;
+            hasSignature = false;
+
+            if (signatureData) {
+                signatureData.value = "";
+            }
+
+            if (signaturePlaceholder) {
+
+                signaturePlaceholder.style.display =
+                    "flex";
+
+            }
+
+            if (signatureStatus) {
+
+                signatureStatus.textContent =
+                    "Signature required";
+
+                signatureStatus.classList.remove(
+                    "signed"
+                );
+
+            }
+
+            if (signatureError) {
+                signatureError.textContent = "";
+            }
+        }
+
+
+        canvas.addEventListener(
+            "pointerdown",
+            startDrawing,
+            { passive: false }
+        );
+
+        canvas.addEventListener(
+            "pointermove",
+            draw,
+            { passive: false }
+        );
+
+        canvas.addEventListener(
+            "pointerup",
+            stopDrawing,
+            { passive: false }
+        );
+
+        canvas.addEventListener(
+            "pointercancel",
+            stopDrawing,
+            { passive: false }
+        );
+
+
+        if (clearSignature) {
+
+            clearSignature.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    clearCanvas();
+
+                }
+            );
+
+        }
+
+
+        if (declaration) {
+
+            declaration.addEventListener(
+                "change",
+                function () {
+
+                    if (!declaration.checked) {
+
+                        clearCanvas();
+
+                        if (signatureSection) {
+
+                            signatureSection.classList.remove(
+                                "signature-enabled"
+                            );
+
+                        }
+
+                    } else {
+
+                        if (signatureSection) {
+
+                            signatureSection.classList.add(
+                                "signature-enabled"
+                            );
+
+                        }
+
+                        if (signatureError) {
+
+                            signatureError.textContent =
+                                "";
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        requestAnimationFrame(
+            setupCanvas
+        );
+
+
+        window.addEventListener(
+            "resize",
+            setupCanvas
+        );
+
+    }
+
+
+    if (form) {
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                if (currentStep < 7) {
+
+                    if (
+                        !validateVisibleStep()
+                    ) {
+
+                        event.preventDefault();
+
+                    }
+
+                    return;
+                }
+
+
+                if (isLocked) {
+
+                    event.preventDefault();
+                    return;
+
+                }
+
+
+                if (
+                    declaration &&
+                    !declaration.checked
+                ) {
+
+                    event.preventDefault();
+
+                    const declarationError =
+                        document.getElementById(
+                            "declarationError"
+                        );
+
+                    if (declarationError) {
+
+                        declarationError.textContent =
+                            "Please confirm the declaration before submitting.";
+
+                    }
+
+                    declaration.focus();
+
+                    return;
+                }
+
+
+                if (
+                    canvas &&
+                    signatureData
+                ) {
+
+                    if (!hasSignature) {
+
+                        event.preventDefault();
+
+                        if (signatureError) {
+
+                            signatureError.textContent =
+                                "Please provide your signature before submitting.";
+
+                        }
+
+                        canvas.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                        return;
+                    }
+
+                    signatureData.value =
+                        canvas.toDataURL(
+                            "image/png"
+                        );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    showStep(currentStep);
+
+});
+</script>
+
+{% endblock %}

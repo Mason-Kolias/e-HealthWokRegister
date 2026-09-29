@@ -1,0 +1,1483 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="PNG Health Workers Online Registration System">
+
+    <title>e-HealthWorkRegister | PNG's Online Health Workers RegistrationSystem </title>
+
+    <link rel="stylesheet"
+          href="{% static 'landing/css/landing.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body{% if show_login %} class="login-open"{% endif %}>
+
+<div class="top-strip">
+    <div class="top-strip-left">
+        <span>🇵🇬 Papua New Guinea</span>
+    </div>
+
+    <div class="top-strip-right">
+        <span>Digital Health Workers Registration Potal</span>
+    </div>
+</div>
+
+<header class="main-header">
+    <div class="header-inner">
+
+        <a href="#home"
+           class="brand slide-link"
+           data-slide="0">
+
+            <div class="brand-icon">
+                
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <div class="brand-text">
+                <strong>e-HealthWorkRegister</strong>
+                <span>PNG Health Workers Registration</span>
+            </div>
+
+        </a>
+
+        <button class="mobile-toggle"
+                id="mobileToggle"
+                type="button"
+                aria-label="Open navigation">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+        <nav class="navigation" id="navLinks">
+
+            <button class="nav-link active"
+                    data-slide="0"
+                    type="button">
+                Home
+            </button>
+
+            <button class="nav-link"
+                    data-slide="1"
+                    type="button">
+                Services
+            </button>
+
+            <button class="nav-link"
+                    data-slide="2"
+                    type="button">
+                How It Works
+            </button>
+
+            <button class="nav-link"
+                    data-slide="3"
+                    type="button">
+                About
+            </button>
+
+            <button class="nav-link"
+                    data-slide="4"
+                    type="button">
+                FAQ
+            </button>
+
+            <a href="#"
+               class="nav-signin login-trigger">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
+
+            </a>
+
+        </nav>
+
+    </div>
+</header>
+
+<main class="page-wrapper">
+
+    <div class="slides-container"
+         id="slidesContainer">
+
+        <section class="page-slide home-slide"
+                 id="home">
+
+            <div class="home-content">
+
+                <div class="hero-text">
+
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        PNG Digital Health Registration
+                    </div>
+
+                    <h1>
+                        Medical licence
+                        <span>registration,</span>
+                        made simpler.
+                    </h1>
+
+                    <p>
+                        A secure online platform designed to make
+                        health worker registration, application
+                        tracking and digital licence management
+                        easier and more efficient.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#"
+                           class="primary-button login-trigger">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Sign In
+
+                        </a>
+
+                        <button class="secondary-button slide-link"
+                                data-slide="1"
+                                type="button">
+
+                            Explore Services
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="hero-visual">
+
+                    <div class="image-carousel">
+
+    <div class="carousel-slide active">
+        <img src="{% static 'landing/images/doctor.png' %}"
+             alt="Medical doctor">
+    </div>
+
+    <div class="carousel-slide">
+        <img src="{% static 'landing/images/dwu-top-lab-scientist.png' %}"
+             alt="DWU laboratory scientist">
+    </div>
+
+    <div class="carousel-slide">
+        <img src="{% static 'landing/images/Medical-Board-Members.png' %}"
+             alt="Medical Board member">
+    </div>
+
+    <div class="carousel-slide">
+        <img src="{% static 'landing/images/medical-graduates.png' %}"
+             alt="Medical graduates">
+    </div>
+
+                   
+
+                </div>
+
+            </div>
+
+            <div class="information-panel">
+
+                <div class="information-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div class="information-text">
+
+                    <span class="information-label">
+                        ONLINE REGISTRATION
+                    </span>
+
+                    <strong>
+                        Your application is ready when you are.
+                    </strong>
+
+                    <p>
+                        Submit your health worker registration
+                        application online and monitor its progress
+                        through one central portal.
+                    </p>
+
+                </div>
+
+                <button class="information-button slide-link"
+                        data-slide="1"
+                        type="button">
+
+                    Get Started
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="page-slide services-slide"
+                 id="services">
+
+            <div class="slide-header">
+
+                <span class="section-label">
+                    OUR SERVICES
+                </span>
+
+                <h2>
+                    Everything you need in
+                    <span>one portal.</span>
+                </h2>
+
+                <p>
+                    e-HealthWorkRegister provides a centralized
+                    digital platform for health worker registration
+                    and medical licence management.
+                </p>
+
+            </div>
+
+            <div class="services-grid">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+
+                    <h3>Online Registration</h3>
+
+                    <p>
+                        Complete your health worker registration
+                        application online without unnecessary
+                        paperwork.
+                    </p>
+
+                    <span class="service-number">01</span>
+
+                </div>
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+
+                    <h3>Secure Documents</h3>
+
+                    <p>
+                        Upload and manage required identification,
+                        education and professional documents
+                        securely.
+                    </p>
+
+                    <span class="service-number">02</span>
+
+                </div>
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+
+                    <h3>Application Tracking</h3>
+
+                    <p>
+                        Follow the progress of your application
+                        from submission through registrar review.
+                    </p>
+
+                    <span class="service-number">03</span>
+
+                </div>
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+
+                    <h3>Digital Medical Licence</h3>
+
+                    <p>
+                        Access your approved digital medical licence
+                        directly from your health worker dashboard.
+                    </p>
+
+                    <span class="service-number">04</span>
+
+                </div>
+
+            </div>
+
+            <div class="slide-navigation">
+
+                <button class="slide-back slide-link"
+                        data-slide="0"
+                        type="button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Home
+
+                </button>
+
+                <button class="slide-next slide-link"
+                        data-slide="2"
+                        type="button">
+
+                    How It Works
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="page-slide process-slide"
+                 id="how-it-works">
+
+            <div class="slide-header">
+
+                <span class="section-label">
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Registration made
+                    <span>simple.</span>
+                </h2>
+
+                <p>
+                    Follow a straightforward digital process from
+                    application to your approved medical licence.
+                </p>
+
+            </div>
+
+            <div class="process-container">
+
+                <div class="process-line"></div>
+
+                <div class="process-step">
+
+                    <div class="process-number">
+                        01
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <h3>Create Account</h3>
+
+                    <p>
+                        Create your health worker account and
+                        securely sign in to the portal.
+                    </p>
+
+                </div>
+
+                <div class="process-step">
+
+                    <div class="process-number">
+                        02
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                    </div>
+
+                    <h3>Submit Application</h3>
+
+                    <p>
+                        Complete your medical licence application
+                        and upload the required documents.
+                    </p>
+
+                </div>
+
+                <div class="process-step">
+
+                    <div class="process-number">
+                        03
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+
+                    <h3>Registrar Review</h3>
+
+                    <p>
+                        A registrar reviews and verifies your
+                        submitted application.
+                    </p>
+
+                </div>
+
+                <div class="process-step">
+
+                    <div class="process-number">
+                        04
+                    </div>
+
+                    <div class="process-icon">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+
+                    <h3>Receive Licence</h3>
+
+                    <p>
+                        Once approved, access and download your
+                        digital medical licence.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="slide-navigation">
+
+                <button class="slide-back slide-link"
+                        data-slide="1"
+                        type="button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Services
+
+                </button>
+
+                <button class="slide-next slide-link"
+                        data-slide="3"
+                        type="button">
+
+                    About
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="page-slide about-slide"
+                 id="about">
+
+            <div class="about-layout">
+
+                <div class="about-text">
+
+                    <span class="section-label">
+                        ABOUT THE SYSTEM
+                    </span>
+
+                    <h2>
+                        A smarter approach to
+                        <span>health registration.</span>
+                    </h2>
+
+                    <p>
+                        The PNG Health Workers Online Registration
+                        System is designed to improve the way health
+                        worker medical licence applications are
+                        submitted, reviewed and managed.
+                    </p>
+
+                    <p>
+                        By moving the registration process online,
+                        the system provides a centralized platform
+                        where applicants and registrars can interact
+                        efficiently.
+                    </p>
+
+                    <div class="about-features">
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Centralized applications</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Secure document management</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Efficient application tracking</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Digital medical licences</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="about-panel">
+
+                    <div class="about-panel-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <h3>
+                        Digital Health Registration
+                    </h3>
+
+                    <p>
+                        Bringing registration services closer
+                        to health workers through a modern
+                        digital platform.
+                    </p>
+
+                    <div class="about-stat-grid">
+
+                        <div>
+                            <strong>24/7</strong>
+                            <span>Online Access</span>
+                        </div>
+
+                        <div>
+                            <strong>1</strong>
+                            <span>Central Portal</span>
+                        </div>
+
+                        <div>
+                            <strong>QR</strong>
+                            <span>Licence Verification</span>
+                        </div>
+
+                        <div>
+                            <strong>100%</strong>
+                            <span>Digital Process</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-navigation">
+
+                <button class="slide-back slide-link"
+                        data-slide="2"
+                        type="button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    How It Works
+
+                </button>
+
+                <button class="slide-next slide-link"
+                        data-slide="4"
+                        type="button">
+
+                    FAQ
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="page-slide faq-slide"
+                 id="faq">
+
+            <div class="slide-header">
+
+                <span class="section-label">
+                    FAQ
+                </span>
+
+                <h2>
+                    Frequently asked
+                    <span>questions.</span>
+                </h2>
+
+                <p>
+                    Find answers to some common questions about
+                    the online registration process.
+                </p>
+
+            </div>
+
+            <div class="faq-container">
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+                        <span>
+                            How do I register for a medical licence?
+                        </span>
+
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+
+                    <div class="faq-answer">
+
+                        <p>
+                            Create a health worker account, sign in,
+                            complete the medical licence application
+                            and upload the required documents.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+
+                        <span>
+                            Can I save my application before submitting?
+                        </span>
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </div>
+
+                    <div class="faq-answer">
+
+                        <p>
+                            Yes. You can save your application as a
+                            draft and return later to complete and
+                            submit it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+
+                        <span>
+                            How can I track my application?
+                        </span>
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </div>
+
+                    <div class="faq-answer">
+
+                        <p>
+                            After signing in, your dashboard displays
+                            the current status of your application.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <div class="faq-question">
+
+                        <span>
+                            How will I receive my medical licence?
+                        </span>
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </div>
+
+                    <div class="faq-answer">
+
+                        <p>
+                            Once your application has been approved,
+                            your digital medical licence becomes
+                            available from your dashboard.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="faq-bottom">
+
+                <button class="slide-back slide-link"
+                        data-slide="3"
+                        type="button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    About
+
+                </button>
+
+                <a href="#"
+                   class="primary-button login-trigger">
+
+                    Sign In
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<div class="slide-indicator">
+
+    <span class="indicator-current"
+          id="currentSlide">
+        01
+    </span>
+
+    <span class="indicator-line"></span>
+
+    <span class="indicator-total">
+        05
+    </span>
+
+</div>
+
+<div class="login-overlay{% if show_login %} active{% endif %}"
+     id="loginOverlay"
+     aria-hidden="{% if show_login %}false{% else %}true{% endif %}">
+
+    <div class="login-overlay-backdrop"></div>
+
+    <div class="login-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="loginTitle">
+
+        <button type="button"
+                class="login-close"
+                id="loginClose"
+                aria-label="Close login">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="embedded-login-card">
+
+            <div class="embedded-login-header">
+
+                <div class="embedded-logo-container">
+
+                    <img
+                        src="{% static 'accounts/images/mb_logo.png' %}"
+                        alt="Project Logo"
+                        class="embedded-login-logo"
+                    >
+
+                </div>
+
+                <h1 id="loginTitle">
+                    e-HealthWorkRegister
+                </h1>
+
+                <p>
+                    PNG Online Health Workers Registration System
+                </p>
+
+            </div>
+
+            <div class="embedded-login-form">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p class="embedded-login-subtitle">
+                    Sign in to access your account
+                </p>
+
+                <form method="POST"
+                      action="{% url 'login' %}">
+
+                    {% csrf_token %}
+
+                    <div class="embedded-form-group">
+
+                        <label for="embedded-username">
+                            Email Address
+                        </label>
+
+                        <div class="embedded-input-wrapper">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                name="username"
+                                id="embedded-username"
+                                value="{{ login_username|default:'' }}"
+                                placeholder="Enter your email address"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="embedded-form-group">
+
+                        <label for="embedded-password">
+                            Password
+                        </label>
+
+                        <div class="embedded-input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="embedded-password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="embedded-form-group">
+
+                        <label for="embedded-role">
+                            Login As
+                        </label>
+
+                        <div class="embedded-input-wrapper select-wrapper">
+
+                            <i class="fa-solid fa-user-tag"></i>
+
+                            <select
+                                name="role"
+                                id="embedded-role"
+                                required
+                            >
+
+                                <option
+                                    value=""
+                                    {% if not login_role %}selected{% endif %}
+                                    disabled
+                                >
+                                    Select your role
+                                </option>
+
+                                <option
+                                    value="health_worker"
+                                    {% if login_role == "health_worker" %}selected{% endif %}
+                                >
+                                    Health Worker
+                                </option>
+
+                                <option
+                                    value="registrar"
+                                    {% if login_role == "registrar" %}selected{% endif %}
+                                >
+                                    Registrar
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    {% if login_error %}
+
+                    <div class="embedded-error-message">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        <span>
+                            {{ login_error }}
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+                    <button
+                        type="submit"
+                        class="embedded-login-button"
+                    >
+
+                        <span>
+                            Sign In
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="embedded-login-footer">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure PNG Health Workers Registration Portal
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const container =
+        document.getElementById("slidesContainer");
+
+    const navLinks =
+        document.querySelectorAll(".nav-link");
+
+    const slideLinks =
+        document.querySelectorAll(".slide-link");
+
+    const nav =
+        document.getElementById("navLinks");
+
+    const mobileToggle =
+        document.getElementById("mobileToggle");
+
+    const currentSlideDisplay =
+        document.getElementById("currentSlide");
+
+    let currentSlide = 0;
+
+    const totalSlides = 5;
+
+    function goToSlide(index) {
+
+        index = Math.max(
+            0,
+            Math.min(index, totalSlides - 1)
+        );
+
+        currentSlide = index;
+
+        container.style.transform =
+            `translate3d(-${index * 100}vw, 0, 0)`;
+
+        navLinks.forEach(link => {
+
+            const linkSlide =
+                parseInt(link.dataset.slide);
+
+            link.classList.toggle(
+                "active",
+                linkSlide === index
+            );
+
+        });
+
+        currentSlideDisplay.textContent =
+            String(index + 1).padStart(2, "0");
+
+        nav.classList.remove("mobile-open");
+
+        mobileToggle.classList.remove("open");
+
+    }
+
+    slideLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    this.classList.contains("login-trigger")
+                ) {
+                    return;
+                }
+
+                const slide =
+                    parseInt(this.dataset.slide);
+
+                if (!Number.isNaN(slide)) {
+                    goToSlide(slide);
+                }
+
+            }
+        );
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                const slide =
+                    parseInt(this.dataset.slide);
+
+                if (!Number.isNaN(slide)) {
+                    goToSlide(slide);
+                }
+
+            }
+        );
+
+    });
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.target.tagName === "INPUT" ||
+                event.target.tagName === "TEXTAREA" ||
+                event.target.tagName === "SELECT"
+            ) {
+                return;
+            }
+
+            if (event.key === "ArrowRight") {
+                goToSlide(currentSlide + 1);
+            }
+
+            if (event.key === "ArrowLeft") {
+                goToSlide(currentSlide - 1);
+            }
+
+        }
+    );
+
+    let wheelLocked = false;
+
+    document.addEventListener(
+        "wheel",
+        function (event) {
+
+            if (wheelLocked) {
+                return;
+            }
+
+            if (
+                document.body.classList.contains(
+                    "login-open"
+                )
+            ) {
+                return;
+            }
+
+            if (
+                event.target.closest(".faq-answer") ||
+                event.target.closest(".navigation")
+            ) {
+                return;
+            }
+
+            if (Math.abs(event.deltaY) < 20) {
+                return;
+            }
+
+            event.preventDefault();
+
+            wheelLocked = true;
+
+            if (event.deltaY > 0) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(currentSlide - 1);
+            }
+
+            setTimeout(
+                function () {
+                    wheelLocked = false;
+                },
+                850
+            );
+
+        },
+        { passive: false }
+    );
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    container.addEventListener(
+        "touchstart",
+        function (event) {
+
+            if (
+                document.body.classList.contains(
+                    "login-open"
+                )
+            ) {
+                return;
+            }
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+            touchStartY =
+                event.changedTouches[0].screenY;
+
+        },
+        { passive: true }
+    );
+
+    container.addEventListener(
+        "touchend",
+        function (event) {
+
+            if (
+                document.body.classList.contains(
+                    "login-open"
+                )
+            ) {
+                return;
+            }
+
+            const touchEndX =
+                event.changedTouches[0].screenX;
+
+            const touchEndY =
+                event.changedTouches[0].screenY;
+
+            const differenceX =
+                touchStartX - touchEndX;
+
+            const differenceY =
+                touchStartY - touchEndY;
+
+            if (
+                Math.abs(differenceX) >
+                Math.abs(differenceY)
+            ) {
+
+                if (Math.abs(differenceX) > 60) {
+
+                    if (differenceX > 0) {
+                        goToSlide(currentSlide + 1);
+                    } else {
+                        goToSlide(currentSlide - 1);
+                    }
+
+                }
+
+            }
+
+        },
+        { passive: true }
+    );
+
+    mobileToggle.addEventListener(
+        "click",
+        function () {
+
+            nav.classList.toggle(
+                "mobile-open"
+            );
+
+            mobileToggle.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+    const carouselSlides =
+        document.querySelectorAll(
+            ".carousel-slide"
+        );
+
+    const carouselDots =
+        document.querySelectorAll(
+            ".carousel-dot"
+        );
+
+    let carouselIndex = 0;
+
+    function showCarouselSlide(index) {
+
+        carouselSlides.forEach(
+            slide => slide.classList.remove("active")
+        );
+
+        carouselDots.forEach(
+            dot => dot.classList.remove("active")
+        );
+
+        if (carouselSlides[index]) {
+            carouselSlides[index]
+                .classList.add("active");
+        }
+
+        if (carouselDots[index]) {
+            carouselDots[index]
+                .classList.add("active");
+        }
+
+        carouselIndex = index;
+
+    }
+
+    function nextCarouselSlide() {
+
+        carouselIndex =
+            (carouselIndex + 1) %
+            carouselSlides.length;
+
+        showCarouselSlide(
+            carouselIndex
+        );
+
+    }
+
+    carouselDots.forEach(dot => {
+
+        dot.addEventListener(
+            "click",
+            function () {
+
+                showCarouselSlide(
+                    parseInt(
+                        this.dataset.index
+                    )
+                );
+
+            }
+        );
+
+    });
+
+    if (carouselSlides.length > 1) {
+
+        setInterval(
+            nextCarouselSlide,
+            3000
+        );
+
+    }
+
+    const faqItems =
+        document.querySelectorAll(
+            ".faq-item"
+        );
+
+    faqItems.forEach(item => {
+
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
+
+        question.addEventListener(
+            "click",
+            function () {
+
+                faqItems.forEach(
+                    otherItem => {
+
+                        if (otherItem !== item) {
+
+                            otherItem.classList.remove(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+                item.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    });
+
+    const loginOverlay =
+        document.getElementById("loginOverlay");
+
+    const loginClose =
+        document.getElementById("loginClose");
+
+    const loginTriggers =
+        document.querySelectorAll(
+            ".login-trigger"
+        );
+
+    function openLogin() {
+
+        if (!loginOverlay) {
+            return;
+        }
+
+        loginOverlay.classList.add("active");
+
+        loginOverlay.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "login-open"
+        );
+
+        nav.classList.remove(
+            "mobile-open"
+        );
+
+        mobileToggle.classList.remove(
+            "open"
+        );
+
+        const usernameInput =
+            document.getElementById(
+                "embedded-username"
+            );
+
+        if (usernameInput) {
+
+            setTimeout(
+                function () {
+
+                    usernameInput.focus();
+
+                },
+                300
+            );
+
+        }
+
+    }
+
+    function closeLogin() {
+
+        if (!loginOverlay) {
+            return;
+        }
+
+        loginOverlay.classList.remove(
+            "active"
+        );
+
+        loginOverlay.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "login-open"
+        );
+
+    }
+
+    loginTriggers.forEach(
+        function (trigger) {
+
+            trigger.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    openLogin();
+
+                }
+            );
+
+        }
+    );
+
+    if (loginClose) {
+
+        loginClose.addEventListener(
+            "click",
+            function () {
+
+                closeLogin();
+
+            }
+        );
+
+    }
+
+    if (loginOverlay) {
+
+        loginOverlay.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target.classList.contains(
+                        "login-overlay-backdrop"
+                    )
+                ) {
+
+                    closeLogin();
+
+                }
+
+            }
+        );
+
+    }
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                loginOverlay &&
+                loginOverlay.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeLogin();
+
+            }
+
+        }
+    );
+
+    goToSlide(0);
+
+    {% if show_login %}
+    openLogin();
+    {% endif %}
+
+});
+
+</script>
+
+</body>
+</html>

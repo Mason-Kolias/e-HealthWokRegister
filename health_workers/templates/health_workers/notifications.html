@@ -1,0 +1,312 @@
+{% extends "health_workers/health_worker_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+    Notifications | e-HealthWorkRegister
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'accounts/css/notifications.css' %}"
+>
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/portal_header.css' %}"
+>
+
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+
+<div class="notifications-page">
+
+
+    <!-- =====================================================
+         ORANGE HEADER
+    ====================================================== -->
+
+    <header class="portal-page-header">
+
+        <div class="portal-page-header-content">
+
+            <span class="portal-page-header-label">
+                ACCOUNT
+            </span>
+
+            <h1>
+                Notifications
+            </h1>
+
+            <p>
+                Stay updated about your applications,
+                licenses and account activity.
+            </p>
+
+        </div>
+
+
+        <div class="portal-page-header-icon">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MARK ALL AS READ
+    ====================================================== -->
+
+    {% if unread_count > 0 %}
+
+        <div class="notifications-actions">
+
+            <form
+                method="post"
+                action="{% url 'mark_all_notifications_read' %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="mark-all-button"
+                >
+
+                    <i class="fa-solid fa-check-double"></i>
+
+                    Mark All as Read
+
+                </button>
+
+            </form>
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <div class="notification-summary">
+
+        <div class="notification-summary-icon">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+                {{ unread_count }}
+            </strong>
+
+            <span>
+                unread notification{{ unread_count|pluralize }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NOTIFICATIONS
+    ====================================================== -->
+
+    <div class="notification-list">
+
+
+        {% if notifications %}
+
+
+            {% for notification in notifications %}
+
+
+                <div
+                    class="notification-card
+                    {% if not notification.is_read %}
+                        notification-unread
+                    {% endif %}"
+                >
+
+
+                    <div
+                        class="notification-icon
+
+                        {% if notification.notification_type == 'application_submitted' %}
+                            notification-blue
+
+                        {% elif notification.notification_type == 'application_under_review' %}
+                            notification-purple
+
+                        {% elif notification.notification_type == 'application_approved' %}
+                            notification-green
+
+                        {% elif notification.notification_type == 'application_rejected' %}
+                            notification-red
+
+                        {% elif notification.notification_type == 'application_resubmitted' %}
+                            notification-orange
+
+                        {% elif notification.notification_type == 'license_generated' %}
+                            notification-gold
+
+                        {% else %}
+                            notification-gray
+
+                        {% endif %}"
+                    >
+
+
+                        {% if notification.notification_type == "application_submitted" %}
+
+                            <i class="fa-solid fa-file-circle-plus"></i>
+
+                        {% elif notification.notification_type == "application_under_review" %}
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        {% elif notification.notification_type == "application_approved" %}
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        {% elif notification.notification_type == "application_rejected" %}
+
+                            <i class="fa-solid fa-circle-xmark"></i>
+
+                        {% elif notification.notification_type == "application_resubmitted" %}
+
+                            <i class="fa-solid fa-rotate"></i>
+
+                        {% elif notification.notification_type == "license_generated" %}
+
+                            <i class="fa-solid fa-id-card"></i>
+
+                        {% else %}
+
+                            <i class="fa-solid fa-bell"></i>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+                        <div class="notification-top">
+
+                            <h3>
+                                {{ notification.title }}
+                            </h3>
+
+
+                            {% if not notification.is_read %}
+                                <span class="unread-dot"></span>
+                            {% endif %}
+
+                        </div>
+
+
+                        <p>
+                            {{ notification.message }}
+                        </p>
+
+
+                        <div class="notification-bottom">
+
+                            <span class="notification-date">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                {{ notification.created_at|date:"d M Y, H:i" }}
+
+                            </span>
+
+
+                            {% if notification.is_read %}
+
+                                <span class="read-label">
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                    Read
+
+                                </span>
+
+                            {% else %}
+
+                                <a
+                                    href="{% url 'mark_notification_read' notification.id %}"
+                                    class="notification-action"
+                                >
+                                    View
+                                </a>
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="empty-notifications">
+
+                <div class="empty-notification-icon">
+
+                    <i class="fa-regular fa-bell-slash"></i>
+
+                </div>
+
+
+                <h2>
+                    No Notifications
+                </h2>
+
+
+                <p>
+                    You don't have any notifications at the moment.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

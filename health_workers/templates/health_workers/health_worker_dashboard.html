@@ -1,0 +1,574 @@
+{% extends "health_workers/health_worker_base.html" %}
+
+{% load static %}
+
+{% block title %}
+Health Worker Dashboard
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+<section class="dashboard-content">
+
+
+    <div class="welcome-section">
+
+        <div>
+
+            <h2>
+                Welcome back to your Health Worker Dashboard,
+                {{ request.user.first_name|default:"Health Worker" }}!
+            </h2>
+
+            <p>
+                Manage your registration application,
+                documents and professional license from your dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-user-doctor"></i>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-cards">
+
+
+        <div class="summary-card">
+
+            <div class="stat-icon application-icon">
+
+                <i class="fas fa-file-medical"></i>
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Application Status
+                </span>
+
+                <strong>
+                    {{ application_status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="stat-icon documents-icon">
+
+                <i class="fas fa-folder-open"></i>
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Documents
+                </span>
+
+                <strong>
+                    {{ document_count }} Uploaded
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="stat-icon progress-icon">
+
+                <i class="fas fa-clock"></i>
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Application Progress
+                </span>
+
+                <strong>
+                    {{ application_progress }}%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="stat-icon license-icon">
+
+                <i class="fas fa-id-card"></i>
+
+            </div>
+
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    License
+                </span>
+
+                <strong>
+                    {{ license_status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+
+        <div class="dashboard-card application-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Application Status
+                    </h3>
+
+                    <p>
+                        Your registration application progress
+                    </p>
+
+                </div>
+
+
+                <span class="status-badge {{ application_status_class }}">
+                    {{ application_status }}
+                </span>
+
+            </div>
+
+
+            <div class="application-number">
+
+                <span>
+                    Application Number
+                </span>
+
+                <strong>
+
+                    {% if application %}
+                        {{ application.application_number }}
+                    {% else %}
+                        Not Available
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="progress-header">
+
+                <span>
+                    Application Progress
+                </span>
+
+                <strong>
+                    {{ application_progress }}%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="width: {{ application_progress }}%;"
+                ></div>
+
+            </div>
+
+
+            <div class="application-timeline">
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-icon">
+
+                        <i class="fas fa-check"></i>
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <strong>
+                            Application Submitted
+                        </strong>
+
+
+                        {% if application and application.submitted_at %}
+
+                            <span>
+                                {{ application.submitted_at|date:"d F Y" }}
+                            </span>
+
+                        {% else %}
+
+                            <span>
+                                Not submitted
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-icon">
+
+                        <i class="fas fa-folder-open"></i>
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <strong>
+                            Documents Uploaded
+                        </strong>
+
+                        <span>
+                            {{ document_count }}
+                            document{{ document_count|pluralize }}
+                            uploaded
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-icon">
+
+                        {% if application and application.status == "under_review" %}
+
+                            <i class="fas fa-hourglass-half"></i>
+
+                        {% elif application and application.status == "approved" %}
+
+                            <i class="fas fa-check"></i>
+
+                        {% else %}
+
+                            <i class="fas fa-clock"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <strong>
+                            Registrar Review
+                        </strong>
+
+
+                        {% if application and application.status == "under_review" %}
+
+                            <span>
+                                Currently under review
+                            </span>
+
+                        {% elif application and application.status == "approved" %}
+
+                            <span>
+                                Application approved
+                            </span>
+
+                        {% elif application and application.status == "license_generated" %}
+
+                            <span>
+                                Application approved
+                            </span>
+
+                        {% else %}
+
+                            <span>
+                                Pending
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-icon">
+
+                        <i class="fas fa-id-card"></i>
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <strong>
+                            License Issued
+                        </strong>
+
+
+                        {% if application and application.status == "license_generated" %}
+
+                            <span>
+                                License available
+                            </span>
+
+                        {% else %}
+
+                            <span>
+                                Pending approval
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card license-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Professional License
+                    </h3>
+
+                    <p>
+                        Your registration license
+                    </p>
+
+                </div>
+
+
+                <i class="fa-solid fa-id-card license-header-icon"></i>
+
+            </div>
+
+
+            <div class="license-content">
+
+
+                {% if license_available and license %}
+
+                    <div class="license-status-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Medical License Available
+                    </h3>
+
+
+                    <p>
+                        Your medical license has been generated
+                        and is now available for download.
+                    </p>
+
+
+                    <div class="license-details">
+
+                        <div>
+
+                            <span>
+                                License Number
+                            </span>
+
+                            <strong>
+                                {{ license.license_number }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Issue Date
+                            </span>
+
+                            <strong>
+                                {{ license.issue_date|date:"d M Y" }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Expiry Date
+                            </span>
+
+                            <strong>
+                                {{ license.expiry_date|date:"d M Y" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'download_medical_license' application.id %}"
+                        class="primary-btn"
+                    >
+
+                        <i class="fa-solid fa-download"></i>
+
+                        Download Medical License
+
+                    </a>
+
+
+                {% elif application and application.status == "approved" %}
+
+                    <div class="license-status-icon">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+
+                    <h3>
+                        License Processing
+                    </h3>
+
+
+                    <p>
+                        Your application has been approved.
+                        Your medical license is currently waiting
+                        to be generated by the Registrar.
+                    </p>
+
+
+                    <button
+                        class="disabled-btn"
+                        disabled
+                    >
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        License Being Prepared
+
+                    </button>
+
+
+                {% elif application and application.status == "license_generated" %}
+
+                    <div class="license-status-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <h3>
+                        License Available
+                    </h3>
+
+
+                    <p>
+                        Your medical license has been generated.
+                    </p>
+
+
+                {% else %}
+
+                    <div class="license-status-icon">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+
+                    <h3>
+                        License Pending
+                    </h3>
+
+
+                    <p>
+                        Your professional license will become
+                        available here once your application has
+                        been approved and the Registrar has
+                        generated your license.
+                    </p>
+
+
+                    <button
+                        class="disabled-btn"
+                        disabled
+                    >
+
+                        <i class="fa-solid fa-download"></i>
+
+                        Download License
+
+                    </button>
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}

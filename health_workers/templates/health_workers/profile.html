@@ -1,0 +1,46 @@
+{% if user.role == "registrar" %}
+
+    {% extends "registrar/registrar_base.html" %}
+
+{% else %}
+
+    {% extends "health_workers/health_worker_base.html" %}
+
+{% endif %}
+
+{% load static %}
+
+
+{% block title %}
+    My Profile | e-HealthWorkRegister
+{% endblock %}
+
+
+{% block extra_css %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/profile.css' %}"
+    >
+
+
+{% endblock %}
+
+
+{% if user.role == "registrar" %}
+
+    {% block registrar_content %}
+
+        {% include "accounts/profile_content.html" %}
+
+    {% endblock %}
+
+{% else %}
+
+    {% block dashboard_content %}
+
+        {% include "accounts/profile_content.html" %}
+
+    {% endblock %}
+
+{% endif %}

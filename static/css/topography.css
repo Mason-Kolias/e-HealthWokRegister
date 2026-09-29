@@ -1,0 +1,591 @@
+/* ==========================================================
+   e-HealthWorkRegister
+   HEALTH WORKER PRESENTATION TYPOGRAPHY
+
+   Loaded LAST by health_worker_base.html.
+   This intentionally overrides page-specific font sizes.
+========================================================== */
+
+
+/* ==========================================================
+   GLOBAL
+========================================================== */
+
+html {
+    font-size: 17px;
+}
+
+body {
+    font-size: 17px !important;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.sidebar {
+    width: 290px;
+}
+
+.main-content {
+    width: calc(100% - 290px);
+    margin-left: 290px;
+}
+
+.sidebar-header {
+    min-height: 105px;
+    padding: 22px 20px;
+}
+
+.brand h2 {
+    font-size: 21px !important;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.brand span {
+    font-size: 14px !important;
+}
+
+.sidebar-nav {
+    padding: 22px 14px;
+}
+
+.nav-title {
+    font-size: 13px !important;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.nav-link,
+.action-btn,
+.logout-link {
+    min-height: 55px;
+    padding: 13px 15px;
+
+    gap: 14px;
+
+    font-size: 17px !important;
+    font-weight: 600;
+
+    line-height: 1.35;
+}
+
+.nav-link i,
+.action-btn i,
+.logout-link i {
+    width: 24px;
+    font-size: 20px !important;
+}
+
+
+/* ==========================================================
+   TOPBAR
+========================================================== */
+
+.topbar {
+    min-height: 96px;
+    padding: 18px 34px;
+}
+
+.portal-label {
+    font-size: 13px !important;
+}
+
+.topbar h1 {
+    font-size: 25px !important;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+
+    font-size: 21px !important;
+}
+
+.user-details strong {
+    font-size: 16px !important;
+}
+
+.user-details span {
+    font-size: 14px !important;
+}
+
+
+/* ==========================================================
+   MAIN DASHBOARD CONTENT
+========================================================== */
+
+.dashboard-content {
+    padding: 32px 34px 40px;
+}
+
+
+/* ==========================================================
+   ORANGE WELCOME CONTAINER
+========================================================== */
+
+.welcome-section {
+    padding: 34px 36px;
+}
+
+.welcome-label {
+    font-size: 14px !important;
+}
+
+.welcome-section h2 {
+    font-size: 31px !important;
+    line-height: 1.25;
+}
+
+.welcome-section p {
+    max-width: 850px;
+
+    font-size: 18px !important;
+    line-height: 1.65;
+}
+
+.welcome-icon {
+    width: 78px;
+    height: 78px;
+
+    font-size: 35px !important;
+}
+
+
+/* ==========================================================
+   SHARED ORANGE PAGE HEADERS
+========================================================== */
+
+.portal-page-header,
+.health-worker-page-header {
+    padding: 32px 36px;
+}
+
+.portal-page-eyebrow,
+.portal-page-header-label,
+.health-worker-page-header-label {
+    font-size: 14px !important;
+    font-weight: 800;
+}
+
+.portal-page-header h1,
+.portal-page-header h2,
+.health-worker-page-header h1,
+.health-worker-page-header h2 {
+    font-size: 31px !important;
+    line-height: 1.25;
+}
+
+.portal-page-header p,
+.health-worker-page-header p {
+    max-width: 850px;
+
+    font-size: 18px !important;
+    line-height: 1.6;
+}
+
+.portal-page-header-icon {
+    font-size: 78px !important;
+}
+
+.health-worker-page-header-icon {
+    width: 68px;
+    height: 68px;
+    flex: 0 0 68px;
+
+    font-size: 28px !important;
+}
+
+.health-worker-page-header-icon i {
+    font-size: 28px !important;
+}
+
+
+/* ==========================================================
+   APPLICATION NUMBER IN ORANGE HEADER
+========================================================== */
+
+.health-worker-application-number {
+    min-width: 205px;
+    padding: 13px 16px;
+}
+
+.health-worker-application-number span {
+    font-size: 12px !important;
+}
+
+.health-worker-application-number strong {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   SUMMARY CARDS
+========================================================== */
+
+.summary-card {
+    min-height: 135px;
+    padding: 24px;
+    gap: 18px;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+
+    font-size: 25px !important;
+}
+
+.stat-label {
+    font-size: 14px !important;
+}
+
+.stat-info strong {
+    font-size: 21px !important;
+}
+
+
+/* ==========================================================
+   GENERAL CARDS
+========================================================== */
+
+.card-header {
+    padding: 25px 26px;
+}
+
+.card-eyebrow {
+    font-size: 12px !important;
+}
+
+.card-header h3 {
+    font-size: 23px !important;
+}
+
+.card-header p {
+    font-size: 16px !important;
+    line-height: 1.55;
+}
+
+
+/* ==========================================================
+   STATUS BADGES
+========================================================== */
+
+.status-badge {
+    padding: 8px 15px;
+
+    font-size: 13px !important;
+}
+
+
+/* ==========================================================
+   APPLICATION NUMBER
+========================================================== */
+
+.application-number {
+    padding: 17px 19px;
+}
+
+.application-number span {
+    font-size: 13px !important;
+}
+
+.application-number strong {
+    font-size: 18px !important;
+}
+
+.application-number > i {
+    font-size: 24px !important;
+}
+
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+.progress-header span,
+.progress-header strong {
+    font-size: 14px !important;
+}
+
+.progress-bar {
+    height: 11px;
+}
+
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+.timeline-icon {
+    width: 39px;
+    height: 39px;
+
+    font-size: 13px !important;
+}
+
+.timeline-content strong {
+    font-size: 16px !important;
+}
+
+.timeline-content span {
+    font-size: 14px !important;
+}
+
+
+/* ==========================================================
+   LICENSE
+========================================================== */
+
+.card-header-icon {
+    width: 49px;
+    height: 49px;
+
+    font-size: 22px !important;
+}
+
+.license-status-icon {
+    width: 75px;
+    height: 75px;
+
+    font-size: 30px !important;
+}
+
+.license-content h3 {
+    font-size: 23px !important;
+}
+
+.license-content p {
+    font-size: 16px !important;
+}
+
+.license-details span {
+    font-size: 13px !important;
+}
+
+.license-details strong {
+    font-size: 15px !important;
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.primary-btn,
+.disabled-btn,
+button,
+input[type="submit"],
+input[type="button"] {
+    font-size: 16px !important;
+}
+
+.primary-btn,
+.disabled-btn {
+    min-height: 52px;
+}
+
+
+/* ==========================================================
+   PROFILE
+========================================================== */
+
+.profile-page {
+    font-size: 17px;
+}
+
+.profile-page h1 {
+    font-size: 31px !important;
+}
+
+.profile-page h2 {
+    font-size: 23px !important;
+}
+
+.profile-page h3 {
+    font-size: 19px !important;
+}
+
+.profile-page p {
+    font-size: 16px !important;
+    line-height: 1.6;
+}
+
+.profile-email {
+    font-size: 16px !important;
+}
+
+.field-label {
+    font-size: 14px !important;
+}
+
+.field-value {
+    font-size: 17px !important;
+}
+
+.role-badge {
+    font-size: 14px !important;
+}
+
+.profile-edit-button,
+.secondary-button {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   NOTIFICATIONS
+========================================================== */
+
+.notifications-page {
+    font-size: 17px;
+}
+
+.notifications-page h1 {
+    font-size: 31px !important;
+}
+
+.notifications-page h2 {
+    font-size: 23px !important;
+}
+
+.notifications-page h3 {
+    font-size: 19px !important;
+}
+
+.notifications-page p {
+    font-size: 16px !important;
+    line-height: 1.6;
+}
+
+.notification-summary strong {
+    font-size: 25px !important;
+}
+
+.notification-summary span {
+    font-size: 15px !important;
+}
+
+.notification-date,
+.read-label,
+.notification-action {
+    font-size: 14px !important;
+}
+
+.mark-all-button {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   FORMS
+========================================================== */
+
+label {
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    font-size: 16px !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    font-size: 15px !important;
+}
+
+
+/* ==========================================================
+   TABLES
+========================================================== */
+
+table {
+    font-size: 16px !important;
+}
+
+th {
+    font-size: 15px !important;
+}
+
+td {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.dashboard-footer {
+    font-size: 13px !important;
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: 78px;
+    }
+
+    .main-content {
+        width: calc(100% - 78px);
+        margin-left: 78px;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 650px) {
+
+    body {
+        font-size: 15px !important;
+    }
+
+    .welcome-section h2,
+    .portal-page-header h1,
+    .portal-page-header h2,
+    .health-worker-page-header h1,
+    .health-worker-page-header h2 {
+        font-size: 25px !important;
+    }
+
+    .welcome-section p,
+    .portal-page-header p,
+    .health-worker-page-header p {
+        font-size: 15px !important;
+    }
+
+    .card-header h3 {
+        font-size: 20px !important;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .sidebar {
+        width: 64px;
+    }
+
+    .main-content {
+        width: calc(100% - 64px);
+        margin-left: 64px;
+    }
+
+}

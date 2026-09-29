@@ -1,0 +1,2741 @@
+/* =========================================================
+   PNG HEALTH WORKERS ONLINE REGISTRATION SYSTEM
+   HEALTH WORKER DASHBOARD
+   LANDING PAGE CONSISTENT DESIGN
+   ========================================================= */
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+    --orange: #c46703;
+    --orange-dark: #a65300;
+    --orange-light: #e98a18;
+    --orange-soft: #fff2e2;
+
+    --navy: #0b1f33;
+    --navy-light: #163653;
+    --navy-soft: #eaf1f7;
+
+    --background: #f6f8fb;
+    --white: #ffffff;
+
+    --text: #182b3d;
+    --text-soft: #62748a;
+    --text-muted: #8a9aab;
+
+    --border: #e5eaf0;
+
+    --green: #198754;
+    --green-soft: #e8f6ef;
+
+    --red: #c0392b;
+    --red-soft: #fdeceb;
+
+    --shadow-sm: 0 2px 8px rgba(11, 31, 51, 0.05);
+    --shadow-md: 0 8px 24px rgba(11, 31, 51, 0.08);
+
+    --radius: 14px;
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    font-size: 15px;
+
+    line-height: 1.55;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.dashboard-container {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 260px;
+
+    background: var(--navy);
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    box-shadow:
+        4px 0 18px rgba(11, 31, 51, 0.08);
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+   ========================================================= */
+
+.sidebar-header {
+    min-height: 98px;
+
+    padding: 21px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+.brand-mark {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--orange);
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.brand h2 {
+    font-size: 17px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+
+    color: #ffffff;
+}
+
+
+.brand span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #aebdcc;
+
+    font-size: 12px;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+   ========================================================= */
+
+.sidebar-nav {
+    padding: 25px 14px;
+
+    flex: 1;
+}
+
+
+.nav-title {
+    margin: 8px 10px 11px;
+
+    color: #8297aa;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+.nav-link,
+.action-btn,
+.logout-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 6px;
+
+    border-radius: 9px;
+
+    color: #dbe5ee;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.nav-link i,
+.action-btn i,
+.logout-link i {
+    width: 21px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+
+.nav-link:hover,
+.action-btn:hover,
+.logout-link:hover {
+    background: rgba(255,255,255,0.08);
+
+    color: #ffffff;
+
+    transform: translateX(2px);
+}
+
+
+.nav-link.active {
+    background: var(--orange);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(196, 103, 3, 0.24);
+}
+
+
+.action-btn {
+    background: rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    color: #ffffff;
+}
+
+
+.action-btn:hover {
+    background: var(--orange);
+
+    border-color: var(--orange);
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+    padding: 15px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+.sidebar-help {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 14px;
+
+    margin-bottom: 11px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.05);
+
+    color: #b9c8d6;
+}
+
+
+.sidebar-help > i {
+    color: var(--orange-light);
+
+    margin-top: 3px;
+
+    font-size: 16px;
+}
+
+
+.sidebar-help strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 12px;
+}
+
+
+.sidebar-help span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+}
+
+
+.logout-link {
+    margin-bottom: 0;
+}
+
+
+.logout-link:hover {
+    background: rgba(192,57,43,0.18);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - 260px);
+
+    margin-left: 260px;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+    min-height: 86px;
+
+    padding: 16px 32px;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.topbar-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.logo {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+.portal-label {
+    display: block;
+
+    color: var(--orange);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+}
+
+
+.topbar h1 {
+    margin-top: 2px;
+
+    color: var(--navy);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+}
+
+
+.topbar-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 18px;
+}
+
+
+.user-details strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 14px;
+}
+
+
+.user-details span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+    flex: 1;
+
+    padding: 30px 32px 36px;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.welcome-section {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 31px 32px;
+
+    margin-bottom: 24px;
+
+    border-radius: var(--radius);
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange) 0%,
+            var(--orange-light) 100%
+        );
+
+    box-shadow:
+        0 9px 24px rgba(196,103,3,0.18);
+}
+
+
+.welcome-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -58px;
+    bottom: -95px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+}
+
+
+.welcome-content {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+.welcome-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #ffe9d0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+}
+
+
+.welcome-section h2 {
+    font-size: 25px;
+
+    font-weight: 650;
+
+    line-height: 1.3;
+}
+
+
+.welcome-section p {
+    max-width: 720px;
+
+    margin-top: 8px;
+
+    color: #fff5ea;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+
+.welcome-icon {
+    position: relative;
+
+    z-index: 1;
+
+    width: 70px;
+    height: 70px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,0.14);
+
+    border:
+        1px solid rgba(255,255,255,0.18);
+
+    font-size: 31px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.summary-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 17px;
+
+    margin-bottom: 24px;
+}
+
+
+.summary-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 116px;
+
+    padding: 21px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: var(--orange);
+}
+
+
+.summary-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+
+    border-color: #d8e0e8;
+}
+
+
+.stat-icon {
+    width: 51px;
+    height: 51px;
+
+    min-width: 51px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+.application-icon {
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+.documents-icon {
+    background: var(--navy-soft);
+
+    color: var(--navy);
+}
+
+
+.progress-icon {
+    background: #eef4f9;
+
+    color: #365f80;
+}
+
+
+.license-icon {
+    background: var(--green-soft);
+
+    color: var(--green);
+}
+
+
+.stat-label {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin-bottom: 5px;
+}
+
+
+.stat-info strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(330px, 0.85fr);
+
+    gap: 21px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.dashboard-card {
+    background: #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+
+    overflow: hidden;
+}
+
+
+.application-card {
+    min-width: 0;
+}
+
+
+.card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 23px 24px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.card-eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--orange);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.card-header h3 {
+    color: var(--navy);
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+.card-header p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 7px 13px;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+.status-badge.no-application {
+    background: #eef2f5;
+
+    color: #68798a;
+}
+
+
+.status-badge.draft {
+    background: #fff4df;
+
+    color: #a85d00;
+}
+
+
+.status-badge.submitted {
+    background: var(--navy-soft);
+
+    color: #285778;
+}
+
+
+.status-badge.under-review {
+    background: #fff4df;
+
+    color: #a85d00;
+}
+
+
+.status-badge.approved {
+    background: var(--green-soft);
+
+    color: var(--green);
+}
+
+
+.status-badge.rejected {
+    background: var(--red-soft);
+
+    color: var(--red);
+}
+
+
+.status-badge.license-generated {
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   APPLICATION NUMBER
+   ========================================================= */
+
+.application-number {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin: 21px 23px;
+
+    padding: 15px 17px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #edf1f5;
+
+    border-radius: 10px;
+}
+
+
+.application-number span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.application-number strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--navy);
+
+    font-size: 15px;
+}
+
+
+.application-number > i {
+    color: var(--orange);
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress-section {
+    padding: 0 23px;
+
+    margin-bottom: 24px;
+}
+
+
+.progress-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+}
+
+
+.progress-header span {
+    color: var(--text-soft);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.progress-header strong {
+    color: var(--orange);
+
+    font-size: 12px;
+}
+
+
+.progress-bar {
+    width: 100%;
+
+    height: 9px;
+
+    background: #edf1f5;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.progress-fill {
+    height: 100%;
+
+    min-width: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange),
+            var(--orange-light)
+        );
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.application-timeline {
+    position: relative;
+
+    padding: 0 23px 24px;
+}
+
+
+.application-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 38px;
+
+    top: 15px;
+    bottom: 15px;
+
+    width: 2px;
+
+    background: #e7edf2;
+}
+
+
+.timeline-item {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.timeline-icon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 33px;
+    height: 33px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0f3f6;
+
+    border: 3px solid #ffffff;
+
+    color: #8b9bab;
+
+    font-size: 11px;
+
+    box-shadow:
+        0 0 0 1px #e2e8ee;
+}
+
+
+.timeline-item:first-child .timeline-icon {
+    background: var(--green-soft);
+
+    color: var(--green);
+}
+
+
+.timeline-item:nth-child(2) .timeline-icon {
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+.timeline-content {
+    flex: 1;
+}
+
+
+.timeline-content strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+.timeline-content span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LICENSE CARD
+   ========================================================= */
+
+.license-card {
+    min-width: 0;
+}
+
+
+.card-header-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 19px;
+}
+
+
+.license-content {
+    padding: 30px 26px;
+
+    text-align: center;
+}
+
+
+.license-status-icon {
+    width: 66px;
+    height: 66px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+}
+
+
+.license-status-icon.available {
+    background: var(--green-soft);
+
+    color: var(--green);
+}
+
+
+.license-status-icon.processing {
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+.license-content h3 {
+    color: var(--navy);
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+.license-content p {
+    max-width: 340px;
+
+    margin: 9px auto 19px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   LICENSE DETAILS
+   ========================================================= */
+
+.license-details {
+    margin: 19px 0;
+
+    padding: 13px 16px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e8edf2;
+
+    border-radius: 10px;
+}
+
+
+.license-details div {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 9px 0;
+
+    border-bottom:
+        1px solid #e7edf2;
+}
+
+
+.license-details div:last-child {
+    border-bottom: none;
+}
+
+
+.license-details span {
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+.license-details strong {
+    color: var(--navy);
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-btn,
+.disabled-btn {
+    width: 100%;
+
+    min-height: 47px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.primary-btn {
+    background: var(--orange);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 13px rgba(196,103,3,0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.primary-btn i,
+.disabled-btn i {
+    font-size: 15px;
+}
+
+
+.primary-btn:hover {
+    background: var(--orange-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(196,103,3,0.23);
+}
+
+
+.disabled-btn {
+    border: none;
+
+    background: #edf1f5;
+
+    color: #99a7b5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.dashboard-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 17px 32px;
+
+    background: #ffffff;
+
+    border-top:
+        1px solid var(--border);
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1150px) {
+
+    .summary-cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: 78px;
+    }
+
+
+    .brand,
+    .nav-title,
+    .nav-link span,
+    .action-btn span,
+    .sidebar-help,
+    .logout-link span {
+        display: none;
+    }
+
+
+    .sidebar-header {
+        justify-content: center;
+
+        padding: 18px 10px;
+    }
+
+
+    .brand-mark {
+        width: 46px;
+        height: 46px;
+
+        font-size: 20px;
+    }
+
+
+    .nav-link,
+    .action-btn,
+    .logout-link {
+        justify-content: center;
+
+        min-height: 50px;
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .nav-link i,
+    .action-btn i,
+    .logout-link i {
+        font-size: 20px;
+    }
+
+
+    .main-content {
+        width: calc(100% - 78px);
+
+        margin-left: 78px;
+    }
+
+
+    .topbar {
+        padding: 14px 20px;
+    }
+
+
+    .user-details {
+        display: none;
+    }
+
+
+    .dashboard-content {
+        padding: 24px 20px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .topbar {
+        align-items: flex-start;
+    }
+
+
+    .topbar h1 {
+        font-size: 15px;
+    }
+
+
+    .portal-label {
+        font-size: 9px;
+    }
+
+
+    .logo {
+        width: 43px;
+        height: 43px;
+    }
+
+
+    .topbar-brand {
+        gap: 10px;
+    }
+
+
+    .welcome-section {
+        align-items: flex-start;
+
+        padding: 24px;
+
+        min-height: 190px;
+    }
+
+
+    .welcome-section h2 {
+        font-size: 21px;
+    }
+
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+
+    .welcome-icon {
+        display: none;
+    }
+
+
+    .card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .card-header h3 {
+        font-size: 18px;
+    }
+
+
+    .status-badge {
+        align-self: flex-start;
+
+        font-size: 11px;
+    }
+
+
+    .dashboard-footer {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 15px 20px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .sidebar {
+        width: 64px;
+    }
+
+
+    .main-content {
+        width: calc(100% - 64px);
+
+        margin-left: 64px;
+    }
+
+
+    .dashboard-content {
+        padding: 18px 12px;
+    }
+
+
+    .topbar {
+        padding: 12px;
+    }
+
+
+    .topbar-brand {
+        gap: 8px;
+    }
+
+
+    .topbar h1 {
+        font-size: 12px;
+    }
+
+
+    .portal-label {
+        display: none;
+    }
+
+
+    .logo {
+        width: 39px;
+        height: 39px;
+    }
+
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+
+        font-size: 17px;
+    }
+
+
+    .welcome-section {
+        padding: 21px;
+    }
+
+
+    .welcome-section h2 {
+        font-size: 19px;
+    }
+
+
+    .welcome-section p {
+        font-size: 13px;
+    }
+
+
+    .summary-card {
+        min-height: 108px;
+
+        padding: 18px;
+    }
+
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+
+        min-width: 48px;
+
+        font-size: 20px;
+    }
+
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+
+    .stat-info strong {
+        font-size: 16px;
+    }
+
+
+    .card-header {
+        padding: 20px;
+    }
+
+
+    .application-number {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+
+    .progress-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
+    .application-timeline {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   ACTIVE SIDEBAR LINK
+   ========================================================= */
+
+.sidebar-nav .nav-link.active {
+    background: #c46703;
+
+    color: #ffffff;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+}
+
+
+.sidebar-nav .nav-link.active i {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   SHARED PAGE HERO / ORANGE HEADER
+========================================================= */
+
+.portal-page-header {
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 24px;
+    padding: 28px 32px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c46703 0%,
+            #d97706 55%,
+            #ea8c13 100%
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 28px rgba(196, 103, 3, 0.18);
+}
+
+
+/* Subtle decorative background */
+
+.portal-page-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    top: -95px;
+    right: -55px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER CONTENT
+========================================================= */
+
+.portal-page-header-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 760px;
+}
+
+
+/* Small heading above title */
+
+.portal-page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.88);
+}
+
+
+/* Main title */
+
+.portal-page-header h1,
+.portal-page-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+/* Description */
+
+.portal-page-header p {
+    max-width: 700px;
+
+    margin: 9px 0 0;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   OPTIONAL HEADER ICON
+========================================================= */
+
+.portal-page-header-icon {
+    position: absolute;
+
+    top: 50%;
+    right: 34px;
+
+    z-index: 2;
+
+    transform: translateY(-50%);
+
+    color: rgba(255, 255, 255, 0.16);
+
+    font-size: 72px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .portal-page-header {
+        padding: 23px 22px;
+
+        border-radius: 13px;
+    }
+
+    .portal-page-header h1,
+    .portal-page-header h2 {
+        font-size: 24px;
+    }
+
+    .portal-page-header p {
+        font-size: 13px;
+    }
+
+    .portal-page-header-icon {
+        right: 20px;
+
+        font-size: 55px;
+    }
+}
+
+
+
+
+/* ============================================================
+   SHARED HEALTH WORKER ORANGE PAGE HEADER
+   Use on Dashboard, Applications, Renewal, Profile,
+   Notifications and other Health Worker pages
+============================================================ */
+
+.health-worker-page-header {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin: 0 0 22px 0;
+    padding: 31px 32px;
+
+    background: linear-gradient(
+        135deg,
+        #c46703 0%,
+        #dc7b16 100%
+    );
+
+    border: none;
+    border-radius: 12px;
+
+    box-shadow:
+        0 9px 24px rgba(196, 103, 3, 0.18);
+
+    color: #ffffff;
+}
+
+
+/* Decorative background circle */
+
+.health-worker-page-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -55px;
+    bottom: -95px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ============================================================
+   HEADER CONTENT
+============================================================ */
+
+.health-worker-page-header-content {
+    position: relative;
+    z-index: 1;
+
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ============================================================
+   SMALL TOP LABEL
+============================================================ */
+
+.health-worker-page-header-label {
+    display: block;
+
+    margin: 0 0 6px 0;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    color: #ffe9d0;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   MAIN TITLE
+============================================================ */
+
+.health-worker-page-header h1,
+.health-worker-page-header h2 {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: -0.2px;
+}
+
+
+/* ============================================================
+   DESCRIPTION
+============================================================ */
+
+.health-worker-page-header p {
+    max-width: 760px;
+
+    margin: 8px 0 0 0;
+    padding: 0;
+
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    color: #fff5ea;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   ICON CONTAINER
+============================================================ */
+
+.health-worker-page-header-icon {
+    position: relative;
+    z-index: 1;
+
+    width: 70px;
+    height: 70px;
+
+    flex: 0 0 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    color: #ffffff;
+}
+
+
+.health-worker-page-header-icon i {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 31px;
+    line-height: 1;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .health-worker-page-header {
+        padding: 28px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .health-worker-page-header {
+        min-height: 160px;
+
+        padding: 23px;
+
+        align-items: flex-start;
+    }
+
+
+    .health-worker-page-header-label {
+        font-size: 13px;
+    }
+
+
+    .health-worker-page-header h1,
+    .health-worker-page-header h2 {
+        font-size: 24px;
+    }
+
+
+    .health-worker-page-header p {
+        font-size: 15px;
+    }
+
+
+    .health-worker-page-header-icon {
+        display: none;
+    }
+}
+
+
+
+
+/* =========================================================
+   SHARED HEALTH WORKER ORANGE PAGE HEADER
+========================================================= */
+
+.health-worker-page-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 28px;
+
+    padding: 24px 28px;
+    margin-bottom: 24px;
+
+    background: linear-gradient(
+        135deg,
+        #c46703 0%,
+        #d77b18 100%
+    );
+
+    border: 1px solid #b95f00;
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 12px rgba(196, 103, 3, 0.16),
+        0 1px 3px rgba(16, 42, 67, 0.08);
+
+    color: #ffffff;
+}
+
+
+.health-worker-page-header-content {
+    min-width: 0;
+    flex: 1;
+}
+
+
+.health-worker-page-header-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #fff3e4;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.health-worker-page-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+}
+
+
+.health-worker-page-header p {
+    max-width: 760px;
+
+    margin: 7px 0 0;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.health-worker-page-header-side {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   APPLICATION NUMBER
+========================================================= */
+
+.health-worker-application-number {
+    min-width: 180px;
+
+    padding: 10px 14px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+
+    text-align: right;
+}
+
+
+.health-worker-application-number span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+
+.health-worker-application-number strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   HEADER ICON
+========================================================= */
+
+.health-worker-page-header-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .health-worker-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 22px;
+    }
+
+    .health-worker-page-header-side {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .health-worker-application-number {
+        flex: 1;
+
+        text-align: left;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .health-worker-page-header {
+        padding: 19px 20px;
+    }
+
+    .health-worker-page-header h1 {
+        font-size: 22px;
+    }
+
+    .health-worker-page-header p {
+        font-size: 13px;
+    }
+
+    .health-worker-page-header-icon {
+        width: 46px;
+        height: 46px;
+
+        font-size: 18px;
+    }
+
+}
+
+
+
+/* =========================================================
+   PORTAL TOP ACCOUNT BAR
+========================================================= */
+
+.portal-topbar {
+    min-height: 74px;
+
+    padding: 12px 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5eaf0;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.portal-topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+
+.portal-topbar-label {
+    color: #0b1f33;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.portal-topbar-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   SHORTCUT
+========================================================= */
+
+.topbar-shortcut {
+    min-height: 44px;
+
+    padding: 9px 14px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid #e5eaf0;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #34495e;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.topbar-shortcut i {
+    color: #c46703;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.topbar-shortcut:hover {
+    background: #fff5e9;
+
+    border-color: #e6b47e;
+
+    color: #c46703;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.topbar-shortcut.active {
+    background: #fff2e2;
+
+    border-color: #c46703;
+
+    color: #c46703;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-shortcut:hover {
+    background: #fdeceb;
+
+    border-color: #e5aaa4;
+
+    color: #c0392b;
+}
+
+
+.logout-shortcut:hover i {
+    color: #c0392b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .portal-topbar {
+        padding: 12px 20px;
+    }
+
+    .portal-topbar-left {
+        display: none;
+    }
+
+    .portal-topbar-actions {
+        width: 100%;
+
+        justify-content: flex-end;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .portal-topbar {
+        padding: 10px 12px;
+    }
+
+    .topbar-shortcut {
+        width: 44px;
+        height: 44px;
+
+        padding: 0;
+    }
+
+    .topbar-shortcut span {
+        display: none;
+    }
+
+    .topbar-shortcut i {
+        font-size: 18px;
+    }
+
+}
+
+
+/* ============================================================
+   SIDEBAR USER PROFILE
+============================================================ */
+
+.sidebar-user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 20px;
+    padding: 18px 12px 16px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+    text-decoration: none;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.sidebar-user-profile:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+/* ============================================================
+   PROFILE PHOTO
+============================================================ */
+
+.sidebar-profile-photo,
+.sidebar-profile-avatar {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    margin-bottom: 11px;
+
+    box-sizing: border-box;
+}
+
+
+.sidebar-profile-photo {
+    display: block;
+
+    object-fit: cover;
+
+    border: 3px solid #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(196, 103, 3, 0.85),
+        0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   FALLBACK INITIALS
+============================================================ */
+
+.sidebar-profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #c46703;
+
+    border: 3px solid #ffffff;
+
+    color: #ffffff;
+
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 0 3px rgba(196, 103, 3, 0.85),
+        0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   USER DETAILS
+============================================================ */
+
+.sidebar-user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+}
+
+
+.sidebar-user-details strong {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 4px;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.sidebar-user-details span {
+    display: block;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* ============================================================
+   SMALLER SCREENS
+============================================================ */
+
+@media (max-height: 750px) {
+
+    .sidebar-user-profile {
+        margin-top: 12px;
+        padding-top: 13px;
+        padding-bottom: 12px;
+    }
+
+    .sidebar-profile-photo,
+    .sidebar-profile-avatar {
+        width: 62px;
+        height: 62px;
+        margin-bottom: 8px;
+    }
+
+    .sidebar-profile-avatar {
+        font-size: 19px;
+    }
+
+    .sidebar-user-details strong {
+        font-size: 14px;
+    }
+}
+
+
+
+
+/* ============================================================
+   SIDEBAR HEADER - PORTAL TITLE ABOVE PROFILE
+============================================================ */
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Portal title */
+
+.sidebar-header .brand {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.sidebar-header .brand h2 {
+    margin: 0;
+    text-align: center;
+}
+
+
+/* User profile underneath portal title */
+
+.sidebar-user-profile {
+    width: 100%;
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    box-sizing: border-box;
+}

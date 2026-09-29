@@ -1,0 +1,348 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            Registrar Dashboard
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'registrar/css/registrar_dashboard.css' %}"
+    >
+
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    {% block extra_css %}
+    {% endblock %}
+
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrar/css/presentation-typography.css' %}"
+>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand">
+
+                <h2>
+                    REGISTRAR PORTAL
+                </h2>
+
+            </div>
+            <!--   profile in the side bar-->
+               <!-- LOGGED-IN REGISTRAR -->
+    <a href="{% url 'profile' %}" class="sidebar-user-profile">
+
+        {% if request.user.profile_photo %}
+
+            <img
+                src="{{ request.user.profile_photo.url }}"
+                alt="Profile photo"
+                class="sidebar-profile-photo"
+            >
+
+        {% else %}
+
+            <div class="sidebar-profile-avatar">
+
+                {% if request.user.first_name or request.user.last_name %}
+                    {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+                {% else %}
+                    {{ request.user.email|first|upper }}
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+        <div class="sidebar-user-details">
+
+            <strong>
+                {% if request.user.get_full_name %}
+                    {{ request.user.get_full_name }}
+                {% else %}
+                    {{ request.user.username }}
+                {% endif %}
+            </strong>
+
+            <span>
+                Registrar
+            </span>
+
+        </div>
+
+    </a>
+
+
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                MAIN MENU
+            </p>
+
+            <a
+                href="{% url 'registrar_dashboard' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'registrar_dashboard' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="{% url 'registrar_review_applications' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'registrar_review_applications' or request.resolver_match.url_name == 'registrar_review_application' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+                <span>
+                    Review New License Applications
+                </span>
+
+            </a>
+
+            <a
+    href="{% url 'registrar_renewal_applications' %}"
+    class="nav-link {% if request.resolver_match.url_name == 'registrar_renewal_applications' or request.resolver_match.url_name == 'registrar_review_renewal' %}active{% endif %}"
+>
+    <i class="fa-solid fa-arrows-rotate"></i>
+    <span>Review License Renewal Applications</span>
+</a>
+
+<a
+    href="{% url 'registrar_health_worker_records' %}"
+    class="nav-link
+    {% if request.resolver_match.url_name == 'registrar_health_worker_records' or request.resolver_match.url_name == 'registrar_health_worker_record_detail' %}
+        active
+    {% endif %}"
+>
+
+    <i class="fa-solid fa-users"></i>
+
+    <span>
+        Health Worker Records
+    </span>
+
+</a>
+
+            <a
+                href="{% url 'generate_license_page' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'generate_license_page' or request.resolver_match.url_name == 'generate_medical_license' %}
+                    active
+                {% endif %}"
+            >
+
+                <i class="fa-solid fa-id-card"></i>
+
+                <span>
+                    Generate New Medical License
+                </span>
+
+            </a>
+
+
+      
+<a
+    href="{% url 'generate_renewed_licenses' %}"
+    class="nav-link
+    {% if request.resolver_match.url_name == 'generate_renewed_licenses' or request.resolver_match.url_name == 'generate_renewed_license' %}
+        active
+    {% endif %}"
+>
+
+    <i class="fa-solid fa-id-card"></i>
+
+    <span>
+        Generate Renewed License
+    </span>
+
+</a>
+
+
+
+
+
+
+
+            <a
+                href="{% url 'registrar_reports' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'registrar_reports' %}active{% endif %}"
+            >
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Reports</span>
+            </a>
+
+<a
+    href="{% url 'notifications' %}"
+    class="nav-link {% if request.resolver_match.url_name == 'notifications' %}active{% endif %}"
+>
+    <i class="fa-solid fa-bell"></i>
+    <span>Notifications</span>
+</a>
+
+
+            <a href="{% url 'profile' %}" class="nav-link {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' or request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+    <i class="fa-solid fa-user"></i><span>My Profile</span>
+</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-link"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+          <!-- =====================================================
+         TOP ACCOUNT SHORTCUTS
+    ====================================================== -->
+
+    <header class="portal-topbar">
+
+        <div class="portal-topbar-left">
+
+            <span class="portal-topbar-label">
+             <!--   REGISTRAR PORTAL -->
+            </span>
+
+        </div>
+
+
+        <div class="portal-topbar-actions">
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="{% url 'notifications' %}"
+                class="topbar-shortcut
+                {% if request.resolver_match.url_name == 'notifications' %}
+                    active
+                {% endif %}"
+                title="Notifications"
+            >
+
+                <i class="fa-solid fa-bell"></i>
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <!-- MY PROFILE -->
+
+            <a
+                href="{% url 'profile' %}"
+                class="topbar-shortcut
+                {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' or request.resolver_match.url_name == 'change_password' %}
+                    active
+                {% endif %}"
+                title="My Profile"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <a
+                href="{% url 'logout' %}"
+                class="topbar-shortcut logout-shortcut"
+                title="Logout"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         REGISTRAR PAGE CONTENT
+    ====================================================== -->
+
+        {% block registrar_content %}
+        {% endblock %}
+
+    </main>
+
+</div>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+/* ============================================================
+   e-HealthWorkRegister
+   REGISTRAR — PRESENTATION TYPOGRAPHY
+============================================================ */
+
+body {
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+}
+
+
+/* ------------------------------------------------------------
+   SIDEBAR
+------------------------------------------------------------ */
+
+.sidebar .brand h2 {
+    font-size: 21px !important;
+    font-weight: 750 !important;
+}
+
+.sidebar .nav-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+.sidebar .nav-link {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.sidebar .nav-link i {
+    font-size: 18px !important;
+}
+
+.sidebar .logout-link {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.sidebar .logout-link i {
+    font-size: 18px !important;
+}
+
+
+/* ------------------------------------------------------------
+   ORANGE PAGE HEADERS
+------------------------------------------------------------ */
+
+.portal-page-header-label,
+.registrar-page-header-label,
+.welcome-label,
+.page-label {
+    font-size: 14px !important;
+    font-weight: 750 !important;
+    letter-spacing: 1.1px !important;
+}
+
+.portal-page-header h1,
+.registrar-page-header h1 {
+    font-size: 31px !important;
+    font-weight: 750 !important;
+    line-height: 1.25 !important;
+}
+
+.portal-page-header p,
+.registrar-page-header p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+}
+
+.portal-page-header-icon,
+.registrar-page-header-icon {
+    font-size: 24px !important;
+}
+
+
+/* ------------------------------------------------------------
+   PAGE HEADINGS
+------------------------------------------------------------ */
+
+h1 {
+    font-size: 31px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+
+/* ------------------------------------------------------------
+   DASHBOARD / SUMMARY CARDS
+------------------------------------------------------------ */
+
+.dashboard-card h2,
+.dashboard-card h3,
+.summary-card h3,
+.profile-card h2,
+.license-card h2 {
+    font-size: 21px !important;
+    font-weight: 700 !important;
+}
+
+.dashboard-card p,
+.summary-card p,
+.profile-card p,
+.license-card p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+}
+
+.summary-info span {
+    font-size: 15px !important;
+}
+
+.summary-info h3 {
+    font-size: 30px !important;
+}
+
+
+/* ------------------------------------------------------------
+   TABLES
+------------------------------------------------------------ */
+
+table th,
+.table-container th {
+    font-size: 14px !important;
+    font-weight: 750 !important;
+}
+
+table td,
+.table-container td {
+    font-size: 16px !important;
+}
+
+table td small,
+.table-container td small {
+    font-size: 14px !important;
+}
+
+
+/* ------------------------------------------------------------
+   LABELS / VALUES
+------------------------------------------------------------ */
+
+label,
+.field-label {
+    font-size: 15px !important;
+    font-weight: 650 !important;
+}
+
+.field-value {
+    font-size: 17px !important;
+}
+
+
+/* ------------------------------------------------------------
+   FORMS
+------------------------------------------------------------ */
+
+input,
+select,
+textarea,
+button {
+    font-size: 16px !important;
+}
+
+input,
+select {
+    min-height: 46px;
+}
+
+
+/* ------------------------------------------------------------
+   BUTTONS
+------------------------------------------------------------ */
+
+button,
+.btn,
+.view-btn,
+.generate-btn,
+.action-btn,
+.primary-button,
+.secondary-button,
+.profile-edit-button,
+.save-button,
+.cancel-button,
+.renewal-review-button {
+    font-size: 15px !important;
+    font-weight: 650 !important;
+}
+
+
+/* ------------------------------------------------------------
+   STATUS BADGES
+------------------------------------------------------------ */
+
+.status,
+.status-badge,
+.role-badge {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+
+/* ------------------------------------------------------------
+   SUPPORTING TEXT
+------------------------------------------------------------ */
+
+small {
+    font-size: 14px;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+
+    body {
+        font-size: 16px !important;
+    }
+
+    .portal-page-header h1,
+    .registrar-page-header h1 {
+        font-size: 26px !important;
+    }
+
+    .portal-page-header p,
+    .registrar-page-header p {
+        font-size: 15px !important;
+    }
+
+}

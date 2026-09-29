@@ -1,0 +1,1239 @@
+/* ==========================================================
+   e-HealthWorkRegister
+   HEALTH WORKER PRESENTATION TYPOGRAPHY
+
+   MASTER TYPOGRAPHY + COMPONENT SIZING LAYER
+
+   IMPORTANT:
+   Load this stylesheet LAST in health_worker_base.html
+   so that it can standardize page-specific CSS.
+
+   This file changes sizing/typography only.
+   Existing page colors and general designs are preserved.
+========================================================== */
+
+
+/* ==========================================================
+   1. GLOBAL TYPOGRAPHY
+========================================================== */
+
+html {
+    font-size: 17px;
+}
+
+body {
+    font-size: 17px !important;
+    line-height: 1.6;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+p,
+li,
+td,
+th,
+label,
+input,
+select,
+textarea,
+button,
+a {
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   2. MAIN DASHBOARD LAYOUT
+========================================================== */
+
+.sidebar {
+    width: 290px !important;
+}
+
+.main-content {
+    width: calc(100% - 290px) !important;
+    margin-left: 290px !important;
+}
+
+
+/* ==========================================================
+   3. SIDEBAR HEADER / BRAND
+========================================================== */
+
+.sidebar-header {
+    min-height: 105px;
+    padding: 22px 20px !important;
+}
+
+.brand h2 {
+    font-size: 21px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+}
+
+.brand span {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+.brand-mark {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+.brand-mark i {
+    font-size: 21px !important;
+}
+
+
+/* ==========================================================
+   4. SIDEBAR NAVIGATION
+========================================================== */
+
+.sidebar-nav {
+    padding: 22px 14px !important;
+}
+
+.nav-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.2px !important;
+}
+
+.nav-link,
+.action-btn,
+.logout-link {
+    min-height: 55px !important;
+
+    padding: 13px 15px !important;
+
+    gap: 14px !important;
+
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+}
+
+.nav-link i,
+.action-btn i,
+.logout-link i {
+    width: 24px !important;
+
+    font-size: 20px !important;
+}
+
+
+/* Notification number in sidebar */
+
+.sidebar-notification-badge {
+    min-width: 23px !important;
+    height: 23px !important;
+
+    padding: 0 7px !important;
+
+    font-size: 12px !important;
+    line-height: 23px !important;
+}
+
+
+/* ==========================================================
+   5. TOPBAR
+========================================================== */
+
+.topbar {
+    min-height: 96px !important;
+
+    padding: 18px 34px !important;
+}
+
+.portal-label {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+.topbar h1,
+.page-title h1 {
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+}
+
+
+/* Logo */
+
+.logo {
+    width: 54px !important;
+    height: 54px !important;
+}
+
+.topbar-brand {
+    gap: 14px !important;
+}
+
+
+/* ==========================================================
+   6. TOPBAR USER PROFILE
+========================================================== */
+
+.user-avatar,
+.profile-avatar {
+    width: 50px !important;
+    height: 50px !important;
+
+    font-size: 21px !important;
+}
+
+.user-avatar img,
+.profile-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover;
+}
+
+.user-details strong,
+.profile-info strong {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+}
+
+.user-details span,
+.profile-info span {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+
+/* ==========================================================
+   7. MAIN PAGE CONTENT
+========================================================== */
+
+.dashboard-content {
+    padding: 32px 34px 40px !important;
+}
+
+
+/* ==========================================================
+   8. SHARED ORANGE PAGE HEADER
+========================================================== */
+
+.portal-page-header,
+.health-worker-page-header {
+    position: relative !important;
+    overflow: hidden !important;
+
+    width: 100% !important;
+
+    padding: 32px 34px !important;
+    margin: 0 0 24px !important;
+
+    gap: 28px !important;
+}
+
+
+/* Small header label */
+
+.portal-page-header-label,
+.health-worker-page-header-label,
+.welcome-label {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: 1px !important;
+}
+
+
+/* Main page heading */
+
+.portal-page-header h1,
+.portal-page-header h2,
+.health-worker-page-header h1,
+.health-worker-page-header h2 {
+    font-size: 31px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.25 !important;
+
+    letter-spacing: -0.3px !important;
+}
+
+
+/* Header description */
+
+.portal-page-header p,
+.health-worker-page-header p {
+    max-width: 850px !important;
+
+    margin-top: 9px !important;
+
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+}
+
+
+/* Header icon */
+
+.portal-page-header-icon,
+.health-worker-page-header-icon {
+    width: 58px !important;
+    height: 58px !important;
+
+    flex: 0 0 58px !important;
+}
+
+.portal-page-header-icon i,
+.health-worker-page-header-icon i {
+    font-size: 25px !important;
+}
+
+
+/* ==========================================================
+   9. DASHBOARD WELCOME SECTION
+========================================================== */
+
+.welcome-section {
+    padding: 34px 36px !important;
+}
+
+.welcome-section h1,
+.welcome-section h2 {
+    font-size: 31px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.25 !important;
+}
+
+.welcome-section p {
+    max-width: 850px !important;
+
+    font-size: 18px !important;
+    line-height: 1.65 !important;
+}
+
+.welcome-icon {
+    font-size: 55px !important;
+}
+
+
+/* ==========================================================
+   10. SUMMARY / STATISTIC CARDS
+========================================================== */
+
+.summary-card {
+    min-height: 135px !important;
+
+    padding: 24px !important;
+
+    gap: 18px !important;
+}
+
+.stat-icon,
+.summary-icon {
+    width: 60px !important;
+    height: 60px !important;
+
+    min-width: 60px !important;
+
+    font-size: 25px !important;
+}
+
+.stat-label,
+.summary-info span {
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+}
+
+.stat-info strong {
+    font-size: 21px !important;
+}
+
+.summary-info h3 {
+    font-size: 30px !important;
+
+    line-height: 1.15 !important;
+}
+
+.summary-info small {
+    font-size: 13px !important;
+}
+
+
+/* ==========================================================
+   11. GENERAL CARDS
+========================================================== */
+
+.card-header {
+    padding: 25px 26px !important;
+}
+
+.card-eyebrow {
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.8px !important;
+}
+
+.card-header h2,
+.card-header h3 {
+    font-size: 23px !important;
+
+    line-height: 1.3 !important;
+}
+
+.card-header p {
+    font-size: 16px !important;
+
+    line-height: 1.55 !important;
+}
+
+
+/* Generic card body */
+
+.card-body {
+    font-size: 16px !important;
+}
+
+.card-body p {
+    font-size: 16px !important;
+
+    line-height: 1.6 !important;
+}
+
+
+/* ==========================================================
+   12. APPLICATION NUMBER
+========================================================== */
+
+.application-number,
+.health-worker-application-number {
+    padding: 17px 19px !important;
+}
+
+.application-number span,
+.health-worker-application-number span {
+    font-size: 13px !important;
+}
+
+.application-number strong,
+.health-worker-application-number strong {
+    font-size: 18px !important;
+}
+
+.application-number > i {
+    font-size: 24px !important;
+}
+
+
+/* ==========================================================
+   13. STATUS BADGES
+========================================================== */
+
+.status-badge,
+.status-pill,
+.badge {
+    padding: 8px 14px !important;
+
+    font-size: 13px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.25 !important;
+}
+
+
+/* ==========================================================
+   14. PROGRESS
+========================================================== */
+
+.progress-header span,
+.progress-header strong {
+    font-size: 14px !important;
+}
+
+.progress-bar {
+    height: 11px !important;
+}
+
+
+/* ==========================================================
+   15. TIMELINE
+========================================================== */
+
+.timeline-icon {
+    width: 42px !important;
+    height: 42px !important;
+
+    font-size: 15px !important;
+}
+
+.timeline-content strong {
+    font-size: 16px !important;
+}
+
+.timeline-content span {
+    font-size: 14px !important;
+}
+
+
+/* ==========================================================
+   16. LICENSE SECTION
+========================================================== */
+
+.card-header-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    font-size: 22px !important;
+}
+
+.license-status-icon {
+    width: 76px !important;
+    height: 76px !important;
+
+    font-size: 31px !important;
+}
+
+.license-content h2,
+.license-content h3 {
+    font-size: 23px !important;
+}
+
+.license-content p {
+    font-size: 16px !important;
+
+    line-height: 1.6 !important;
+}
+
+.license-details span {
+    font-size: 13px !important;
+}
+
+.license-details strong {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   17. APPLICATION / RENEWAL PAGE HEADINGS
+========================================================== */
+
+.application-page h1,
+.renewal-page h1 {
+    font-size: 31px !important;
+}
+
+.application-page h2,
+.renewal-page h2 {
+    font-size: 25px !important;
+}
+
+.application-page h3,
+.renewal-page h3 {
+    font-size: 21px !important;
+}
+
+
+/* ==========================================================
+   18. APPLICATION WIZARD
+========================================================== */
+
+.wizard-step,
+.step-item,
+.step-button {
+    font-size: 14px !important;
+}
+
+.wizard-step-number,
+.step-number {
+    width: 38px !important;
+    height: 38px !important;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+.wizard-step-title,
+.step-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+
+/* ==========================================================
+   19. FORM SECTIONS
+========================================================== */
+
+.form-section-title,
+.section-title {
+    font-size: 22px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.3 !important;
+}
+
+.form-section-description,
+.section-description {
+    font-size: 15px !important;
+
+    line-height: 1.6 !important;
+}
+
+
+/* ==========================================================
+   20. FORM LABELS
+========================================================== */
+
+.form-group label,
+.field-group label,
+.application-form label,
+.renewal-form label,
+.profile-form label {
+    margin-bottom: 8px !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.4 !important;
+}
+
+
+/* ==========================================================
+   21. FORM INPUTS
+========================================================== */
+
+.form-control,
+.form-select,
+.form-group input,
+.form-group select,
+.form-group textarea,
+.field-group input,
+.field-group select,
+.field-group textarea,
+.application-form input,
+.application-form select,
+.application-form textarea,
+.renewal-form input,
+.renewal-form select,
+.renewal-form textarea,
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+    font-size: 16px !important;
+
+    line-height: 1.45 !important;
+}
+
+
+/* Text inputs/selects */
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+select {
+    min-height: 48px;
+}
+
+
+/* Textareas */
+
+textarea {
+    min-height: 110px;
+}
+
+
+/* Placeholder */
+
+input::placeholder,
+textarea::placeholder {
+    font-size: 15px !important;
+}
+
+
+/* ==========================================================
+   22. HELP / ERROR TEXT
+========================================================== */
+
+.help-text,
+.form-text,
+.field-help,
+small.help-text {
+    font-size: 13px !important;
+
+    line-height: 1.5 !important;
+}
+
+.errorlist,
+.field-error,
+.error-message {
+    font-size: 14px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* ==========================================================
+   23. CHECKBOXES / DECLARATIONS
+========================================================== */
+
+.checkbox-label,
+.declaration-label,
+.form-check-label {
+    font-size: 15px !important;
+
+    line-height: 1.55 !important;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* ==========================================================
+   24. DOCUMENT UPLOAD SECTION
+========================================================== */
+
+.document-upload-card h3,
+.upload-card h3 {
+    font-size: 18px !important;
+}
+
+.document-upload-card p,
+.upload-card p {
+    font-size: 14px !important;
+
+    line-height: 1.55 !important;
+}
+
+.document-upload-card i,
+.upload-card i {
+    font-size: 26px !important;
+}
+
+
+/* ==========================================================
+   25. REVIEW PAGE
+========================================================== */
+
+.review-section h2,
+.review-section h3 {
+    font-size: 21px !important;
+}
+
+.review-label {
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+}
+
+.review-value {
+    font-size: 16px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* ==========================================================
+   26. BUTTONS
+========================================================== */
+
+.btn,
+button,
+.primary-button,
+.secondary-button,
+.action-button,
+.submit-button,
+.next-button,
+.previous-button,
+.save-button,
+.edit-button,
+.download-button {
+    min-height: 44px;
+
+    padding: 10px 17px;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    line-height: 1.35 !important;
+}
+
+.btn i,
+button i,
+.primary-button i,
+.secondary-button i,
+.action-button i {
+    font-size: 15px !important;
+}
+
+
+/* Important primary actions */
+
+.submit-button,
+.primary-button {
+    min-height: 48px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   27. TABLES
+========================================================== */
+
+table {
+    font-size: 15px !important;
+}
+
+table th {
+    padding: 14px 15px !important;
+
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.4 !important;
+}
+
+table td {
+    padding: 15px !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* ==========================================================
+   28. PROFILE PAGE
+========================================================== */
+
+.profile-layout {
+    grid-template-columns: 300px minmax(0, 1fr) !important;
+
+    gap: 24px !important;
+}
+
+.profile-card h2,
+.profile-card h3 {
+    font-size: 22px !important;
+}
+
+.profile-card p {
+    font-size: 15px !important;
+
+    line-height: 1.6 !important;
+}
+
+.profile-photo,
+.profile-image {
+    width: 130px !important;
+    height: 130px !important;
+}
+
+.profile-info-label {
+    font-size: 13px !important;
+}
+
+.profile-info-value {
+    font-size: 16px !important;
+}
+
+
+/* ==========================================================
+   29. NOTIFICATIONS PAGE
+========================================================== */
+
+.notifications-page {
+    max-width: 1220px !important;
+
+    padding: 32px 34px 42px !important;
+}
+
+.notifications-header h1 {
+    font-size: 31px !important;
+}
+
+.notifications-header p {
+    font-size: 16px !important;
+}
+
+.mark-all-button {
+    min-height: 44px !important;
+
+    padding: 11px 17px !important;
+
+    font-size: 15px !important;
+}
+
+.notification-summary {
+    padding: 18px 20px !important;
+}
+
+.notification-summary-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    font-size: 21px !important;
+}
+
+.notification-summary strong {
+    font-size: 23px !important;
+}
+
+.notification-summary span {
+    font-size: 14px !important;
+}
+
+.notification-card {
+    gap: 18px !important;
+
+    padding: 20px !important;
+}
+
+.notification-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    font-size: 21px !important;
+}
+
+.notification-top h3 {
+    font-size: 17px !important;
+}
+
+.notification-content p {
+    font-size: 15px !important;
+
+    line-height: 1.6 !important;
+}
+
+.notification-date {
+    font-size: 13px !important;
+}
+
+.notification-action {
+    font-size: 14px !important;
+}
+
+.read-label {
+    font-size: 13px !important;
+}
+
+.empty-notifications h2 {
+    font-size: 22px !important;
+}
+
+.empty-notifications p {
+    font-size: 15px !important;
+}
+
+
+/* ==========================================================
+   30. ALERTS / DJANGO MESSAGES
+========================================================== */
+
+.alert,
+.message,
+.messages li {
+    font-size: 15px !important;
+
+    line-height: 1.55 !important;
+}
+
+
+/* ==========================================================
+   31. MODALS
+========================================================== */
+
+.modal h2,
+.modal-title {
+    font-size: 23px !important;
+}
+
+.modal p,
+.modal-body {
+    font-size: 16px !important;
+
+    line-height: 1.6 !important;
+}
+
+
+/* ==========================================================
+   32. FOOTER
+========================================================== */
+
+.dashboard-footer {
+    font-size: 14px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* ==========================================================
+   33. TABLET
+========================================================== */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 82px !important;
+    }
+
+    .main-content {
+        width: calc(100% - 82px) !important;
+        margin-left: 82px !important;
+    }
+
+    .brand,
+    .nav-title,
+    .nav-link span,
+    .action-btn span,
+    .sidebar-help,
+    .logout-link span {
+        display: none !important;
+    }
+
+    .sidebar-header {
+        justify-content: center !important;
+
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .nav-link,
+    .action-btn,
+    .logout-link {
+        justify-content: center !important;
+
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .nav-link i,
+    .action-btn i,
+    .logout-link i {
+        width: auto !important;
+
+        font-size: 21px !important;
+    }
+
+    .user-details {
+        display: none !important;
+    }
+
+    .dashboard-content {
+        padding: 27px 24px 34px !important;
+    }
+
+    .profile-layout {
+        grid-template-columns: 260px minmax(0, 1fr) !important;
+    }
+}
+
+
+/* ==========================================================
+   34. MOBILE
+========================================================== */
+
+@media (max-width: 650px) {
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-size: 16px !important;
+    }
+
+    .sidebar {
+        width: 68px !important;
+    }
+
+    .main-content {
+        width: calc(100% - 68px) !important;
+        margin-left: 68px !important;
+    }
+
+    .topbar {
+        min-height: 78px !important;
+
+        padding: 13px 16px !important;
+    }
+
+    .topbar h1,
+    .page-title h1 {
+        font-size: 18px !important;
+    }
+
+    .portal-label {
+        font-size: 11px !important;
+    }
+
+    .logo {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .dashboard-content {
+        padding: 22px 16px 30px !important;
+    }
+
+    .portal-page-header,
+    .health-worker-page-header,
+    .welcome-section {
+        padding: 24px 22px !important;
+
+        align-items: flex-start !important;
+    }
+
+    .portal-page-header h1,
+    .portal-page-header h2,
+    .health-worker-page-header h1,
+    .health-worker-page-header h2,
+    .welcome-section h1,
+    .welcome-section h2 {
+        font-size: 25px !important;
+    }
+
+    .portal-page-header p,
+    .health-worker-page-header p,
+    .welcome-section p {
+        font-size: 15px !important;
+    }
+
+    .portal-page-header-label,
+    .health-worker-page-header-label,
+    .welcome-label {
+        font-size: 12px !important;
+    }
+
+    .portal-page-header-icon,
+    .health-worker-page-header-icon {
+        width: 48px !important;
+        height: 48px !important;
+
+        flex-basis: 48px !important;
+    }
+
+    .portal-page-header-icon i,
+    .health-worker-page-header-icon i {
+        font-size: 21px !important;
+    }
+
+    .welcome-icon {
+        display: none !important;
+    }
+
+    .card-header h2,
+    .card-header h3 {
+        font-size: 20px !important;
+    }
+
+    .card-header p {
+        font-size: 15px !important;
+    }
+
+    .summary-info h3 {
+        font-size: 26px !important;
+    }
+
+    .form-section-title,
+    .section-title {
+        font-size: 20px !important;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    .notifications-page {
+        padding: 22px 16px 32px !important;
+    }
+
+    .notifications-header h1 {
+        font-size: 25px !important;
+    }
+
+    table th {
+        font-size: 12px !important;
+    }
+
+    table td {
+        font-size: 14px !important;
+    }
+}
+
+
+/* ==========================================================
+   35. VERY SMALL SCREENS
+========================================================== */
+
+@media (max-width: 450px) {
+
+    .sidebar {
+        width: 64px !important;
+    }
+
+    .main-content {
+        width: calc(100% - 64px) !important;
+        margin-left: 64px !important;
+    }
+
+    .topbar {
+        padding: 11px 12px !important;
+    }
+
+    .topbar h1,
+    .page-title h1 {
+        font-size: 16px !important;
+    }
+
+    .portal-label {
+        font-size: 10px !important;
+    }
+
+    .logo {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .portal-page-header,
+    .health-worker-page-header,
+    .welcome-section {
+        padding: 21px 18px !important;
+    }
+
+    .portal-page-header h1,
+    .portal-page-header h2,
+    .health-worker-page-header h1,
+    .health-worker-page-header h2,
+    .welcome-section h1,
+    .welcome-section h2 {
+        font-size: 22px !important;
+    }
+
+    .portal-page-header-icon,
+    .health-worker-page-header-icon {
+        display: none !important;
+    }
+}

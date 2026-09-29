@@ -1,0 +1,1642 @@
+:root {
+    --orange: #c46703;
+    --orange-dark: #a65300;
+    --orange-light: #e98a18;
+    --orange-soft: #fff2e2;
+    --orange-border: #f0d2ad;
+
+    --navy: #0b1f33;
+    --navy-soft: #102a43;
+    --navy-light: #163653;
+
+    --text: #182b3d;
+    --muted: #62748a;
+    --light-text: #8a9aab;
+
+    --background: #f6f8fb;
+    --white: #ffffff;
+
+    --border: #e5eaf0;
+    --border-dark: #d5dde6;
+
+    --success: #18794e;
+    --success-light: #e9f7ef;
+
+    --danger: #b42318;
+    --danger-light: #fff0ef;
+
+    --shadow: 0 8px 24px rgba(11, 31, 51, 0.07);
+    --shadow-hover: 0 12px 28px rgba(11, 31, 51, 0.10);
+}
+
+.application-page {
+    width: min(1200px, calc(100% - 40px));
+    margin: 28px auto 45px;
+    color: var(--text);
+}
+
+.application-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+
+    padding: 28px 32px;
+    margin-bottom: 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--orange-dark)
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 9px 24px rgba(196, 103, 3, 0.18);
+}
+
+.header-content {
+    min-width: 0;
+}
+
+.header-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: rgba(255,255,255,0.84);
+}
+
+.application-page-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.application-page-header p {
+    max-width: 720px;
+
+    margin: 8px 0 0;
+
+    color: rgba(255,255,255,0.88);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.application-number {
+    min-width: 205px;
+    flex-shrink: 0;
+
+    padding: 13px 16px;
+
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.10);
+
+    text-align: right;
+}
+
+.application-number span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: rgba(255,255,255,0.68);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.application-number strong {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+
+/* Messages */
+
+.messages-container {
+    display: grid;
+    gap: 9px;
+    margin-bottom: 18px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    font-size: 12px;
+}
+
+.message.success {
+    color: var(--success);
+    background: var(--success-light);
+}
+
+.message.error {
+    color: var(--danger);
+    background: var(--danger-light);
+}
+
+.message.warning {
+    color: #8a5500;
+    background: #fff6df;
+}
+
+.message.info {
+    color: #285778;
+    background: #edf5fa;
+}
+
+.form-error-summary {
+    margin-bottom: 18px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #f2c7c3;
+    border-radius: 9px;
+
+    background: var(--danger-light);
+    color: var(--danger);
+
+    font-size: 12px;
+}
+
+.form-error-summary strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-error-summary p {
+    margin: 3px 0;
+}
+
+
+/* Rejection */
+
+.status-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    padding: 16px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid;
+    border-radius: 11px;
+}
+
+.status-banner.rejected {
+    background: var(--danger-light);
+    border-color: #f2c8c4;
+    color: var(--danger);
+}
+
+.status-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: rgba(180,35,24,0.10);
+}
+
+.status-banner strong {
+    font-size: 13px;
+}
+
+.status-banner p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.rejection-reason {
+    margin-top: 11px;
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.72);
+}
+
+.rejection-reason span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.rejection-reason p {
+    margin-top: 4px;
+}
+
+
+/* Wizard */
+
+.wizard-progress {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    margin: 0 0 20px;
+    padding: 0 6px;
+}
+
+.progress-line {
+    position: absolute;
+
+    top: 18px;
+    left: 8%;
+    right: 8%;
+
+    height: 2px;
+
+    background: var(--border);
+
+    z-index: 0;
+}
+
+.progress-line-fill {
+    width: 0;
+    height: 100%;
+
+    background: var(--orange);
+
+    transition: width 0.25s ease;
+}
+
+.wizard-progress-step {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 6px;
+
+    border: 0;
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid var(--border);
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.step-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.wizard-progress-step.active .step-number {
+    border-color: var(--orange);
+    background: var(--orange);
+    color: #ffffff;
+}
+
+.wizard-progress-step.active .step-label {
+    color: var(--orange);
+}
+
+.wizard-progress-step.completed .step-number {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: transparent;
+}
+
+.wizard-progress-step.completed .step-number::before {
+    content: "✓";
+    color: #ffffff;
+    font-size: 12px;
+}
+
+
+/* Steps */
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+.application-card {
+    padding: 26px;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    background: var(--white);
+
+    box-shadow: var(--shadow);
+}
+
+.card-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    font-size: 17px;
+}
+
+.card-heading h2 {
+    margin: 1px 0 4px;
+
+    color: var(--navy);
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.card-heading p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* Form */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+
+    color: var(--navy);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.required {
+    color: var(--orange);
+}
+
+.form-group small {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+.form-control,
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    min-height: 42px;
+
+    padding: 9px 11px;
+
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-control:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--orange);
+
+    box-shadow:
+        0 0 0 3px rgba(196,103,3,0.09);
+}
+
+.field-error {
+    margin-top: 5px;
+
+    color: var(--danger);
+
+    font-size: 10px;
+}
+
+
+/* Notices */
+
+.information-notice,
+.upload-notice,
+.submission-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    padding: 12px 14px;
+    margin-bottom: 19px;
+
+    border: 1px solid var(--orange-border);
+    border-radius: 9px;
+
+    background: var(--orange-soft);
+}
+
+.notice-icon,
+.upload-notice > i,
+.submission-notice > i {
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+    color: var(--orange);
+}
+
+.information-notice strong,
+.upload-notice strong,
+.submission-notice strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--navy);
+
+    font-size: 12px;
+}
+
+.information-notice p,
+.upload-notice p,
+.submission-notice p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* Documents */
+
+.document-list {
+    display: grid;
+    gap: 12px;
+}
+
+.document-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    padding: 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: #fbfcfd;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.document-card:hover {
+    border-color: var(--orange-border);
+    box-shadow: 0 4px 12px rgba(11,31,51,0.04);
+}
+
+.document-number {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--navy);
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.document-information {
+    flex: 1;
+    min-width: 0;
+}
+
+.document-information h3 {
+    margin: 1px 0 3px;
+
+    color: var(--navy);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.document-information p {
+    margin: 0 0 10px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.file-upload-box {
+    position: relative;
+
+    min-height: 67px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.file-upload-box:hover,
+.file-upload-box.has-file {
+    border-color: var(--orange);
+    background: var(--orange-soft);
+}
+
+.file-upload-box > i {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background: #f1f4f6;
+    color: var(--orange);
+
+    font-size: 13px;
+}
+
+.upload-main-text {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.upload-file-name {
+    display: block;
+
+    max-width: 430px;
+
+    margin-top: 2px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.file-upload-box input[type="file"] {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+.existing-document {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 8px;
+
+    color: var(--success);
+
+    font-size: 10px;
+}
+
+.existing-document strong {
+    color: var(--navy);
+}
+
+.existing-file-note {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+/* Review */
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+
+    margin-bottom: 16px;
+}
+
+.review-section,
+.document-review {
+    padding: 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: #fbfcfd;
+}
+
+.review-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+}
+
+.review-eyebrow {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--orange);
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+}
+
+.review-section-header h3 {
+    margin: 0;
+
+    color: var(--navy);
+
+    font-size: 13px;
+}
+
+.edit-step {
+    padding: 5px 9px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    font-family: inherit;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.edit-step:hover {
+    background: var(--orange);
+    color: #ffffff;
+}
+
+.review-items {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 11px 15px;
+}
+
+.review-items > div {
+    min-width: 0;
+}
+
+.review-items .full-review {
+    grid-column: 1 / -1;
+}
+
+.review-items span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--light-text);
+
+    font-size: 9px;
+}
+
+.review-items strong {
+    display: block;
+
+    overflow-wrap: anywhere;
+
+    color: var(--text);
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* Document Review */
+
+.document-review {
+    margin-bottom: 16px;
+}
+
+.document-review-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+.document-review-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    min-width: 0;
+
+    padding: 9px 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: #ffffff;
+}
+
+.document-review-item > i {
+    flex-shrink: 0;
+    color: var(--orange);
+    font-size: 12px;
+}
+
+.document-review-item span {
+    flex: 1;
+    min-width: 0;
+
+    color: var(--text);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.document-review-item strong {
+    color: var(--danger);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.document-review-item strong.uploaded {
+    color: var(--success);
+}
+
+
+/* Declaration */
+
+.declaration-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 16px;
+    margin-bottom: 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.declaration-icon {
+    width: 37px;
+    height: 37px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: var(--navy);
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+.declaration-content {
+    flex: 1;
+}
+
+.declaration-content h3 {
+    margin: 0 0 6px;
+
+    color: var(--navy);
+
+    font-size: 13px;
+}
+
+.declaration-content > p {
+    margin: 0 0 11px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    color: var(--text);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 15px;
+    height: 15px;
+
+    margin-top: 1px;
+
+    accent-color: var(--orange);
+}
+
+.declaration-error,
+.signature-error {
+    margin-top: 6px;
+
+    color: var(--danger);
+
+    font-size: 10px;
+}
+
+
+/* Signature */
+.signature-section
+ { padding: 16px; 
+    margin-bottom: 15px;
+     border: 1px solid var(--border);
+      border-radius: 10px; 
+      background: #fbfcfd; 
+      opacity: 0.72; 
+      transition: opacity 0.2s ease; }
+       .signature-section.signature-enabled { opacity: 1; } 
+       .signature-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; } .signature-icon { width: 37px; height: 37px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 8px; background: var(--orange-soft); color: var(--orange); } .signature-heading h3 { margin: 0 0 2px; color: var(--navy); font-size: 13px; } .signature-heading p { margin: 0; color: var(--muted); font-size: 10px; } .signature-box { position: relative; width: 100%; height: 165px; border: 1px solid var(--border-dark); border-radius: 8px; background: #ffffff; overflow: hidden; } #signatureCanvas { display: block; width: 100%; height: 100%; margin: 0; padding: 0; cursor: crosshair; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; } .signature-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; color: #b8c3ce; font-size: 12px; font-style: italic; transition: opacity 0.2s ease; } .signature-section.signature-enabled .signature-placeholder { color: #a5b2bf; } .signature-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; } #signatureStatus { color: var(--danger); font-size: 10px; font-weight: 600; } #signatureStatus.signed { color: var(--success); } .clear-signature { display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; border: 0; border-radius: 6px; background: #eef1f4; color: var(--text); font-family: inherit; font-size: 9px; font-weight: 700; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; } .clear-signature:hover { background: var(--danger-light); color: var(--danger); } .signature-error { min-height: 14px; margin-top: 6px; color: var(--danger); font-size: 10px; } .signature-submitted { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; padding: 8px 10px; border-radius: 7px; background: var(--success-light); color: var(--success); font-size: 10px; font-weight: 700; } .application-locked-declaration { background: #fbfcfd; } @media (max-width: 600px) { .signature-box { height: 145px; } #signatureCanvas { touch-action: none; } .signature-footer { align-items: flex-start; gap: 10px; } }
+
+
+/* Buttons */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 40px;
+
+    padding: 9px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn.primary {
+    background: var(--orange);
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px rgba(196,103,3,0.16);
+}
+
+.btn.primary:hover {
+    background: var(--orange-dark);
+}
+
+.btn.secondary {
+    background: #ffffff;
+    border-color: var(--border-dark);
+    color: var(--navy);
+}
+
+.btn.secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.btn.submit-application {
+    min-width: 175px;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .application-page {
+        width: min(100% - 28px, 1200px);
+    }
+
+    .application-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .application-number {
+        width: 100%;
+        text-align: left;
+    }
+
+    .wizard-progress {
+        overflow-x: auto;
+        grid-template-columns: repeat(
+            7,
+            minmax(95px, 1fr)
+        );
+
+        padding-bottom: 8px;
+    }
+
+    .progress-line {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .form-grid,
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .document-review-list {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .application-page {
+        width: calc(100% - 20px);
+        margin-top: 15px;
+    }
+
+    .application-page-header {
+        padding: 22px;
+    }
+
+    .application-page-header h1 {
+        font-size: 21px;
+    }
+
+    .application-card {
+        padding: 18px 15px;
+    }
+
+    .card-heading {
+        padding-bottom: 16px;
+        margin-bottom: 17px;
+    }
+
+    .form-grid {
+        gap: 14px;
+    }
+
+    .review-items {
+        grid-template-columns: 1fr;
+    }
+
+    .review-items .full-review {
+        grid-column: auto;
+    }
+
+    .document-card {
+        padding: 12px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .signature-box {
+        height: 145px;
+    }
+
+}
+
+/* =========================================================
+   ENHANCED APPLICATION FORM TYPOGRAPHY
+   Larger, clearer and more professional
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   PAGE HEADER
+--------------------------------------------------------- */
+
+.header-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.application-page-header h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.application-page-header p {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.application-number span {
+    font-size: 12px;
+}
+
+.application-number strong {
+    font-size: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   WIZARD NAVIGATION
+--------------------------------------------------------- */
+
+.step-number {
+    width: 40px;
+    height: 40px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.step-label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+
+/* ---------------------------------------------------------
+   FORM SECTION HEADINGS
+--------------------------------------------------------- */
+
+.card-heading h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.card-heading p {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.card-icon {
+    width: 46px;
+    height: 46px;
+
+    font-size: 20px;
+}
+
+
+/* ---------------------------------------------------------
+   FORM LABELS
+--------------------------------------------------------- */
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+
+/* Required asterisk */
+
+.required {
+    font-size: 16px;
+}
+
+
+/* ---------------------------------------------------------
+   FORM INPUT TEXT
+--------------------------------------------------------- */
+
+.form-control,
+.form-group input,
+.form-group select,
+.form-group textarea {
+    min-height: 50px;
+
+    padding: 12px 14px;
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.form-group textarea {
+    min-height: 110px;
+}
+
+
+/* ---------------------------------------------------------
+   HELPER TEXT
+--------------------------------------------------------- */
+
+.form-group small {
+    margin-top: 7px;
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   VALIDATION / ERRORS
+--------------------------------------------------------- */
+
+.field-error {
+    margin-top: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.form-error-summary {
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.form-error-summary strong {
+    font-size: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   SYSTEM MESSAGES
+--------------------------------------------------------- */
+
+.message {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ---------------------------------------------------------
+   INFORMATION NOTICES
+--------------------------------------------------------- */
+
+.information-notice strong,
+.upload-notice strong,
+.submission-notice strong {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.information-notice p,
+.upload-notice p,
+.submission-notice p {
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* ---------------------------------------------------------
+   STATUS BANNERS
+--------------------------------------------------------- */
+
+.status-banner strong {
+    font-size: 16px;
+}
+
+.status-banner p {
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.rejection-reason span {
+    font-size: 11px;
+}
+
+.rejection-reason p {
+    font-size: 14px;
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORTING DOCUMENTS
+--------------------------------------------------------- */
+
+.document-number {
+    width: 36px;
+    height: 36px;
+
+    font-size: 14px;
+}
+
+.document-information h3 {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.document-information p {
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.upload-main-text {
+    font-size: 14px;
+}
+
+.upload-file-name {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.existing-document {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.existing-file-note {
+    font-size: 11px;
+}
+
+
+/* ---------------------------------------------------------
+   REVIEW APPLICATION
+--------------------------------------------------------- */
+
+.review-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.review-section-header h3 {
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.review-items span {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.review-items strong {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.edit-step {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   DOCUMENT REVIEW
+--------------------------------------------------------- */
+
+.document-review-item span {
+    font-size: 13px;
+}
+
+.document-review-item strong {
+    font-size: 11px;
+}
+
+
+/* ---------------------------------------------------------
+   DECLARATION
+--------------------------------------------------------- */
+
+.declaration-content h3 {
+    font-size: 17px;
+}
+
+.declaration-content > p {
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.checkbox-label input {
+    width: 19px;
+    height: 19px;
+}
+
+.declaration-error,
+.signature-error {
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   SIGNATURE SECTION
+--------------------------------------------------------- */
+
+.signature-heading h3 {
+    font-size: 17px;
+}
+
+.signature-heading p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.signature-placeholder {
+    font-size: 14px;
+}
+
+#signatureStatus {
+    font-size: 12px;
+}
+
+.clear-signature {
+    font-size: 12px;
+}
+
+.signature-submitted {
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON TYPOGRAPHY
+--------------------------------------------------------- */
+
+.btn {
+    min-height: 48px;
+
+    padding: 11px 19px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE TYPOGRAPHY
+--------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .header-eyebrow {
+        font-size: 11px;
+    }
+
+    .application-page-header h1 {
+        font-size: 26px;
+    }
+
+    .application-page-header p {
+        font-size: 14px;
+    }
+
+    .step-number {
+        width: 37px;
+        height: 37px;
+        font-size: 13px;
+    }
+
+    .step-label {
+        font-size: 12px;
+    }
+
+    .card-heading h2 {
+        font-size: 21px;
+    }
+
+    .card-heading p {
+        font-size: 14px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-control,
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .form-group small {
+        font-size: 12px;
+    }
+
+    .information-notice strong,
+    .upload-notice strong,
+    .submission-notice strong {
+        font-size: 14px;
+    }
+
+    .information-notice p,
+    .upload-notice p,
+    .submission-notice p {
+        font-size: 13px;
+    }
+
+    .btn {
+        min-height: 48px;
+        font-size: 14px;
+    }
+}
